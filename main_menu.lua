@@ -40,7 +40,7 @@ local creditsButton
 local instructionsButton
 
 --Sounds
-local easy = audio.loadSound("Sounds/easy.mp3")
+local easy = audio.loadStream("Sounds/easy.mp3")
 local easyChannel
 
 -----------------------------------------------------------------------------------------
