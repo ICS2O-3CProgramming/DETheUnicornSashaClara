@@ -179,8 +179,8 @@ function scene:create( event )
         height = 200,
 
         -- Setting Visual Properties
-        defaultFile = "Images/Level3ButtonUnpressed@2x.png",
-        overFile = "Images/Level3ButtonUnpressed@2x.png",
+        defaultFile = "Images/Level3ButtonUnpressed.png",
+        overFile = "Images/Level3ButtonUnpressed.png",
 
         -- Setting Functional Properties
         onRelease = Level3Transition

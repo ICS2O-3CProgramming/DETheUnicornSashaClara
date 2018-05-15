@@ -279,6 +279,7 @@ local function TouchListenerAnswerbox(touch)
 
             --let other boxes know it has been clicked
             answerboxAlreadyTouched = true
+            print ("***Clicked")
 
         --drag the answer to follow the mouse
         elseif (touch.phase == "moved") then
@@ -465,11 +466,11 @@ function scene:create( event )
     --covering the other scene with a rectangle so it looks faded and stops touch from going through
     bkg = display.newRect(display.contentCenterX, display.contentCenterY, display.contentWidth, display.contentHeight)
     --setting to a semi black colour
-    bkg:setFillColor(0,0,0,0.5)
+    bkg:setFillColor(0,0,0,0.8)
 
     -----------------------------------------------------------------------------------------
     --making a cover rectangle to have the background fully bolcked where the question is
-    cover = display.newRoundedRect(display.contentCenterX, display.contentCenterY, display.contentWidth*0.8, display.contentHeight*0.95, 50 )
+    cover = display.newRoundedRect(display.contentCenterX, display.contentCenterY, display.contentWidth*0.9, display.contentHeight*0.95, 50 )
     --setting its colour
     cover:setFillColor(96/255, 96/255, 96/255)
 

@@ -68,6 +68,8 @@ local door
 
 local questionsAnswered = 0
 
+local theBall
+
 
 -----------------------------------------------------------------------------------------
 -- LOCAL SCENE FUNCTIONS
@@ -153,13 +155,10 @@ local function ReplaceCharacter()
     AddRuntimeListeners()
 end
 
-local function MakeSoccerBallsVisible()
-    door.isVisible = true
-end
-
 local function MakeHeartsVisible()
     heart1.isVisible = true
     heart2.isVisible = true
+    heart3.isVisible = true
 end
 
 local function YouWinTransition()
@@ -192,20 +191,38 @@ local function onCollision( self, event )
             -- decrease number of lives
             numLives = numLives - 1
 
-            if (numLives == 1) then
+            if (numLives == 3) then
                 -- update hearts
                 heart1.isVisible = true
+                heart2.isVisible = true
+                heart3.isVisible = true
+
+
+            elseif (numLives == 2) then
+                -- update hearts
+                heart1.isVisible = false
+                heart2.isVisible = true
+                heart3.isVisible = true
+                timer.performWithDelay(200, ReplaceCharacter) 
+
+            elseif (numLives == 1) then
+                -- update hearts
+                heart1.isVisible = false
                 heart2.isVisible = false
+                heart3.isVisible = true
                 timer.performWithDelay(200, ReplaceCharacter) 
 
             elseif (numLives == 0) then
                 -- update hearts
                 heart1.isVisible = false
                 heart2.isVisible = false
+                heart3.isVisible = false
             end
         end
 
         if  (event.target.myName == "door") then
+
+            print ("***Hit the door")
             
             -- get the ball that the user hit
             theBall = event.target
@@ -355,7 +372,7 @@ function scene:create( event )
     sceneGroup:insert( door )
 
     -- Insert the Hearts
-    heart1 = display.newImageRect("Images/PinkBackground.png", 80, 80)
+    heart1 = display.newImageRect("Images/heart.png", 80, 80)
     heart1.x = 50
     heart1.y = 50
     heart1.isVisible = true
@@ -363,7 +380,7 @@ function scene:create( event )
     -- Insert objects into the scene group in order to ONLY be associated with this scene
     sceneGroup:insert( heart1 )
 
-    heart2 = display.newImageRect("Images/PinkBackground.png", 80, 80)
+    heart2 = display.newImageRect("Images/heart.png", 80, 80)
     heart2.x = 130
     heart2.y = 50
     heart2.isVisible = true
@@ -371,13 +388,13 @@ function scene:create( event )
     -- Insert objects into the scene group in order to ONLY be associated with this scene
     sceneGroup:insert( heart2 )
 
-    heart3 = display.newImageRect("Images/PinkBackground.png", 80, 80)
-    heart3.x = 130
+    heart3 = display.newImageRect("Images/heart.png", 80, 80)
+    heart3.x = 210
     heart3.y = 50
     heart3.isVisible = true
 
     -- Insert objects into the scene group in order to ONLY be associated with this scene
-    sceneGroup:insert( heart2 )
+    sceneGroup:insert( heart3 )
 
     --Insert the right arrow
     rArrow = display.newImageRect("Images/PinkBackground.png", 100, 50)
@@ -466,9 +483,6 @@ function scene:show( event )
 
         numLives = 2
         questionsAnswered = 0
-
-        -- make all soccer balls visible
-        MakeSoccerBallsVisible()
 
         -- make all lives visible
         MakeHeartsVisible()
