@@ -379,7 +379,7 @@ function scene:show( event )
 
     elseif ( phase == "did" ) then
         -- start the splash screen sound effect
-        horseSoundChannel = audio.play(horseSound)
+        horseSoundChannel = audio.play(horseSound, {channel = 1})
         
         -- Call the moveRosella function as soon as we enter the frame
         Runtime:addEventListener("enterFrame", moveRosella) 

@@ -1,8 +1,8 @@
 -----------------------------------------------------------------------------------------
--- credits_screen.lua
+-- levelSelect_screen.lua
 -- Created by: Sasha Malko
--- Date: May 10, 2018
--- Description: This is the credits page, displaying a back button to the main menu.
+-- Date: May 14, 2018
+-- Description: This is the levelSelect page, displaying a back button to the main menu.
 -----------------------------------------------------------------------------------------
 
 -----------------------------------------------------------------------------------------
@@ -16,7 +16,7 @@ local widget = require( "widget" )
 -----------------------------------------------------------------------------------------
 
 -- Naming Scene
-sceneName = "credits_screen"
+sceneName = "levelSelect_screen"
 
 -- Creating Scene Object
 scene = composer.newScene( sceneName ) 
@@ -26,6 +26,10 @@ scene = composer.newScene( sceneName )
 -----------------------------------------------------------------------------------------
 local bkg_image
 local backButton
+local level1Button
+local level2Button
+local level3Button
+local levelText
 
 -----------------------------------------------------------------------------------------
 -- LOCAL FUNCTIONS
@@ -33,7 +37,22 @@ local backButton
 
 -- Creating Transitioning Function back to main menu
 local function BackTransition( )
-    composer.gotoScene( "main_menu", {effect = "slideRight", time = 500})
+    composer.gotoScene( "main_menu", {effect = "slideLeft", time = 500})
+end
+
+-- Creating Transitioning Function back to main menu
+local function Level1Transition( )
+    composer.gotoScene( "level1_screen", {effect = "zoomInOut", time = 500})
+end
+
+-- Creating Transitioning Function back to main menu
+local function Level2Transition( )
+    composer.gotoScene( "level2_screen", {effect = "zoomInOut", time = 500})
+end
+
+-- Creating Transitioning Function back to main menu
+local function Level3Transition( )
+    composer.gotoScene( "level3_screen", {effect = "zoomInOut", time = 500})
 end
 
 -----------------------------------------------------------------------------------------
@@ -51,7 +70,7 @@ function scene:create( event )
     -----------------------------------------------------------------------------------------
 
     -- Insert the background image and set it to the center of the screen
-    bkg_image = display.newImageRect("Images/credits_screen.png", display.contentWidth, display.contentHeight)
+    bkg_image = display.newImageRect("Images/BlueBackground.png", display.contentWidth, display.contentHeight)
     bkg_image.x = display.contentCenterX
     bkg_image.y = display.contentCenterY
     bkg_image.width = display.contentWidth
@@ -75,8 +94,8 @@ function scene:create( event )
         y = 500,
 
         -- Setting Dimensions
-         width = 200,
-         height = 100,
+        width = 200,
+        height = 100,
 
         -- Setting Visual Properties
         defaultFile = "Images/BackButtonUnpressed.png",
@@ -91,6 +110,96 @@ function scene:create( event )
 
     -- Associating Buttons with this scene
     sceneGroup:insert( backButton )
+
+    -----------------------------------------------------------------------------------------
+
+    -- Creating Back Button
+    level1Button = widget.newButton( 
+    {
+        -- Setting Position
+        x = 150,
+        y = 250,
+
+        -- Setting Dimensions
+        width = 200,
+        height = 200,
+
+        -- Setting Visual Properties
+        defaultFile = "Images/Level1ButtonUnpressed.png",
+        overFile = "Images/Level1ButtonUnpressed.png",
+
+        -- Setting Functional Properties
+        onRelease = Level1Transition
+
+    } )
+
+    -----------------------------------------------------------------------------------------
+
+    -- Associating Buttons with this scene
+    sceneGroup:insert( level1Button )
+
+    -----------------------------------------------------------------------------------------
+
+    -- Creating Back Button
+    level2Button = widget.newButton( 
+    {
+        -- Setting Position
+        x = 500,
+        y = 250,
+
+        -- Setting Dimensions
+        width = 200,
+        height = 200,
+
+        -- Setting Visual Properties
+        defaultFile = "Images/Level2ButtonUnpressed.png",
+        overFile = "Images/Level2ButtonUnpressed.png",
+
+        -- Setting Functional Properties
+        onRelease = Level2Transition
+
+    } )
+
+    -----------------------------------------------------------------------------------------
+
+    -- Associating Buttons with this scene
+    sceneGroup:insert( level2Button )
+
+    -----------------------------------------------------------------------------------------
+
+    -- Creating Back Button
+    level3Button = widget.newButton( 
+    {
+        -- Setting Position
+        x = 850,
+        y = 250,
+
+        -- Setting Dimensions
+        width = 200,
+        height = 200,
+
+        -- Setting Visual Properties
+        defaultFile = "Images/Level3ButtonUnpressed@2x.png",
+        overFile = "Images/Level3ButtonUnpressed@2x.png",
+
+        -- Setting Functional Properties
+        onRelease = Level3Transition
+
+    } )
+
+    -----------------------------------------------------------------------------------------
+
+    -- Associating Buttons with this scene
+    sceneGroup:insert( level3Button )
+
+    --Inserting the Music On/Off text, it's position and colour
+    levelText = display.newText( "Level Select" , 0, 0, nil, 80)
+    levelText.x = 500
+    levelText.y = 60
+    levelText:setTextColor(0,0,0)
+
+    -- Associating Buttons with this scene
+    sceneGroup:insert( levelText )
     
 end --function scene:create( event )
 
@@ -156,7 +265,6 @@ function scene:destroy( event )
     -----------------------------------------------------------------------------------------
 
     -- Called prior to the removal of scene's view ("sceneGroup").
-
 
 end --function scene:destroy( event )
 
