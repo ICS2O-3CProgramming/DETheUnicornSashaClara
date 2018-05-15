@@ -132,10 +132,10 @@ end
 
 
 local function ReplaceCharacter()
-    character = display.newImageRect("Images/PinkBackground.png", 100, 150)
+    character = display.newImageRect("Images/RectangularUnicorn.png", 100, 150)
     character.x = display.contentWidth * 0.5 / 8
     character.y = display.contentHeight  * 0.1 / 3
-    character.width = 75
+    character.width = 200
     character.height = 100
     character.myName = "KickyKat"
 
@@ -221,8 +221,6 @@ local function onCollision( self, event )
         end
 
         if  (event.target.myName == "door") then
-
-            print ("***Hit the door")
             
             -- get the ball that the user hit
             theBall = event.target
@@ -470,7 +468,7 @@ function scene:show( event )
         -- Called when the scene is still off screen (but is about to come on screen).
     -----------------------------------------------------------------------------------------
         -- start physics
-        physics.start()
+        --physics.start()
 
         -- set gravity
         physics.setGravity( 0, GRAVITY )

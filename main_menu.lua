@@ -11,7 +11,7 @@ display.setStatusBar(display.HiddenStatusBar)
 --load physics
 local physics = require("physics")
 
---start physics 
+--start physics for the whole game
 physics.start()
 
 -----------------------------------------------------------------------------------------
@@ -48,8 +48,7 @@ local ground
 
 --Sounds
 local easy = audio.loadStream("Sounds/easy.mp3")
-local easyChannel
-
+local easyChannel = audio.play(easy, {channel = 2, loops = -1})
 
 -----------------------------------------------------------------------------------------
 -- LOCAL FUNCTIONS
@@ -74,6 +73,23 @@ end
 local function SettingsTransition( ) 
    composer.gotoScene( "settings_screen", {effect = "slideDown", time = 500}) 
 end 
+
+local function AddPhysicsBodies()
+        --Add the ground to physics
+    physics.addBody(ground, "static", {friction=0.5, bounce=0.3})
+
+    --add the background image to physics
+    physics.addBody(bkg_image, {density=1.0, friction=0.5, bounce=0.3})
+end 
+
+local function RemovePhysicsBodies()
+        --Add the ground to physics
+    physics.removeBody(ground, "static", {friction=0.5, bounce=0.3})
+
+    --add the background image to physics
+    physics.removeBody(bkg_image, {density=1.0, friction=0.5, bounce=0.3})
+end 
+
 -----------------------------------------------------------------------------------------
 -- GLOBAL SCENE FUNCTIONS
 -----------------------------------------------------------------------------------------
@@ -107,21 +123,6 @@ function scene:create( event )
     --Change the width of the ground to be the same as the screen
     ground.width = display.contentWidth
 
-    --Add the ground to physics
-    physics.addBody(ground, "static", {friction=0.5, bounce=0.3})
-
-    --add the background image to physics
-    physics.addBody(bkg_image, {density=1.0, friction=0.5, bounce=0.3})
-
-    --Set the timer to display the background image 
-    timer.performWithDelay(0, bkg_image)
-
-    -- Associating display objects with this scene 
-    sceneGroup:insert( bkg_image )
-    sceneGroup:insert( ground )
-
-    -- Send the background image to the back layer so all other objects can be on top
-    bkg_image:toBack()
 
     -----------------------------------------------------------------------------------------
     -- BUTTON WIDGETS
@@ -205,20 +206,17 @@ function scene:create( event )
             onRelease = SettingsTransition
         } ) 
 
-
 -----------------------------------------------------------------------------------------
 
-    --play background music     
-    easyChannel = audio.play(easy, {channel = 2, loops = -1})
-
     -- Associating button widgets with this scene
+    sceneGroup:insert( bkg_image )
+    sceneGroup:insert( ground )
     sceneGroup:insert( playButton )
     sceneGroup:insert( creditsButton )
-    sceneGroup: insert( instructionsButton )
-    sceneGroup: insert( settingsButton )
+    sceneGroup:insert( instructionsButton )
+    sceneGroup:insert( settingsButton )
 
 end -- function scene:create( event )   
-
 
 
 -----------------------------------------------------------------------------------------
@@ -237,11 +235,14 @@ function scene:show( event )
 
     -- Called when the scene is still off screen (but is about to come on screen).   
     if ( phase == "will" ) then
+        
        
     -----------------------------------------------------------------------------------------
 
     -- Called when the scene is now on screen.
     elseif ( phase == "did" ) then  
+        AddPhysicsBodies()
+        
     
 
     end
@@ -269,6 +270,7 @@ function scene:hide( event )
 
     elseif ( phase == "did" ) then
         -- Called immediately after scene goes off screen.
+         RemovePhysicsBodies()
     end
 
 end -- function scene:hide( event )

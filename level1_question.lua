@@ -87,6 +87,23 @@ local Y2 = display.contentHeight*5.5/7
 
 local correctAnswer
 
+-- The list of questions
+local questionsList = {"What is dog in French?", 
+                       "What is red in French?", 
+                       "What is the number five in French?", 
+                       "What is summer in French?",
+                        "What is Germany in French?", 
+                        "What is you are drawing in French?", 
+                        "What is I am eating  in French?",
+                        "What is we are running in French?"
+                        "What is they are walking in French?"
+                        "What is he is playing in French?" }
+
+local answersList = {"Chien, Chat, Souris, Oiseau",
+                    "Rouge, Rose, Noir, Blanc",}
+
+-- The random index to access a question
+local randomIndex 
 -----------------------------------------------------------------------------------------
 --LOCAL FUNCTIONS
 -----------------------------------------------------------------------------------------
@@ -113,6 +130,8 @@ local function DisplayQuestion()
 
     --change question text in relation to answer
     questionText.text = randomNumber1 .. " + " .. randomNumber2 .. " = " 
+
+    -- display the random question
 
     -- put the correct answer into the answerbox
     answerbox.text = correctAnswer
@@ -552,6 +571,7 @@ function scene:show( event )
         -- Example: start timers, begin animation, play audio, etc.
         DisplayQuestion()
         PositionAnswers()
+        AddAnswerBoxEventListeners()
     end
 
 end --function scene:show( event )
