@@ -370,23 +370,25 @@ function scene:create( event )
     sceneGroup:insert( heart3 )
 
     --Insert the right arrow
-    rArrow = display.newImageRect("Images/PinkBackground.png", 100, 50)
+    rArrow = display.newImageRect("Images/ArrowButtonUnpressed.png", 100, 50)
     rArrow.x = display.contentWidth * 9.2 / 10
     rArrow.y = display.contentHeight * 9.5 / 10
+    rArrow.rotation = 180
    
     -- Insert objects into the scene group in order to ONLY be associated with this scene
     sceneGroup:insert( rArrow )
 
     --Insert the up arrow
-    uArrow = display.newImageRect("Images/PinkBackground.png", 50, 100)
+    uArrow = display.newImageRect("Images/ArrowButtonUnpressed.png", 100, 50)
     uArrow.x = display.contentWidth * 8.2 / 10
     uArrow.y = display.contentHeight * 8.5 / 10
+    uArrow.rotation = 90
 
     -- Insert objects into the scene group in order to ONLY be associated with this scene
     sceneGroup:insert( uArrow )
 
     --Insert the left arrow
-    lArrow = display.newImageRect("Images/PinkBackground.png", 100, 50)
+    lArrow = display.newImageRect("Images/ArrowButtonUnpressed.png", 100, 50)
     lArrow.x = 750
     lArrow.y = 730
 

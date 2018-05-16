@@ -123,7 +123,7 @@ function scene:create( event )
 
         -- Setting Visual Properties
         defaultFile = "Images/Level1ButtonUnpressed.png",
-        overFile = "Images/Level1ButtonUnpressed.png",
+        overFile = "Images/Level1ButtonPressed.png",
 
         -- Setting Functional Properties
         onRelease = Level1Transition
@@ -150,7 +150,7 @@ function scene:create( event )
 
         -- Setting Visual Properties
         defaultFile = "Images/Level2ButtonUnpressed.png",
-        overFile = "Images/Level2ButtonUnpressed.png",
+        overFile = "Images/Level2ButtonPressed.png",
 
         -- Setting Functional Properties
         onRelease = Level2Transition
@@ -177,7 +177,7 @@ function scene:create( event )
 
         -- Setting Visual Properties
         defaultFile = "Images/Level3ButtonUnpressed.png",
-        overFile = "Images/Level3ButtonUnpressed.png",
+        overFile = "Images/Level3ButtonPressed.png",
 
         -- Setting Functional Properties
         onRelease = Level3Transition
