@@ -35,13 +35,6 @@ local scene = composer.newScene( sceneName )
 -- The local variables for this scene
 local questionText
 
-local firstNumber
-
-local answerText
-local wrongAnswer1
-local wrongAnswer2
-local wrongAnswer3
-
 local userAnswer
 
 -- boolean variables telling me which answer box was touched
@@ -58,24 +51,19 @@ local wrongAnswerBox3
 
 -- create variables that will hold the previous x- and y-positions so that 
 -- each answer will return back to its previous position after it is moved
-local answerboxPreviousY
-local wrongAnswerBox1PreviousY
-local wrongAnswerBox2PreviousY
-local wrongAnswerBox3PreviousY
-
 local answerboxPreviousX
 local wrongAnswerBox1PreviousX
 local wrongAnswerBox2PreviousX
 local wrongAnswerBox3PreviousX
 
+local answerboxPreviousY
+local wrongAnswerBox1PreviousY
+local wrongAnswerBox2PreviousY
+local wrongAnswerBox3PreviousY
+
 -- the black box where the user will drag the answer
 local userAnswerBoxPlaceholder
 
---Number of correct/incorrect answers
-local answersCorrect = 0
-local answersIncorrect = 0
-
-local answerPosition 
 local bkg
 local cover
 
@@ -103,7 +91,7 @@ local function BackToLevel1()
 end 
 
 -----------------------------------------------------------------------------------------
-local function DisplayQuestion()
+local function DisplayQuestionAndAnswers()
 
     local randomNumber1
 
@@ -123,6 +111,9 @@ local function DisplayQuestion()
 
 
   elseif (randomNumber1 == 2) then 
+
+    --- FINISH EVERYTHING BELOW TO BE THE SAME AS ABOVE
+
       -- create the question text object
       questionText = display.newText("What is red in French?", display.contentCenterX, display.contentCenterY*3/8, Arial, 75)
 
@@ -210,26 +201,6 @@ local function DisplayQuestion()
       wrongAnswerBox3 = display.newText("Elle joue", display.contentWidth * 0.9, 0, nil, 65)
     end
 
-   -------------------------------------------------------------------------------------------
-   -- RESET ALL X POSITIONS OF ANSWER BOXES (because the x-position is changed when it is
-   -- placed into the black box)
-   -----------------------------------------------------------------------------------------
-    answerbox.x = 800
-    wrongAnswerBox1.x = 250
-    wrongAnswerBox2.x = 800
-    wrongAnswerBox3.x = 250
-
-    answerbox.y = 500
-    wrongAnswerBox1.y = 500
-    wrongAnswerBox2.y = 650
-    wrongAnswerBox3.y = 650
-
-    -- make it possible to click on the answers again
-    answerboxAlreadyTouched = false
-    alternateAnswerBox1AlreadyTouched = false
-    alternateAnswerBox2AlreadyTouched = false
-    alternateAnswerBox3AlreadyTouched = false
-
 end
 
 local function PositionAnswers()
@@ -240,12 +211,17 @@ local function PositionAnswers()
     -----------------------------------------------------------------------------------------
     randomPosition = math.random(1,4)
 
+    -- DELETE THIS LINE AFTER
+    randomPosition = 1
+
     -- random position 1
     if (randomPosition == 1) then
         -- set the new y-positions of each of the answers
-        answerbox.y = Y1
         answerbox.x = X1
+        answerbox.y = Y1
 
+        --- FIX THE ORDER
+        
         --wrongAnswerBox1
         wrongAnswerBox1.y = Y1
         wrongAnswerBox1.x = X2
@@ -261,10 +237,16 @@ local function PositionAnswers()
 
         ---------------------------------------------------------
         --remembering their positions to return the answer in case it's wrong
+        answerboxPreviousX = answerbox.x
+        wrongAnswerBox1PreviousX = wrongAnswerBox1.x
+        wrongAnswerBox2PreviousX = wrongAnswerBox2.x
+        wrongAnswerBox3PreviousX = wrongAnswerBox3.x
+         
+        answerboxPreviousY = answerbox.y
         wrongAnswerBox1PreviousY = wrongAnswerBox1.y
         wrongAnswerBox2PreviousY = wrongAnswerBox2.y
         wrongAnswerBox3PreviousY = wrongAnswerBox3.y
-        answerboxPreviousY = answerbox.y 
+         
 
     -- random position 2
     elseif (randomPosition == 2) then
@@ -342,6 +324,10 @@ local function PositionAnswers()
     end
 end
 
+local function RestartQuestion()
+  DisplayQuestionAndAnswers()
+  PositionAnswers()
+end
 
 
 -- Function to Check User Input to see if answers are correct or incorrect
@@ -402,10 +388,12 @@ local function TouchListenerAnswerbox(touch)
                 -- setting the position of the number to be in the center of the box
                 answerbox.x = userAnswerBoxPlaceholder.x
                 answerbox.y = userAnswerBoxPlaceholder.y
-                userAnswer = correctAnswer
+
+                -- Play correct Sound 
+                correctSoundChannel = audio.play(correctSound)
 
                 -- call the function to check if the user's input is correct or not
-                CheckUserAnswerInput()
+                --CheckUserAnswerInput()
 
             --else make box go back to where it was
             else
@@ -415,6 +403,8 @@ local function TouchListenerAnswerbox(touch)
         end
     end                
 end 
+
+--- ********** MAKE ALL THE OTHER TOUCH LISTENER FUNCTIONS SIMILAR TO THE ABOVE
 
 local function TouchListenerAnswerBox1(touch)
     --only work if none of the other boxes have been touched
@@ -444,7 +434,7 @@ local function TouchListenerAnswerBox1(touch)
                 userAnswer = wrongAnswer1
 
                 -- call the function to check if the user's input is correct or not
-                CheckUserAnswerInput()
+                --CheckUserAnswerInput()
 
             --else make box go back to where it was
             else
@@ -483,7 +473,7 @@ local function TouchListenerAnswerBox2(touch)
                 userAnswer = wrongAnswer2
 
                 -- call the function to check if the user's input is correct or not
-                CheckUserAnswerInput()
+                --CheckUserAnswerInput()
 
             --else make box go back to where it was
             else
@@ -523,7 +513,7 @@ local function TouchListenerAnswerBox3(touch)
                 userAnswer = wrongAnswer3
 
                 -- call the function to check if the user's input is correct or not
-                CheckUserAnswerInput()
+                --CheckUserAnswerInput()
 
             --else make box go back to where it was
             else
@@ -583,12 +573,6 @@ function scene:create( event )
     wrongAnswerBox2 = display.newText("", X2, Y1, nil, 75)
     wrongAnswerBox3 = display.newText("", X1, Y2, nil, 75)
 
-    -- set the x positions of each of the answer boxes
-    answerboxPreviousX = 500
-    wrongAnswerBox1PreviousX = display.contentWidth * 0.9
-    wrongAnswerBox2PreviousX = display.contentWidth * 0.9
-    wrongAnswerBox3PreviousX = display.contentWidth * 0.9
-
     -- the black box where the user will drag the answer
     userAnswerBoxPlaceholder = display.newImageRect("Images/PinkBackground.png", 400, 150, 0, 0)
     userAnswerBoxPlaceholder.x = 500
@@ -600,19 +584,17 @@ function scene:create( event )
     wrongAnswerBox2AlreadyTouched = false
     wrongAnswerBox3AlreadyTouched = false
 
-
-
     -----------------------------------------------------------------------------------------
 
     -- insert all objects for this scene into the scene group
     sceneGroup:insert(bkg)
     sceneGroup:insert(cover)
     sceneGroup:insert(questionText)
-    sceneGroup:insert( userAnswerBoxPlaceholder )
-    sceneGroup:insert( answerbox )
-    sceneGroup:insert( wrongAnswerBox1 )
-    sceneGroup:insert( wrongAnswerBox2 )
-    sceneGroup:insert( wrongAnswerBox3 )
+    sceneGroup:insert(userAnswerBoxPlaceholder )
+    sceneGroup:insert(answerbox )
+    sceneGroup:insert(wrongAnswerBox1 )
+    sceneGroup:insert(wrongAnswerBox2 )
+    sceneGroup:insert(wrongAnswerBox3 )
 
 
 end --function scene:create( event )
@@ -637,9 +619,9 @@ function scene:show( event )
         -- Called when the scene is now on screen.
         -- Insert code here to make the scene come alive.
         -- Example: start timers, begin animation, play audio, etc.
-        DisplayQuestion()
-        PositionAnswers()
+        RestartQuestion()
         AddAnswerBoxEventListeners()
+
     end
 
 end --function scene:show( event )
