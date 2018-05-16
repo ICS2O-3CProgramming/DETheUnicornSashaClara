@@ -37,7 +37,7 @@ local questionText
 
 local firstNumber
 
-local answer
+local answerText
 local wrongAnswer1
 local wrongAnswer2
 local wrongAnswer3
@@ -87,23 +87,13 @@ local Y2 = display.contentHeight*5.5/7
 
 local correctAnswer
 
--- The list of questions
-local questionsList = {"What is dog in French?", 
-                       "What is red in French?", 
-                       "What is the number five in French?", 
-                       "What is summer in French?",
-                        "What is Germany in French?", 
-                        "What is you are drawing in French?", 
-                        "What is I am eating  in French?",
-                        "What is we are running in French?"
-                        "What is they are walking in French?"
-                        "What is he is playing in French?" }
+local correctText
 
-local answersList = {"Chien, Chat, Souris, Oiseau",
-                    "Rouge, Rose, Noir, Blanc",}
+local correctSound = audio.loadSound("Sounds/Correct.wav")
+local correctSoundChannel
+local booSound = audio.loadSound("Sounds/boo.mp3")
+local booSoundChannel
 
--- The random index to access a question
-local randomIndex 
 -----------------------------------------------------------------------------------------
 --LOCAL FUNCTIONS
 -----------------------------------------------------------------------------------------
@@ -115,56 +105,131 @@ local function BackToLevel1()
 end 
 
 -----------------------------------------------------------------------------------------
-
 local function DisplayQuestion()
 
     local randomNumber1
-    local randomNumber2
 
-    --set random numbers
-    randomNumber1 = math.random(5, 20)
-    randomNumber2 = math.random(5, 20)
+  randomNumber1 = math.random(1,10)
 
-    --calculate answer
-    correctAnswer = randomNumber1 + randomNumber2
+  if (randomNumber1 == 1) then 
+      -- create the question text object
+      questionText = display.newText("What is dog in French?", display.contentCenterX, display.contentCenterY*3/8, Arial, 75)
 
-    --change question text in relation to answer
-    questionText.text = randomNumber1 .. " + " .. randomNumber2 .. " = " 
+      answerbox = display.newText("Chien", 800, 500, nil, 65)
+      wrongAnswerBox1 = display.newText("Chat", display.contentWidth * 0.9, 0, nil, 65)
+      wrongAnswerBox2 = display.newText("Oiseau", display.contentWidth * 0.9, 0, nil, 65)
+      wrongAnswerBox3 = display.newText("Souris", display.contentWidth * 0.9, 0, nil, 65)
+  end
 
-    -- display the random question
+  if (randomNumber1 == 2) then 
+      -- create the question text object
+      questionText = display.newText("What is red in French?", display.contentCenterX, display.contentCenterY*3/8, Arial, 75)
 
-    -- put the correct answer into the answerbox
-    answerbox.text = correctAnswer
+      answerbox = display.newText("Rouge", 800, 500, nil, 65)
+      wrongAnswerBox1 = display.newText("Noir", display.contentWidth * 0.9, 0, nil, 65)
+      wrongAnswerBox2 = display.newText("Brun", display.contentWidth * 0.9, 0, nil, 65)
+      wrongAnswerBox3 = display.newText("Rose", display.contentWidth * 0.9, 0, nil, 65)
+    end
 
-    -- make it possible to click on the answers again
-    answerboxAlreadyTouched = false
-    wrongAnswerBox1AlreadyTouched = false
-    wrongAnswerBox2AlreadyTouched = false
-    wrongAnswerBox3AlreadyTouched = false
+  if (randomNumber1 == 3) then 
+      -- create the question text object
+      questionText = display.newText("What is the number five in French?", display.contentCenterX, display.contentCenterY*3/8, Arial, 65)
+ 
+      answerbox = display.newText("Cinq", 800, 500, nil, 65)
+      wrongAnswerBox1 = display.newText("Trois", display.contentWidth * 0.9, 0, nil, 65)
+      wrongAnswerBox2 = display.newText("Deux", display.contentWidth * 0.9, 0, nil, 65)
+      wrongAnswerBox3 = display.newText("Dix", display.contentWidth * 0.9, 0, nil, 65)
+    end
 
-   
-            
-    -- generate incorrect answer and set it in the textbox
-    wrongAnswer1 = correctAnswer + math.random(3, 5)
-    wrongAnswerBox1.text = wrongAnswer1
+    if (randomNumber1 == 4) then 
+      -- create the question text object
+      questionText = display.newText("What is spring in French?", display.contentCenterX, display.contentCenterY*3/8, Arial, 75)
+ 
+      answerbox = display.newText("Printemps", 800, 500, nil, 65)
+      wrongAnswerBox1 = display.newText("Hiver", display.contentWidth * 0.9, 0, nil, 65)
+      wrongAnswerBox2 = display.newText("Automne", display.contentWidth * 0.9, 0, nil, 65)
+      wrongAnswerBox3 = display.newText("Froid", display.contentWidth * 0.9, 0, nil, 65)
+    end
 
-    -- generate incorrect answer and set it in the textbox
-    wrongAnswer2 = correctAnswer + math.random(1, 2)
-    wrongAnswerBox2.text = wrongAnswer2
+    if (randomNumber1 == 5) then 
+      -- create the question text object
+      questionText = display.newText("What is Germany in French?", display.contentCenterX, display.contentCenterY*3/8, Arial, 75)
+ 
+      answerbox = display.newText("Allemagne", 800, 500, nil, 65)
+      wrongAnswerBox1 = display.newText("Canada", display.contentWidth * 0.9, 0, nil, 65)
+      wrongAnswerBox2 = display.newText("Mexique", display.contentWidth * 0.9, 0, nil, 65)
+      wrongAnswerBox3 = display.newText("Angleterre", display.contentWidth * 0.9, 0, nil, 65)
+    end
 
-    -- generate incorrect answer and set it in the textbox
-    wrongAnswer3 = correctAnswer + math.random(6, 8)
-    wrongAnswerBox3.text = wrongAnswer3
+    if (randomNumber1 == 6) then 
+      -- create the question text object
+      questionText = display.newText("What is you are drawing in French?", display.contentCenterX, display.contentCenterY*3/8, Arial, 65)
+ 
+      answerbox = display.newText("Tu dessines", 800, 500, nil, 65)
+      wrongAnswerBox1 = display.newText("Je dessine", display.contentWidth * 0.9, 0, nil, 65)
+      wrongAnswerBox2 = display.newText("Vous dessinez", display.contentWidth * 0.9, 0, nil, 65)
+      wrongAnswerBox3 = display.newText("Nous dessinons", display.contentWidth * 0.9, 0, nil, 65)
+    end
 
+    if (randomNumber1 == 7) then 
+      -- create the question text object
+      questionText = display.newText("What is I am eating in French?", display.contentCenterX, display.contentCenterY*3/8, Arial, 65)
+ 
+      answerbox = display.newText("Je mange", 800, 500, nil, 65)
+      wrongAnswerBox1 = display.newText("Tu manges", display.contentWidth * 0.9, 0, nil, 65)
+      wrongAnswerBox2 = display.newText("Il mange", display.contentWidth * 0.9, 0, nil, 65)
+      wrongAnswerBox3 = display.newText("Vous mangez", display.contentWidth * 0.9, 0, nil, 65)
+    end
 
-    -------------------------------------------------------------------------------------------
+    if (randomNumber1 == 8) then 
+      -- create the question text object
+      questionText = display.newText("What is we are running in French?", display.contentCenterX, display.contentCenterY*3/8, Arial, 65)
+ 
+      answerbox = display.newText("Nous courrons", 800, 500, nil, 65)
+      wrongAnswerBox1 = display.newText("Tu cours", display.contentWidth * 0.9, 0, nil, 65)
+      wrongAnswerBox2 = display.newText("Vous courez", display.contentWidth * 0.9, 0, nil, 65)
+      wrongAnswerBox3 = display.newText("Il court", display.contentWidth * 0.9, 0, nil, 65)
+    end
+
+    if (randomNumber1 == 9) then 
+      -- create the question text object
+      questionText = display.newText("What is she is walking in French?", display.contentCenterX, display.contentCenterY*3/8, Arial, 65)
+ 
+      answerbox = display.newText("Elle marche", 800, 500, nil, 65)
+      wrongAnswerBox1 = display.newText("Tu marches", display.contentWidth * 0.9, 0, nil, 65)
+      wrongAnswerBox2 = display.newText("Je marches", display.contentWidth * 0.9, 0, nil, 65)
+      wrongAnswerBox3 = display.newText("Vous marchez", display.contentWidth * 0.9, 0, nil, 63)
+    end
+
+    if (randomNumber1 == 10) then 
+      -- create the question text object
+      questionText = display.newText("What is he is playing in French?", display.contentCenterX, display.contentCenterY*3/8, Arial, 65)
+ 
+      answerbox = display.newText("Il joue", 800, 500, nil, 65)
+      wrongAnswerBox1 = display.newText("Tu joues", display.contentWidth * 0.9, 0, nil, 65)
+      wrongAnswerBox2 = display.newText("Vous jouez", display.contentWidth * 0.9, 0, nil, 65)
+      wrongAnswerBox3 = display.newText("Elle joue", display.contentWidth * 0.9, 0, nil, 65)
+    end
+
+   -------------------------------------------------------------------------------------------
    -- RESET ALL X POSITIONS OF ANSWER BOXES (because the x-position is changed when it is
    -- placed into the black box)
    -----------------------------------------------------------------------------------------
-    answerbox.x = display.contentWidth * 0.1
-    wrongAnswerBox1.x = display.contentWidth * 0.1
-    wrongAnswerBox2.x = display.contentWidth * 0.1
-    wrongAnswerBox3.x = display.contentWidth * 0.1
+    answerbox.x = 800
+    wrongAnswerBox1.x = 250
+    wrongAnswerBox2.x = 800
+    wrongAnswerBox3.x = 250
+
+    answerbox.y = 500
+    wrongAnswerBox1.y = 500
+    wrongAnswerBox2.y = 650
+    wrongAnswerBox3.y = 650
+
+    -- make it possible to click on the answers again
+    answerboxAlreadyTouched = false
+    alternateAnswerBox1AlreadyTouched = false
+    alternateAnswerBox2AlreadyTouched = false
+    alternateAnswerBox3AlreadyTouched = false
 
 end
 
@@ -179,37 +244,47 @@ local function PositionAnswers()
     -- random position 1
     if (randomPosition == 1) then
         -- set the new y-positions of each of the answers
-        answerbox.y = display.contentHeight * 0.4
-
-        --wrongAnswerBox2
-        wrongAnswerBox2.y = display.contentHeight * 0.70
+        answerbox.y = 500
+        answerbox.x = 800
 
         --wrongAnswerBox1
-        wrongAnswerBox1.y = display.contentHeight * 0.55
+        wrongAnswerBox1.y = 500
+        wrongAnswerBox1.x = 250
+
+        --wrongAnswerBox2
+        wrongAnswerBox2.y = 650
+        wrongAnswerBox2.x = 800
+
 
         --wrongAnswerBox3
-        wrongAnswerBox3.y = display.contentHeight * 0.85
+        wrongAnswerBox3.y = 650
+        wrongAnswerBox3.x = 250
 
         ---------------------------------------------------------
         --remembering their positions to return the answer in case it's wrong
         wrongAnswerBox1PreviousY = wrongAnswerBox1.y
         wrongAnswerBox2PreviousY = wrongAnswerBox2.y
+        wrongAnswerBox3PreviousY = wrongAnswerBox3.y
         answerboxPreviousY = answerbox.y 
 
     -- random position 2
     elseif (randomPosition == 2) then
 
-        answerbox.y = display.contentHeight * 0.55
-        
-        --wrongAnswerBox2
-        wrongAnswerBox2.y = display.contentHeight * 0.4
+        answerbox.y = 500
+        answerbox.x = 250
 
         --wrongAnswerBox1
-        wrongAnswerBox1.y = display.contentHeight * 0.85
+        wrongAnswerBox1.y = 500
+        wrongAnswerBox1.x = 800
+        
+        --wrongAnswerBox2
+        wrongAnswerBox2.y = 650
+        wrongAnswerBox2.x = 250
 
 
         --wrongAnswerBox3
-        wrongAnswerBox3.y = display.contentHeight * 0.7
+        wrongAnswerBox3.y = 650
+        wrongAnswerBox3.x = 800
 
         --remembering their positions to return the answer in case it's wrong
         wrongAnswerBox1PreviousY = wrongAnswerBox1.y
@@ -219,17 +294,21 @@ local function PositionAnswers()
 
     -- random position 3
      elseif (randomPosition == 3) then
-        answerbox.y = display.contentHeight * 0.70
-
-        --wrongAnswerBox2
-        wrongAnswerBox2.y = display.contentHeight * 0.85
+        answerbox.y = 650
+        answerbox.x = 800
 
         --wrongAnswerBox1
-        wrongAnswerBox1.y = display.contentHeight * 0.4
+        wrongAnswerBox1.y = 650
+        wrongAnswerBox1.x = 250
+
+        --wrongAnswerBox2
+        wrongAnswerBox2.y = 500
+        wrongAnswerBox2.x = 800
 
 
         --AnswerBox3
-        wrongAnswerBox3.y = display.contentHeight * 0.55
+        wrongAnswerBox3.y = 500
+        wrongAnswerBox3.x = 250
 
         --remembering their positions to return the answer in case it's wrong
         wrongAnswerBox1PreviousY = wrongAnswerBox1.y
@@ -239,31 +318,37 @@ local function PositionAnswers()
 
             -- random position 4
      elseif (randomPosition == 4) then
-        answerbox.y = display.contentHeight * 0.85
+        answerbox.y = 650
+        answerbox.x = 250
 
         --wrongAnswerBox2
-        wrongAnswerBox2.y = display.contentHeight * 0.7
+        wrongAnswerBox1.y = 650
+        wrongAnswerBox1.x = 800
 
         --wrongAnswerBox1
-        wrongAnswerBox1.y = display.contentHeight * 0.55
+        wrongAnswerBox2.y = 500
+        wrongAnswerBox2.x = 250
 
 
         --wrongAnswerBox3
-        wrongAnswerBox3.y = display.contentHeight * 0.4
+        wrongAnswerBox3.y = 500
+        wrongAnswerBox3.x = 800
 
         --remembering their positions to return the answer in case it's wrong
         wrongAnswerBox1PreviousY = wrongAnswerBox1.y
         wrongAnswerBox2PreviousY = wrongAnswerBox2.y
         wrongAnswerBox3PreviousY = wrongAnswerBox3.y
         answerboxPreviousY = answerbox.y 
+
     end
 end
+
+
 
 -- Function to Check User Input to see if answers are correct or incorrect
 local function CheckUserAnswerInput()
     if (userAnswer == correctAnswer) then 
-        answersCorrect = answersCorrect + 1
-        timer.performWithDelay(1600, RestartLevel1)
+        correctText.isVisible = true
         correctSoundChannel = audio.play(correctSound)
     elseif (userAnswer == wrongAnswer1) then 
         answersIncorrect = answersIncorrect + 1
@@ -298,7 +383,6 @@ local function TouchListenerAnswerbox(touch)
 
             --let other boxes know it has been clicked
             answerboxAlreadyTouched = true
-            print ("***Clicked")
 
         --drag the answer to follow the mouse
         elseif (touch.phase == "moved") then
@@ -359,7 +443,6 @@ local function TouchListenerAnswerBox1(touch)
 
                 wrongAnswerBox1.x = userAnswerBoxPlaceholder.x
                 wrongAnswerBox1.y = userAnswerBoxPlaceholder.y
-
                 userAnswer = wrongAnswer1
 
                 -- call the function to check if the user's input is correct or not
@@ -367,7 +450,7 @@ local function TouchListenerAnswerBox1(touch)
 
             --else make box go back to where it was
             else
-                AnswerBox1.x = wrongAnswerBox1PreviousX
+                wrongAnswerBox1.x = wrongAnswerBox1PreviousX
                 wrongAnswerBox1.y = wrongAnswerBox1PreviousY
             end
         end
@@ -491,7 +574,7 @@ function scene:create( event )
     --making a cover rectangle to have the background fully bolcked where the question is
     cover = display.newRoundedRect(display.contentCenterX, display.contentCenterY, display.contentWidth*0.9, display.contentHeight*0.95, 50 )
     --setting its colour
-    cover:setFillColor(96/255, 96/255, 96/255)
+    cover:setFillColor(220/255, 195/255, 32/255)
 
     -- create the question text object
     questionText = display.newText("", display.contentCenterX, display.contentCenterY*3/8, Arial, 75)
@@ -507,27 +590,31 @@ function scene:create( event )
     wrongText3.anchorX = 0
 
     --create answerbox wrong answers and the boxes to show them
-    answerbox = display.newText("", display.contentWidth * 0.9, 0, nil, 110)
+    answerbox = display.newText("", 500, 500, nil, 110)
     wrongAnswerBox1 = display.newText("", display.contentWidth * 0.9, 0, nil, 110)
     wrongAnswerBox2 = display.newText("", display.contentWidth * 0.9, 0, nil, 110)
     wrongAnswerBox3 = display.newText("", display.contentWidth * 0.9, 0, nil, 110)
 
     -- set the x positions of each of the answer boxes
-    answerboxPreviousX = display.contentWidth * 0.9
+    answerboxPreviousX = 500
     wrongAnswerBox1PreviousX = display.contentWidth * 0.9
     wrongAnswerBox2PreviousX = display.contentWidth * 0.9
     wrongAnswerBox3PreviousX = display.contentWidth * 0.9
 
-        -- the black box where the user will drag the answer
-    userAnswerBoxPlaceholder = display.newImageRect("Images/PinkBackground.png", 130, 130, 0, 0)
-    userAnswerBoxPlaceholder.x = display.contentWidth * 0.9
-    userAnswerBoxPlaceholder.y = display.contentHeight * 0.4
+    -- the black box where the user will drag the answer
+    userAnswerBoxPlaceholder = display.newImageRect("Images/PinkBackground.png", 400, 150, 0, 0)
+    userAnswerBoxPlaceholder.x = 500
+    userAnswerBoxPlaceholder.y = 300
 
     -- boolean variables stating whether or not the answer was touched
     answerboxAlreadyTouched = false
     wrongAnswerBox1AlreadyTouched = false
     wrongAnswerBox2AlreadyTouched = false
     wrongAnswerBox3AlreadyTouched = false
+
+
+    -- create the question text object
+    correctText = display.newText("", 500, 500, Arial, 75)
 
 
     -----------------------------------------------------------------------------------------

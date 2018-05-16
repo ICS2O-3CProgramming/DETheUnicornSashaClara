@@ -135,7 +135,7 @@ local function ReplaceCharacter()
     character = display.newImageRect("Images/RectangularUnicorn.png", 100, 150)
     character.x = display.contentWidth * 0.5 / 8
     character.y = display.contentHeight  * 0.1 / 3
-    character.width = 200
+    character.width = 150
     character.height = 100
     character.myName = "KickyKat"
 
@@ -191,33 +191,8 @@ local function onCollision( self, event )
             -- decrease number of lives
             numLives = numLives - 1
 
-            if (numLives == 3) then
-                -- update hearts
-                heart1.isVisible = true
-                heart2.isVisible = true
-                heart3.isVisible = true
-
-
-            elseif (numLives == 2) then
-                -- update hearts
-                heart1.isVisible = false
-                heart2.isVisible = true
-                heart3.isVisible = true
-                timer.performWithDelay(200, ReplaceCharacter) 
-
-            elseif (numLives == 1) then
-                -- update hearts
-                heart1.isVisible = false
-                heart2.isVisible = false
-                heart3.isVisible = true
-                timer.performWithDelay(200, ReplaceCharacter) 
-
-            elseif (numLives == 0) then
-                -- update hearts
-                heart1.isVisible = false
-                heart2.isVisible = false
-                heart3.isVisible = false
-            end
+            -- show overlay with math question
+            composer.showOverlay( "level1_question", { isModal = true, effect = "fade", time = 100})
         end
 
         if  (event.target.myName == "door") then
