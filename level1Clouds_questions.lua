@@ -21,7 +21,7 @@ local physics = require( "physics")
 -----------------------------------------------------------------------------------------
 
 -- Naming Scene
-sceneName = "level1_question"
+sceneName = "level1Clouds_questions"
 
 -----------------------------------------------------------------------------------------
 
@@ -77,6 +77,9 @@ local correctAnswer
 
 local correctSound = audio.loadSound("Sounds/Correct.mp3")
 local correctSoundChannel
+local booSound = audio.loadSound("Sounds/boo.mp3")
+local booSoundChannel
+
 local incorrectSound = audio.loadSound("Sounds/incorrect.mp3")
 local incorrectSoundChannel
 
@@ -87,14 +90,19 @@ local incorrectText
 --LOCAL FUNCTIONS
 -----------------------------------------------------------------------------------------
 
+--making transition to next scene
+local function BackToLevel1() 
+    composer.hideOverlay("crossFade", 400 )
+    ResumeGame()
+end 
 
-
+-----------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------
 local function DisplayQuestionAndAnswers()
 
     local randomNumber1 
 
-  randomNumber1 = math.random(1,10)
+  randomNumber1 = math.random(1,10) 
 
   if (randomNumber1 == 1) then 
       -- create the question text object
@@ -364,15 +372,10 @@ local function HideIncorrect()
   incorrectText.isVisible = false
 end
 
-local function YouWinTransition()
-composer.gotoScene( "you_win" )
-end
-
 local function YouLoseTransition()
 composer.gotoScene( "you_lose" )
 end
  
-
 local function TouchListenerAnswerbox(touch)
     --only work if none of the other boxes have been touched
     if (wrongAnswerBox1AlreadyTouched == false) and 
@@ -410,8 +413,7 @@ local function TouchListenerAnswerbox(touch)
 
                 correctText.isVisible = true
                 timer.performWithDelay(1000,HideCorrect)
-                audio.stop()
-                YouWinTransition()
+                BackToLevel1()
 
 
 
@@ -452,13 +454,10 @@ local function TouchListenerAnswerBox1(touch)
                 wrongAnswerBox1.x = userAnswerBoxPlaceholder.x
                 wrongAnswerBox1.y = userAnswerBoxPlaceholder.y
 
-                incorrectText.isVisible = true
-                timer.performWithDelay(1000,HideIncorrect)
-                RestartQuestion()
+                 incorrectSoundChannel = audio.play(incorrectSound)
 
-                incorrectSoundChannel = audio.play(incorrectSound)
 
-            if (heart1.isVisible == true) and 
+                if (heart1.isVisible == true) and 
                    (heart2.isVisible == true) and 
                    (heart3.isVisible == true) then 
                    heart1.isVisible = false
@@ -466,7 +465,7 @@ local function TouchListenerAnswerBox1(touch)
                    heart3.isVisible = true
                    incorrectText.isVisible = true
                    timer.performWithDelay(1000,HideIncorrect)
-                   
+                   BackToLevel1()
 
                 elseif (heart1.isVisible == false) and 
                    (heart2.isVisible == true) and 
@@ -475,7 +474,7 @@ local function TouchListenerAnswerBox1(touch)
                    heart2.isVisible = false
                    incorrectText.isVisible = true
                    timer.performWithDelay(1000,HideIncorrect)
-                   
+                   BackToLevel1()
                 
 
                  elseif (heart1.isVisible == false) and 
@@ -487,6 +486,7 @@ local function TouchListenerAnswerBox1(touch)
                    YouLoseTransition()
                    audio.stop()
                 end
+                
 
 
             --else make box go back to where it was
@@ -524,13 +524,11 @@ local function TouchListenerAnswerBox2(touch)
                 wrongAnswerBox2.x = userAnswerBoxPlaceholder.x
                 wrongAnswerBox2.y = userAnswerBoxPlaceholder.y
 
-                incorrectText.isVisible = true
-                timer.performWithDelay(1000,HideIncorrect)
-                RestartQuestion()
-
                 incorrectSoundChannel = audio.play(incorrectSound)
+               
+                
 
-            if (heart1.isVisible == true) and 
+                if (heart1.isVisible == true) and 
                    (heart2.isVisible == true) and 
                    (heart3.isVisible == true) then 
                    heart1.isVisible = false
@@ -538,7 +536,7 @@ local function TouchListenerAnswerBox2(touch)
                    heart3.isVisible = true
                    incorrectText.isVisible = true
                    timer.performWithDelay(1000,HideIncorrect)
-                   
+                   BackToLevel1()
 
                 elseif (heart1.isVisible == false) and 
                    (heart2.isVisible == true) and 
@@ -547,7 +545,7 @@ local function TouchListenerAnswerBox2(touch)
                    heart2.isVisible = false
                    incorrectText.isVisible = true
                    timer.performWithDelay(1000,HideIncorrect)
-                   
+                   BackToLevel1()
                 
 
                  elseif (heart1.isVisible == false) and 
@@ -559,6 +557,9 @@ local function TouchListenerAnswerBox2(touch)
                    YouLoseTransition()
                    audio.stop()
                 end
+                
+                
+                
                 
 
             --else make box go back to where it was
@@ -597,13 +598,10 @@ local function TouchListenerAnswerBox3(touch)
                 wrongAnswerBox3.x = userAnswerBoxPlaceholder.x
                 wrongAnswerBox3.y = userAnswerBoxPlaceholder.y
 
-                incorrectText.isVisible = true
-                timer.performWithDelay(1000,HideIncorrect)
-                RestartQuestion()
-
                 incorrectSoundChannel = audio.play(incorrectSound)
+              
 
-            if (heart1.isVisible == true) and 
+                if (heart1.isVisible == true) and 
                    (heart2.isVisible == true) and 
                    (heart3.isVisible == true) then 
                    heart1.isVisible = false
@@ -611,7 +609,7 @@ local function TouchListenerAnswerBox3(touch)
                    heart3.isVisible = true
                    incorrectText.isVisible = true
                    timer.performWithDelay(1000,HideIncorrect)
-                   
+                   BackToLevel1()
 
                 elseif (heart1.isVisible == false) and 
                    (heart2.isVisible == true) and 
@@ -620,7 +618,7 @@ local function TouchListenerAnswerBox3(touch)
                    heart2.isVisible = false
                    incorrectText.isVisible = true
                    timer.performWithDelay(1000,HideIncorrect)
-                   
+                   BackToLevel1()
                 
 
                  elseif (heart1.isVisible == false) and 

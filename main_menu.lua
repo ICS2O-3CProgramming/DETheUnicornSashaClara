@@ -80,7 +80,7 @@ local function AddPhysicsBodies()
 
     --add the background image to physics
     physics.addBody(bkg_image, {density=1.0, friction=0.5, bounce=0.3})
-end 
+end
 
 local function RemovePhysicsBodies()
         --Add the ground to physics

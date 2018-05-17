@@ -44,9 +44,7 @@ local clouds
 
 local character
 
-local heart1
-local heart2
-local heart3
+
 local numLives = 2
 
 local rArrow 
@@ -107,6 +105,10 @@ local function stop (event)
     end
 end
 
+local function YouLoseTransition()
+    composer.gotoScene( "you_lose" )
+end
+
 
 local function AddArrowEventListeners()
     rArrow:addEventListener("touch", right)
@@ -161,9 +163,6 @@ local function MakeHeartsVisible()
     heart3.isVisible = true
 end
 
-local function YouWinTransition()
-    composer.gotoScene( "you_win" )
-end
 
 local function onCollision( self, event )
     -- for testing purposes
@@ -178,8 +177,8 @@ local function onCollision( self, event )
 
         if  (event.target.myName == "clouds") then
 
-            --Pop sound
-            --popSoundChannel = audio.play(popSound)
+            -- get the ball that the user hit
+            theBall = event.target
 
             -- remove runtime listeners that move the character
             RemoveArrowEventListeners()
@@ -191,8 +190,11 @@ local function onCollision( self, event )
             -- decrease number of lives
             numLives = numLives - 1
 
+            -- Increment questions answered
+            questionsAnswered = questionsAnswered + 1
+
             -- show overlay with math question
-            composer.showOverlay( "level1_question", { isModal = true, effect = "fade", time = 100})
+            composer.showOverlay( "level1Clouds_questions", { isModal = true, effect = "fade", time = 100})
         end
 
         if  (event.target.myName == "door") then
@@ -229,8 +231,7 @@ end
 
 local function RemoveCollisionListeners()
     clouds:removeEventListener( "collision" )
-
-    clouds:removeEventListener( "collision" )
+    door:removeEventListener( "collision" )
 
 end
 
@@ -238,33 +239,25 @@ local function AddPhysicsBodies()
     --add to the physics engine
     physics.addBody( rainbow1, "static", { density=1.0, friction=0.3, bounce=0.2 } )
     physics.addBody( rainbow2, "static", { density=1.0, friction=0.3, bounce=0.2 } )
-
+        physics.addBody(door, "static",  {density=0, friction=0, bounce=0} )
     physics.addBody( clouds, "static", { density=1.0, friction=0.3, bounce=0.2 } )  
-
     physics.addBody(leftW, "static", {density=1, friction=0.3, bounce=0.2} )
     physics.addBody(rightW, "static", {density=1, friction=0.3, bounce=0.2} )
     physics.addBody(topW, "static", {density=1, friction=0.3, bounce=0.2} )
     physics.addBody(floor, "static", {density=1, friction=0.3, bounce=0.2} )
 
-    physics.addBody(door, "static",  {density=0, friction=0, bounce=0} )
 
 end
 
 local function RemovePhysicsBodies()
     physics.removeBody(rainbow1)
     physics.removeBody(rainbow2)
-
     physics.removeBody(door)
-
     physics.removeBody(clouds)
-
-    physics.removeBody(cloudsplatform)
-
     physics.removeBody(leftW)
     physics.removeBody(rightW)
     physics.removeBody(topW)
     physics.removeBody(floor)
- 
 end
 
 -----------------------------------------------------------------------------------------
@@ -278,11 +271,10 @@ function ResumeGame()
     
     if (questionsAnswered > 0) then
         if (theBall ~= nil) and (theBall.isBodyActive == true) then
-            physics.removeBody(theBall)
-            theBall.isVisible = false
-        end
-    end
-
+            physics.addBody(theBall)
+            theBall.isVisible = true
+            ReplaceCharacter() 
+    end end
 end
 
 -----------------------------------------------------------------------------------------
