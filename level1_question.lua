@@ -429,7 +429,8 @@ end
 local function TouchListenerAnswerBox1(touch)
     --only work if none of the other boxes have been touched
     if (answerboxAlreadyTouched == false) and 
-        (wrongAnswerBox2AlreadyTouched == false) then
+        (wrongAnswerBox2AlreadyTouched == false) and
+        (wrongAnswerBox3AlreadyTouched == false) then
 
         if (touch.phase == "began") then
             --let other boxes know it has been clicked
@@ -501,7 +502,8 @@ end
 local function TouchListenerAnswerBox2(touch)
     --only work if none of the other boxes have been touched
     if (answerboxAlreadyTouched == false) and 
-        (wrongAnswerBox1AlreadyTouched == false) then
+        (wrongAnswerBox1AlreadyTouched == false) and
+        (wrongAnswerBox3AlreadyTouched == false) then
 
         if (touch.phase == "began") then
             --let other boxes know it has been clicked
@@ -574,7 +576,8 @@ end
 local function TouchListenerAnswerBox3(touch)
     --only work if none of the other boxes have been touched
     if (answerboxAlreadyTouched == false) and 
-        (wrongAnswerBox1AlreadyTouched == false) then
+        (wrongAnswerBox1AlreadyTouched == false) and
+         (wrongAnswerBox2AlreadyTouched == false) then
 
         if (touch.phase == "began") then
             --let other boxes know it has been clicked
