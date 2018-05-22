@@ -1,17 +1,14 @@
 -----------------------------------------------------------------------------------------
---
--- SceneTemplate.lua
--- Scene Template (Composer API)
---
------------------------------------------------------------------------------------------
-
+-- you_lose.lua
+-- Created by: Sasha Malko
+-- Date: May 14, 2018
+-- Description: This is the you lose screen for the game.
 -----------------------------------------------------------------------------------------
 -- INITIALIZATIONS
 -----------------------------------------------------------------------------------------
 
 -- Calling Composer Library
 local composer = require( "composer" )
-
 local widget = require( "widget" )
 
 -----------------------------------------------------------------------------------------
@@ -35,10 +32,14 @@ local bkg
 local loseSound = audio.loadSound("Sounds/boo.mp3")
 local loseSoundChannel
 
-----------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------
 -- LOCAL FUNCTIONS
 -----------------------------------------------------------------------------------------
+
+--Transition to the level select screen
+local function LevelSelectTransition()
+    composer.gotoScene( "levelSelect_screen" )
+end
 
 --------------------------------------------------------------------------------------
 -- The function called when the screen doesn't exist
@@ -79,18 +80,19 @@ function scene:show( event )
 
     if ( phase == "will" ) then
         -- Called when the scene is still off screen (but is about to come on screen).
+    
 
     -----------------------------------------------------------------------------------------
 
     elseif ( phase == "did" ) then
-
         -- Called when the scene is now on screen.
-        -- Insert code here to make the scene come alive.
-        -- Example: start timers, begin animation, play audio, etc.
 
-        --play the sound effect
+        --Play lose sound
         loseSoundChannel = audio.play(loseSound)
-        
+
+        --Transition to level select
+        timer.performWithDelay(2000, LevelSelectTransition)
+     
     end
 
 end
@@ -111,17 +113,16 @@ function scene:hide( event )
 
     if ( phase == "will" ) then
         -- Called when the scene is on screen (but is about to go off screen).
-        -- Insert code here to "pause" the scene.
-        -- Example: stop timers, stop animation, stop audio, etc.
+
 
     -----------------------------------------------------------------------------------------
 
     elseif ( phase == "did" ) then
         -- Called immediately after scene goes off screen.
+
     end
 
 end
-
 -----------------------------------------------------------------------------------------
 
 -- The function called when the scene is issued to be destroyed
@@ -132,10 +133,6 @@ function scene:destroy( event )
 
     -----------------------------------------------------------------------------------------
 
-
-    -- Called prior to the removal of scene's view ("sceneGroup").
-    -- Insert code here to clean up the scene.
-    -- Example: remove display objects, save state, etc.
 end
 
 -----------------------------------------------------------------------------------------
@@ -151,4 +148,3 @@ scene:addEventListener( "destroy", scene )
 -----------------------------------------------------------------------------------------
 
 return scene
-

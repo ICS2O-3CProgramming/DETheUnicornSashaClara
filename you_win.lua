@@ -1,11 +1,8 @@
 -----------------------------------------------------------------------------------------
 -- you_win.lua
--- Created by: Gil Robern
--- Modified by: Sasha Malko
--- Date: April 20, 2018
--- Description: This shows the player that they lost the game and plays a booing sound.
------------------------------------------------------------------------------------------
-
+-- Created by: Sasha Malko
+-- Date: May 14, 2018
+-- Description: This shows is the you win screen of the game.
 -----------------------------------------------------------------------------------------
 -- INITIALIZATIONS
 -----------------------------------------------------------------------------------------
@@ -40,6 +37,10 @@ local youWinSoundChannel
 -- LOCAL FUNCTIONS
 -----------------------------------------------------------------------------------------
 
+--Function that transitions to the level select screen 
+local function LevelSelectTransition()
+    composer.gotoScene( "levelSelect_Screen" )
+end
 -----------------------------------------------------------------------------------------
 -- GLOBAL SCENE FUNCTIONS
 -----------------------------------------------------------------------------------------
@@ -80,16 +81,17 @@ function scene:show( event )
     if ( phase == "will" ) then
         -- Called when the scene is still off screen (but is about to come on screen).
         
-        --play music
-        youWinSoundChannel = audio.play(youWinSound)
 
     -----------------------------------------------------------------------------------------
 
     elseif ( phase == "did" ) then
-
         -- Called when the scene is now on screen.
-        -- Insert code here to make the scene come alive.
-        -- Example: start timers, begin animation, play audio, etc.
+
+        --play music
+        youWinSoundChannel = audio.play(youWinSound)
+
+        --Transition to level select screen
+        timer.performWithDelay(2000, LevelSelectTransition)
     end
 
 end
@@ -110,8 +112,7 @@ function scene:hide( event )
 
     if ( phase == "will" ) then
         -- Called when the scene is on screen (but is about to go off screen).
-        -- Insert code here to "pause" the scene.
-        -- Example: stop timers, stop animation, stop audio, etc.
+
 
     -----------------------------------------------------------------------------------------
 
@@ -120,7 +121,6 @@ function scene:hide( event )
     end
 
 end
-
 -----------------------------------------------------------------------------------------
 
 -- The function called when the scene is issued to be destroyed
@@ -131,10 +131,8 @@ function scene:destroy( event )
 
     -----------------------------------------------------------------------------------------
 
-
     -- Called prior to the removal of scene's view ("sceneGroup").
-    -- Insert code here to clean up the scene.
-    -- Example: remove display objects, save state, etc.
+
 end
 
 -----------------------------------------------------------------------------------------
@@ -150,4 +148,3 @@ scene:addEventListener( "destroy", scene )
 -----------------------------------------------------------------------------------------
 
 return scene
-
