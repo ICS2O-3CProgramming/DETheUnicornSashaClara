@@ -51,6 +51,7 @@ local topW
 local floor
 local door
 local hurdle1
+local hurdle2
 local questionsAnswered = 0
 local Obstacles
 local pauseButton
@@ -206,6 +207,25 @@ local function onCollision( self, event )
             composer.showOverlay( "level1Clouds_questions", { isModal = true, effect = "fade", time = 100})
         end
 
+        if  (event.target.myName == "hurdle2") then
+
+            -- get the obstacle that the user hit
+            Obstacles = event.target
+
+            -- remove runtime listeners that move the character
+            RemoveArrowEventListeners()
+            RemoveRuntimeListeners()
+
+            -- remove the character from the display
+            display.remove(character)
+
+            -- Increment questions answered
+            questionsAnswered = questionsAnswered + 1
+
+            -- show overlay with the question
+            composer.showOverlay( "level1Clouds_questions", { isModal = true, effect = "fade", time = 100})
+        end
+
         if  (event.target.myName == "door") then
             
             -- get the obstacle that the user hit
@@ -236,6 +256,10 @@ local function AddCollisionListeners()
     hurdle1.collision = onCollision
     hurdle1:addEventListener( "collision" )
 
+    -- if character collides with hurdle, onCollision will be called
+    hurdle2.collision = onCollision
+    hurdle2:addEventListener( "collision" )
+
     -- if character collides with ball, onCollision will be called    
     door.collision = onCollision
     door:addEventListener( "collision" )
@@ -246,6 +270,7 @@ end
 local function RemoveCollisionListeners()
     clouds:removeEventListener( "collision" )
     hurdle1:removeEventListener( "collision" )
+    hurdle2:removeEventListener( "collision" )
     door:removeEventListener( "collision" )
 
 end
@@ -256,7 +281,8 @@ local function AddPhysicsBodies()
     physics.addBody( rainbow2, "static", { density=1.0, friction=0.3, bounce=0.2 } )
     physics.addBody(door, "static",  {density=0, friction=0, bounce=0} )
     physics.addBody( clouds, "static", { density=1.0, friction=0.3, bounce=0.2 } )
-    physics.addBody( hurdle1, "static", { density=1.0, friction=0.3, bounce=0.2 } )    
+    physics.addBody( hurdle1, "static", { density=1.0, friction=0.3, bounce=0.2 } )
+    physics.addBody( hurdle2, "static", { density=1.0, friction=0.3, bounce=0.2 } )    
     physics.addBody(leftW, "static", {density=1, friction=0.3, bounce=0.2} )
     physics.addBody(rightW, "static", {density=1, friction=0.3, bounce=0.2} )
     physics.addBody(topW, "static", {density=1, friction=0.3, bounce=0.2} )
@@ -272,6 +298,7 @@ local function RemovePhysicsBodies()
     physics.removeBody(door)
     physics.removeBody(clouds)
     physics.removeBody(hurdle1)
+    physics.removeBody(hurdle2)
     physics.removeBody(leftW)
     physics.removeBody(rightW)
     physics.removeBody(topW)
@@ -327,7 +354,7 @@ function scene:create( event )
     rainbow2 = display.newImageRect("Images/Rainbow.png", 0, 0)
     rainbow2.x = 850
     rainbow2.y = 480
-    rainbow2.width = 500
+    rainbow2.width = 600
     rainbow2.height = 130
         
     -- Insert rainbow into the scene group 
@@ -373,7 +400,7 @@ function scene:create( event )
     -- Insert the heart into the scene group
     sceneGroup:insert( heart2 )
 
-     -- Insert the heart
+    -- Insert the heart
     heart3 = display.newImageRect("Images/heart.png", 80, 80)
     heart3.x = 210
     heart3.y = 50
@@ -393,6 +420,16 @@ function scene:create( event )
     -- Insert rainbow into the scene group    
     sceneGroup:insert( hurdle1 )
 
+    -- Insert the rainbow
+    hurdle2 = display.newImageRect("Images/Hurdle.png", 0, 0)
+    hurdle2.x = 590
+    hurdle2.y = 380
+    hurdle2.width = 100
+    hurdle2.height = 100
+    hurdle2.myName = "hurdle2"
+
+    -- Insert rainbow into the scene group    
+    sceneGroup:insert( hurdle2 )
 
     --Insert the right arrow
     rArrow = display.newImageRect("Images/ArrowButtonUnpressed.png", 100, 50)
