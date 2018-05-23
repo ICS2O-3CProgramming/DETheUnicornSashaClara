@@ -199,7 +199,7 @@ local function onCollision( self, event )
             questionsAnswered = questionsAnswered + 1
 
             -- show overlay with questions
-            composer.showOverlay( "level1_part2questions", { isModal = true, effect = "fade", time = 100})
+            composer.showOverlay( "level1_part2Questions", { isModal = true, effect = "fade", time = 100})
 
         end        
     end
