@@ -399,6 +399,7 @@ function scene:create( event )
     hurdle1.y = 380
     hurdle1.width = 100
     hurdle1.height = 100
+    hurdle1.myName = "hurdle1"
 
     -- Insert rainbow into the scene group    
     sceneGroup:insert( hurdle1 )

@@ -50,10 +50,11 @@ local rightW
 local topW
 local floor
 local door
+local hurdle1
 local questionsAnswered = 0
 local Obstacles
 local pauseButton
-local hurdle1
+
 
 -----------------------------------------------------------------------------------------
 -- LOCAL SCENE FUNCTIONS
@@ -231,7 +232,11 @@ local function AddCollisionListeners()
     clouds.collision = onCollision
     clouds:addEventListener( "collision" )
 
-        -- if character collides with ball, onCollision will be called
+<<<<<<< HEAD
+    -- if character collides with ball, onCollision will be called
+=======
+        -- if character collides with hurdle, onCollision will be called
+>>>>>>> 9ab0954f8c32c20c354e0605e3e6309f8154ba48
     hurdle1.collision = onCollision
     hurdle1:addEventListener( "collision" )
 
@@ -309,7 +314,7 @@ function scene:create( event )
     bkg_image.x = display.contentWidth / 2 
     bkg_image.y = display.contentHeight / 2
 
-     -- Insert background image into the scene group 
+    -- Insert background image into the scene group 
     sceneGroup:insert( bkg_image )    
     
     -- Insert the rainbow
@@ -383,10 +388,11 @@ function scene:create( event )
 
     -- Insert the rainbow
     hurdle1 = display.newImageRect("Images/Hurdle.png", 0, 0)
-    hurdle1.x = 500
+    hurdle1.x = 200
     hurdle1.y = 380
     hurdle1.width = 100
     hurdle1.height = 100
+    hurdle1.myName = "hurdle1"
 
     -- Insert rainbow into the scene group    
     sceneGroup:insert( hurdle1 )

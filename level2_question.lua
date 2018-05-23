@@ -684,7 +684,6 @@ local function TouchListenerAnswerBox3(touch)
 end 
 
 
-
 -- Function that Adds Listeners to each answer box
 local function AddAnswerBoxEventListeners()
     answerbox:addEventListener("touch", TouchListenerAnswerbox)
