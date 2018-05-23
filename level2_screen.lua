@@ -232,11 +232,7 @@ local function AddCollisionListeners()
     clouds.collision = onCollision
     clouds:addEventListener( "collision" )
 
-<<<<<<< HEAD
-    -- if character collides with ball, onCollision will be called
-=======
-        -- if character collides with hurdle, onCollision will be called
->>>>>>> 9ab0954f8c32c20c354e0605e3e6309f8154ba48
+    -- if character collides with hurdle, onCollision will be called
     hurdle1.collision = onCollision
     hurdle1:addEventListener( "collision" )
 
