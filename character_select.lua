@@ -32,8 +32,7 @@ local backButton
 -----------------------------------------------------------------------------------------
 
 -- Creating Transitioning Function back to main menu
-local function BackTransition( )
-    composer.gotoScene( "level1_screen", {effect = "slideRight", time = 500})
+function CharacterTransition( )
     character = display.newImageRect("Images/BlueUnicorn.png", 100, 150)
     character.x = display.contentWidth * 0.5 / 8
     character.y = display.contentHeight  * 0.1 / 3
@@ -89,7 +88,7 @@ function scene:create( event )
         overFile = "Images/BlueUnicorn.png",
 
         -- Setting Functional Properties
-        onRelease = BackTransition
+        onRelease = CharacterTransition
 
     } )
 
