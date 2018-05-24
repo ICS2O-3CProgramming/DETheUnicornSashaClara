@@ -33,12 +33,11 @@ local backButton
 
 -- Creating Transitioning Function back to main menu
 function CharacterTransition( )
-    character = display.newImageRect("Images/BlueUnicorn.png", 100, 150)
-    character.x = display.contentWidth * 0.5 / 8
-    character.y = display.contentHeight  * 0.1 / 3
-    character.width = 130
-    character.height = 80
-    character.myName = "Unicorn"
+    composer.gotoScene( "level1_screen", {effect = "slideLeft", time = 1000})
+end
+
+function BlueTransition()
+    composer.gotoScene( "level1_blue", {effect = "slideLeft", time = 1000})
 end
 
 -----------------------------------------------------------------------------------------
@@ -68,6 +67,32 @@ function scene:create( event )
     -- Send the background image to the back layer so all other objects can be on top
     bkg_image:toBack()
 
+    --Inserting the settings text, it's position and colour
+    selectText = display.newText( "Select your character" , 0, 0, nil, 80)
+    selectText.x = 500
+    selectText.y = 60
+    selectText:setTextColor(0,0,0)
+
+    -- Associating display objects with this scene 
+    sceneGroup:insert( selectText )
+
+    --Inserting the settings text, it's position and colour
+    blueText = display.newText( "Blue Unicorn" , 0, 0, nil, 50)
+    blueText.x = 800
+    blueText.y = 450
+    blueText:setTextColor(0,0,0)
+
+    -- Associating display objects with this scene 
+    sceneGroup:insert( blueText )
+
+    --Inserting the settings text, it's position and colour
+    pinkText = display.newText( "Pink Unicorn" , 0, 0, nil, 50)
+    pinkText.x = 200
+    pinkText.y = 450
+    pinkText:setTextColor(0,0,0)
+
+    -- Associating display objects with this scene 
+    sceneGroup:insert( pinkText )
     -----------------------------------------------------------------------------------------
     -- BUTTON WIDGETS
     -----------------------------------------------------------------------------------------
@@ -76,16 +101,16 @@ function scene:create( event )
     backButton = widget.newButton( 
     {
         -- Setting Position
-        x = 900,
-        y = 500,
+        x = 200,
+        y = 350,
 
         -- Setting Dimensions
          width = 200,
          height = 100,
 
         -- Setting Visual Properties
-        defaultFile = "Images/BlueUnicorn.png",
-        overFile = "Images/BlueUnicorn.png",
+        defaultFile = "Images/RectangularUnicorn.png",
+        overFile = "Images/RectangularUnicorn.png",
 
         -- Setting Functional Properties
         onRelease = CharacterTransition
@@ -96,6 +121,32 @@ function scene:create( event )
 
     -- Associating Buttons with this scene
     sceneGroup:insert( backButton )
+
+        -- Creating Back Button
+    blueButton = widget.newButton( 
+    {
+        -- Setting Position
+        x = 800,
+        y = 350,
+
+        -- Setting Dimensions
+         width = 200,
+         height = 100,
+
+        -- Setting Visual Properties
+        defaultFile = "Images/PinkBackground.png",
+        overFile = "Images/PinkBackground.png",
+
+        -- Setting Functional Properties
+        onRelease = BlueTransition
+
+    } )
+
+    -----------------------------------------------------------------------------------------
+
+    -- Associating Buttons with this scene
+    sceneGroup:insert( blueButton )
+
     
 end --function scene:create( event )
 

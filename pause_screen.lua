@@ -127,8 +127,8 @@ function scene:create( event )
         height = 100,
 
         -- Setting Visual Properties
-        defaultFile = "Images/MainMenuButtonUnpressed.png",
-        overFile = "Images/MainMenuButtonPressed.png",
+        defaultFile = "Images/MusicButtonUnpressed.png",
+        overFile = "Images/MusicButtonPressed.png",
 
         -- Setting Functional Properties
         onRelease = MainMenuTransition

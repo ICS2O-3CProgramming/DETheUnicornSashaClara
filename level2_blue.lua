@@ -132,7 +132,7 @@ end
 
 --Creating a function to replace the character 
 function ReplaceCharacter()
-    character = display.newImageRect("Images/RectangularUnicorn.png", 100, 150)
+    character = display.newImageRect("Images/PinkBackground.png", 100, 150)
     character.x = display.contentWidth * 0.5 / 8
     character.y = display.contentHeight  * 0.1 / 3
     character.width = 130
@@ -240,7 +240,7 @@ local function onCollision( self, event )
             questionsAnswered = questionsAnswered + 1
 
             -- show overlay with the question
-            composer.showOverlay( "level2_question", { isModal = true, effect = "fade", time = 100})
+            composer.showOverlay( "level2blue_question", { isModal = true, effect = "fade", time = 100})
 
         end        
     end

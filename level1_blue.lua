@@ -3,7 +3,7 @@
 -- level1_screen.lua
 -- Created by: Sasha Malko
 -- Date: May 14, 2018
--- Description: This is the level 2 screen of the game.
+-- Description: This is the level 1 screen of the game.
 -----------------------------------------------------------------------------------------
 -- INITIALIZATIONS
 -----------------------------------------------------------------------------------------
@@ -20,7 +20,7 @@ physics.start()
 -----------------------------------------------------------------------------------------
 
 -- Naming Scene
-sceneName = "level2_screen"
+sceneName = "level1_screen"
 
 -----------------------------------------------------------------------------------------
 
@@ -49,11 +49,10 @@ local rightW
 local topW
 local floor
 local door
-local hurdle1
-local hurdle2
 local questionsAnswered = 0
 local Obstacles
 local pauseButton
+local character
 
 
 -----------------------------------------------------------------------------------------
@@ -132,12 +131,12 @@ end
 
 --Creating a function to replace the character 
 function ReplaceCharacter()
-    character = display.newImageRect("Images/RectangularUnicorn.png", 100, 150)
+    character = display.newImageRect("Images/PinkBackground.png", 100, 150)
     character.x = display.contentWidth * 0.5 / 8
     character.y = display.contentHeight  * 0.1 / 3
     character.width = 130
     character.height = 80
-    character.myName = "KickyKat"
+    character.myName = "Unicorn"
 
     -- intialize horizontal movement of character
     motionx = 0
@@ -187,44 +186,6 @@ local function onCollision( self, event )
             composer.showOverlay( "level1Clouds_questions", { isModal = true, effect = "fade", time = 100})
         end
 
-        if  (event.target.myName == "hurdle1") then
-
-            -- get the obstacle that the user hit
-            Obstacles = event.target
-
-            -- remove runtime listeners that move the character
-            RemoveArrowEventListeners()
-            RemoveRuntimeListeners()
-
-            -- remove the character from the display
-            display.remove(character)
-
-            -- Increment questions answered
-            questionsAnswered = questionsAnswered + 1
-
-            -- show overlay with the question
-            composer.showOverlay( "level1Clouds_questions", { isModal = true, effect = "fade", time = 100})
-        end
-
-        if  (event.target.myName == "hurdle2") then
-
-            -- get the obstacle that the user hit
-            Obstacles = event.target
-
-            -- remove runtime listeners that move the character
-            RemoveArrowEventListeners()
-            RemoveRuntimeListeners()
-
-            -- remove the character from the display
-            display.remove(character)
-
-            -- Increment questions answered
-            questionsAnswered = questionsAnswered + 1
-
-            -- show overlay with the question
-            composer.showOverlay( "level1Clouds_questions", { isModal = true, effect = "fade", time = 100})
-        end
-
         if  (event.target.myName == "door") then
             
             -- get the obstacle that the user hit
@@ -240,7 +201,7 @@ local function onCollision( self, event )
             questionsAnswered = questionsAnswered + 1
 
             -- show overlay with the question
-            composer.showOverlay( "level2_question", { isModal = true, effect = "fade", time = 100})
+            composer.showOverlay( "level1blue_question", { isModal = true, effect = "fade", time = 100})
 
         end        
     end
@@ -251,14 +212,6 @@ local function AddCollisionListeners()
     clouds.collision = onCollision
     clouds:addEventListener( "collision" )
 
-    -- if character collides with hurdle, onCollision will be called
-    hurdle1.collision = onCollision
-    hurdle1:addEventListener( "collision" )
-
-    -- if character collides with hurdle, onCollision will be called
-    hurdle2.collision = onCollision
-    hurdle2:addEventListener( "collision" )
-
     -- if character collides with ball, onCollision will be called    
     door.collision = onCollision
     door:addEventListener( "collision" )
@@ -268,8 +221,6 @@ end
 --Creating function to remove the collison listeners 
 local function RemoveCollisionListeners()
     clouds:removeEventListener( "collision" )
-    hurdle1:removeEventListener( "collision" )
-    hurdle2:removeEventListener( "collision" )
     door:removeEventListener( "collision" )
 
 end
@@ -279,9 +230,7 @@ local function AddPhysicsBodies()
     physics.addBody( rainbow1, "static", { density=1.0, friction=0.3, bounce=0.2 } )
     physics.addBody( rainbow2, "static", { density=1.0, friction=0.3, bounce=0.2 } )
     physics.addBody(door, "static",  {density=0, friction=0, bounce=0} )
-    physics.addBody( clouds, "static", { density=1.0, friction=0.3, bounce=0.2 } )
-    physics.addBody( hurdle1, "static", { density=1.0, friction=0.3, bounce=0.2 } )
-    physics.addBody( hurdle2, "static", { density=1.0, friction=0.3, bounce=0.2 } )    
+    physics.addBody( clouds, "static", { density=1.0, friction=0.3, bounce=0.2 } )  
     physics.addBody(leftW, "static", {density=1, friction=0.3, bounce=0.2} )
     physics.addBody(rightW, "static", {density=1, friction=0.3, bounce=0.2} )
     physics.addBody(topW, "static", {density=1, friction=0.3, bounce=0.2} )
@@ -296,8 +245,6 @@ local function RemovePhysicsBodies()
     physics.removeBody(rainbow2)
     physics.removeBody(door)
     physics.removeBody(clouds)
-    physics.removeBody(hurdle1)
-    physics.removeBody(hurdle2)
     physics.removeBody(leftW)
     physics.removeBody(rightW)
     physics.removeBody(topW)
@@ -336,7 +283,7 @@ function scene:create( event )
     bkg_image.x = display.contentWidth / 2 
     bkg_image.y = display.contentHeight / 2
 
-    -- Insert background image into the scene group 
+     -- Insert background image into the scene group 
     sceneGroup:insert( bkg_image )    
     
     -- Insert the rainbow
@@ -353,7 +300,7 @@ function scene:create( event )
     rainbow2 = display.newImageRect("Images/Rainbow.png", 0, 0)
     rainbow2.x = 850
     rainbow2.y = 480
-    rainbow2.width = 600
+    rainbow2.width = 500
     rainbow2.height = 130
         
     -- Insert rainbow into the scene group 
@@ -399,7 +346,7 @@ function scene:create( event )
     -- Insert the heart into the scene group
     sceneGroup:insert( heart2 )
 
-    -- Insert the heart
+     -- Insert the heart
     heart3 = display.newImageRect("Images/heart.png", 80, 80)
     heart3.x = 210
     heart3.y = 50
@@ -407,28 +354,6 @@ function scene:create( event )
 
     -- Insert the heart into the scene group
     sceneGroup:insert( heart3 )
-
-    -- Insert the rainbow
-    hurdle1 = display.newImageRect("Images/Hurdle.png", 0, 0)
-    hurdle1.x = 200
-    hurdle1.y = 380
-    hurdle1.width = 100
-    hurdle1.height = 100
-    hurdle1.myName = "hurdle1"
-
-    -- Insert rainbow into the scene group    
-    sceneGroup:insert( hurdle1 )
-
-    -- Insert the rainbow
-    hurdle2 = display.newImageRect("Images/Hurdle.png", 0, 0)
-    hurdle2.x = 590
-    hurdle2.y = 380
-    hurdle2.width = 100
-    hurdle2.height = 100
-    hurdle2.myName = "hurdle2"
-
-    -- Insert rainbow into the scene group    
-    sceneGroup:insert( hurdle2 )
 
     --Insert the right arrow
     rArrow = display.newImageRect("Images/ArrowButtonUnpressed.png", 100, 50)
