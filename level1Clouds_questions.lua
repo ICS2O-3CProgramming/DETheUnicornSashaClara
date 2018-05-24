@@ -70,7 +70,7 @@ local Y2 = display.contentHeight*6/7
 --Sounds
 local correctSound = audio.loadSound("Sounds/Correct.mp3")
 local correctSoundChannel
-local incorrectSound = audio.loadSound("Sounds/incorrect.mp3")
+local incorrectSound = audio.loadSound("Sounds/Incorrect.mp3")
 local incorrectSoundChannel
 
 -----------------------------------------------------------------------------------------
