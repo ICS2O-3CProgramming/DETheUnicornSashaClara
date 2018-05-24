@@ -36,7 +36,6 @@ local rainbow1
 local rainbow2
 local rainbow3
 local clouds
-local character
 local rArrow 
 local uArrow
 local lArrow
@@ -129,12 +128,12 @@ end
 
 --Creating a function to replace the character 
 function ReplaceCharacter()
-    character = display.newImageRect("Images/RectangularUnicorn.png", 100, 150)
+    --[[character = display.newImageRect("Images/RectangularUnicorn.png", 100, 150)
     character.x = display.contentWidth * 0.5 / 8
     character.y = display.contentHeight  * 0.1 / 3
     character.width = 130
     character.height = 80
-    character.myName = "KickyKat"
+    character.myName = "KickyKat"]]--
 
     --intialize horizontal movement of character
     motionx = 0

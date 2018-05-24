@@ -1,8 +1,10 @@
 -----------------------------------------------------------------------------------------
--- pause_screen.lua
+-- credits_screen.lua
 -- Created by: Sasha Malko
--- Date: May 14, 2018
--- Description: This is the pause page, displaying a play button to the game.
+-- Date: May 10, 2018
+-- Description: This is the credits page, displaying a back button to the main menu.
+-----------------------------------------------------------------------------------------
+
 -----------------------------------------------------------------------------------------
 -- INITIALIZATIONS
 -----------------------------------------------------------------------------------------
@@ -14,7 +16,7 @@ local widget = require( "widget" )
 -----------------------------------------------------------------------------------------
 
 -- Naming Scene
-sceneName = "pause_screen"
+sceneName = "credits_screen"
 
 -- Creating Scene Object
 scene = composer.newScene( sceneName ) 
@@ -22,26 +24,23 @@ scene = composer.newScene( sceneName )
 -----------------------------------------------------------------------------------------
 -- LOCAL VARIABLES
 -----------------------------------------------------------------------------------------
-local bkg
-local cover
-local unpauseButton
-local pauseText
-local playText
+local bkg_image
+local backButton
 
 -----------------------------------------------------------------------------------------
 -- LOCAL FUNCTIONS
 -----------------------------------------------------------------------------------------
 
--- Creating Transitioning Function back to game
-local function PlayTransition() 
-    composer.hideOverlay("crossFade", 400 )
-    ResumeGame()
-end 
-
--- Creating Transitioning Function back to game
-local function MainMenuTransition() 
-  composer.gotoScene( "main_menu" )
-end 
+-- Creating Transitioning Function back to main menu
+local function BackTransition( )
+    composer.gotoScene( "level1_screen", {effect = "slideRight", time = 500})
+    character = display.newImageRect("Images/BlueUnicorn.png", 100, 150)
+    character.x = display.contentWidth * 0.5 / 8
+    character.y = display.contentHeight  * 0.1 / 3
+    character.width = 130
+    character.height = 80
+    character.myName = "Unicorn"
+end
 
 -----------------------------------------------------------------------------------------
 -- GLOBAL SCENE FUNCTIONS
@@ -57,88 +56,48 @@ function scene:create( event )
     -- BACKGROUND AND DISPLAY OBJECTS
     -----------------------------------------------------------------------------------------
 
-    --covering the other scene with a rectangle so it looks faded and stops touch from going through
-    bkg = display.newRect(display.contentCenterX, display.contentCenterY, display.contentWidth, display.contentHeight)
-    --setting to a semi black colour
-    bkg:setFillColor(0,0,0,0.8)
+    -- Insert the background image and set it to the center of the screen
+    bkg_image = display.newImageRect("Images/BlueBackground.png", display.contentWidth, display.contentHeight)
+    bkg_image.x = display.contentCenterX
+    bkg_image.y = display.contentCenterY
+    bkg_image.width = display.contentWidth
+    bkg_image.height = display.contentHeight
 
-    --Insert the bkg to the scene group 
-    sceneGroup:insert( bkg )
+    -- Associating display objects with this scene 
+    sceneGroup:insert( bkg_image )
 
-    --making a cover rectangle to have the background fully bolcked where the question is
-    cover = display.newRoundedRect(display.contentCenterX, display.contentCenterY, display.contentWidth*0.9, display.contentHeight*0.95, 50 )
-    --setting its colour
-    cover:setFillColor(220/255, 195/255, 32/255)
+    -- Send the background image to the back layer so all other objects can be on top
+    bkg_image:toBack()
 
-    --Insert the cover to the scene group 
-    sceneGroup:insert( cover )
+    -----------------------------------------------------------------------------------------
+    -- BUTTON WIDGETS
+    -----------------------------------------------------------------------------------------
 
-    -- create the pause text object
-    pauseText = display.newText("Paused", display.contentCenterX, display.contentCenterY*3/8, Arial, 60)
-    pauseText:setTextColor(0,0,0)
-
-    --Insert the pause text to the scene group 
-    sceneGroup:insert( pauseText )
-
-    -- create the play text object
-    playText = display.newText("Continue playing?", display.contentCenterX, display.contentCenterY*8/8, Arial, 60)
-    playText:setTextColor(0,0,0)
-
-    --Insert the play text to the scene group
-    sceneGroup:insert( playText )
-
-    ------------------------------------------------------------------------------------------
-    --WIDGETS
-    ------------------------------------------------------------------------------------------
-
-    -- Creating unpause Button
-    unpauseButton = widget.newButton( 
+    -- Creating Back Button
+    backButton = widget.newButton( 
     {
         -- Setting Position
-        x = 200,
-        y = 390,
+        x = 900,
+        y = 500,
 
         -- Setting Dimensions
-        width = 100,
-        height = 100,
+         width = 200,
+         height = 100,
 
         -- Setting Visual Properties
-        defaultFile = "Images/UnpauseButtonUnpressed.png",
-        overFile = "Images/UnpauseButtonPressed.png",
+        defaultFile = "Images/BlueUnicorn.png",
+        overFile = "Images/BlueUnicorn.png",
 
         -- Setting Functional Properties
-        onRelease = PlayTransition
+        onRelease = BackTransition
 
     } )
-    
------------------------------------------------------------------------------------------
+
+    -----------------------------------------------------------------------------------------
+
     -- Associating Buttons with this scene
-    sceneGroup:insert( unpauseButton )
-
-    -- Creating main menu Button
-    unpauseButton = widget.newButton( 
-    {
-        -- Setting Position
-        x = 800,
-        y = 600,
-
-        -- Setting Dimensions
-        width = 200,
-        height = 100,
-
-        -- Setting Visual Properties
-        defaultFile = "Images/MainMenuButtonUnpressed.png",
-        overFile = "Images/MainMenuButtonPressed.png",
-
-        -- Setting Functional Properties
-        onRelease = MainMenuTransition
-
-    } )
+    sceneGroup:insert( backButton )
     
------------------------------------------------------------------------------------------
-    -- Associating Buttons with this scene
-    sceneGroup:insert( unpauseButton )
-
 end --function scene:create( event )
 
 -----------------------------------------------------------------------------------------
@@ -155,16 +114,13 @@ function scene:show( event )
 
     -----------------------------------------------------------------------------------------
 
-    -- Called when the scene is still off screen (but is about to come on screen).
     if ( phase == "will" ) then
-        
+        -- Called when the scene is still off screen (but is about to come on screen).
+
     -----------------------------------------------------------------------------------------
- 
-    -- Called when the scene is now on screen.
+
     elseif ( phase == "did" ) then
-        
-        --pause the audio
-        audio.pause()
+        -- Called when the scene is now on screen.
 
     end
 
@@ -184,16 +140,13 @@ function scene:hide( event )
 
     -----------------------------------------------------------------------------------------
 
-    -- Called when the scene is on screen (but is about to go off screen).
     if ( phase == "will" ) then
-        
+        -- Called when the scene is on screen (but is about to go off screen).
+
     -----------------------------------------------------------------------------------------
 
-    -- Called immediately after scene goes off screen.
     elseif ( phase == "did" ) then
-        
-        --Resume the audio
-        audio.resume()
+        -- Called immediately after scene goes off screen.
     end
 
 end --function scene:hide( event )
@@ -207,6 +160,9 @@ function scene:destroy( event )
     local sceneGroup = self.view
 
     -----------------------------------------------------------------------------------------
+
+    -- Called prior to the removal of scene's view ("sceneGroup").
+
 
 end --function scene:destroy( event )
 
