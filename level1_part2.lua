@@ -14,8 +14,7 @@ local widget = require( "widget" )
 -- load physics
 local physics = require("physics")
 
---Start physics
-physics.start()
+
 -----------------------------------------------------------------------------------------
 
 -- Naming Scene
@@ -128,7 +127,7 @@ local function RemoveRuntimeListeners()
 end
 
 --Creating a function to replace the character 
-function ReplaceCharacter()
+local function ReplaceCharacter()
     character = display.newImageRect("Images/RectangularUnicorn.png", 100, 150)
     character.x = display.contentWidth * 0.5 / 8
     character.y = display.contentHeight  * 0.1 / 3
@@ -516,6 +515,7 @@ function scene:hide( event )
         RemoveArrowEventListeners()
         RemoveRuntimeListeners()
         display.remove(character)
+        
     end
 
 end --function scene:hide( event )

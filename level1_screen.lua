@@ -15,8 +15,7 @@ local widget = require( "widget" )
 -- load physics
 local physics = require("physics")
 
---Start physics
-physics.start()
+
 -----------------------------------------------------------------------------------------
 
 -- Naming Scene
@@ -105,6 +104,7 @@ end
 
 --Adding the touch listeners for the arrows
 local function AddArrowEventListeners()
+    print ("*** Added Arrow Listeners")
     rArrow:addEventListener("touch", right)
     uArrow:addEventListener("touch", up)
     lArrow:addEventListener("touch", left)
@@ -112,6 +112,7 @@ end
 
 --Removing the touch listeners for the arrows
 local function RemoveArrowEventListeners()
+    print ("***Removed arrow listeners")
     rArrow:removeEventListener("touch", right)
     uArrow:removeEventListener("touch", up)
     lArrow:removeEventListener("touch", left)
@@ -130,8 +131,14 @@ local function RemoveRuntimeListeners()
 end
 
 --Creating a function to replace the character 
-function ReplaceCharacter()
-    character = display.newImageRect("Images/RectangularUnicorn.png", 100, 150)
+local function ReplaceCharacter()
+
+    if (characterChoice == "PinkUnicorn") then
+        character = display.newImageRect("Images/RectangularUnicorn.png", 100, 150)
+    else
+        character = display.newImageRect("Images/BlueUnicorn.png", 100, 150)
+    end
+
     character.x = display.contentWidth * 0.5 / 8
     character.y = display.contentHeight  * 0.1 / 3
     character.width = 130
@@ -456,7 +463,8 @@ function scene:show( event )
 
     -- Called when the scene is still off screen (but is about to come on screen).
     if ( phase == "will" ) then
-
+        --Start physics
+        physics.start()
 
         -- set gravity
         physics.setGravity( 0, GRAVITY )

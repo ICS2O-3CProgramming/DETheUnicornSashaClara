@@ -22,22 +22,30 @@ sceneName = "credits_screen"
 scene = composer.newScene( sceneName ) 
 
 -----------------------------------------------------------------------------------------
+-- GLOBAL VARIABLES
+-----------------------------------------------------------------------------------------
+
+characterChoice = "pinkUnicorn"
+
+-----------------------------------------------------------------------------------------
 -- LOCAL VARIABLES
 -----------------------------------------------------------------------------------------
 local bkg_image
-local backButton
+local pinkButton
 
 -----------------------------------------------------------------------------------------
 -- LOCAL FUNCTIONS
 -----------------------------------------------------------------------------------------
 
 -- Creating Transitioning Function back to main menu
-function CharacterTransition( )
+function PinkTransition( )
+    characterChoice = "pinkUnicorn"
     composer.gotoScene( "level1_screen", {effect = "slideLeft", time = 1000})
 end
 
 function BlueTransition()
-    composer.gotoScene( "level1_blue", {effect = "slideLeft", time = 1000})
+    characterChoice = "blueUnicorn"
+    composer.gotoScene( "level1_screen", {effect = "slideLeft", time = 1000})
 end
 
 -----------------------------------------------------------------------------------------
@@ -63,9 +71,6 @@ function scene:create( event )
 
     -- Associating display objects with this scene 
     sceneGroup:insert( bkg_image )
-
-    -- Send the background image to the back layer so all other objects can be on top
-    bkg_image:toBack()
 
     --Inserting the settings text, it's position and colour
     selectText = display.newText( "Select your character" , 0, 0, nil, 80)
@@ -98,7 +103,7 @@ function scene:create( event )
     -----------------------------------------------------------------------------------------
 
     -- Creating Back Button
-    backButton = widget.newButton( 
+    pinkButton = widget.newButton( 
     {
         -- Setting Position
         x = 200,
@@ -113,14 +118,14 @@ function scene:create( event )
         overFile = "Images/RectangularUnicorn.png",
 
         -- Setting Functional Properties
-        onRelease = CharacterTransition
+        onRelease = PinkTransition
 
     } )
 
     -----------------------------------------------------------------------------------------
 
     -- Associating Buttons with this scene
-    sceneGroup:insert( backButton )
+    sceneGroup:insert( pinkButton )
 
         -- Creating Back Button
     blueButton = widget.newButton( 

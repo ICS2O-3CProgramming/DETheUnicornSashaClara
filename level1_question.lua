@@ -11,7 +11,6 @@
 -- Use Composer Libraries
 local composer = require( "composer" )
 local widget = require( "widget" )
-local physics = require( "physics")
 
 -----------------------------------------------------------------------------------------
 

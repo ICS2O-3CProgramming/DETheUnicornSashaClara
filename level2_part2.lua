@@ -135,7 +135,7 @@ function ReplaceCharacter()
     character.y = display.contentHeight  * 0.1 / 3
     character.width = 130
     character.height = 80
-    character.myName = "KickyKat"
+    character.myName = "Unicorn"
 
     --intialize horizontal movement of character
     motionx = 0
