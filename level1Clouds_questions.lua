@@ -80,7 +80,7 @@ local incorrectSoundChannel
 --making transition to next scene
 local function BackToLevel1() 
     composer.hideOverlay("crossFade", 400 )
-    ReplaceCharacter()
+    ResumeLevel1Part1()
 end 
 
 -----------------------------------------------------------------------------------------

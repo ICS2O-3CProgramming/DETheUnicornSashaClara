@@ -40,12 +40,13 @@ local pinkButton
 -- Creating Transitioning Function back to main menu
 function PinkTransition( )
     characterChoice = "pinkUnicorn"
-    composer.gotoScene( "level1_screen", {effect = "slideLeft", time = 1000})
+    composer.gotoScene( "level1_part1", {effect = "slideLeft", time = 1000})
+
 end
 
 function BlueTransition()
     characterChoice = "blueUnicorn"
-    composer.gotoScene( "level1_screen", {effect = "slideLeft", time = 1000})
+    composer.gotoScene( "level1_part1", {effect = "slideLeft", time = 1000})
 end
 
 -----------------------------------------------------------------------------------------

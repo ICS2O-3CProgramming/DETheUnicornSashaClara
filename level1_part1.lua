@@ -19,7 +19,7 @@ local physics = require("physics")
 -----------------------------------------------------------------------------------------
 
 -- Naming Scene
-sceneName = "level1_screen"
+sceneName = "level1_part1"
 
 -----------------------------------------------------------------------------------------
 
@@ -133,7 +133,7 @@ end
 --Creating a function to replace the character 
 local function ReplaceCharacter()
 
-    if (characterChoice == "PinkUnicorn") then
+    if (characterChoice == "pinkUnicorn") then
         character = display.newImageRect("Images/RectangularUnicorn.png", 100, 150)
     else
         character = display.newImageRect("Images/BlueUnicorn.png", 100, 150)
@@ -208,7 +208,7 @@ local function onCollision( self, event )
             questionsAnswered = questionsAnswered + 1
 
             -- show overlay with the question
-            composer.showOverlay( "level1_question", { isModal = true, effect = "fade", time = 100})
+            composer.showOverlay( "level1_part1Questions", { isModal = true, effect = "fade", time = 100})
 
         end        
     end
@@ -262,17 +262,19 @@ end
 -- GLOBAL FUNCTIONS
 -----------------------------------------------------------------------------------------
 
-function ResumeGame()
+function ResumeLevel1Part1()
 
     -- make character visible again
-    character.isVisible = true
+    --character.isVisible = true
     
     --allowing the game to continue
-    if (questionsAnswered > 0) then
+    --[[if (questionsAnswered > 0) then
         if (Obstacles ~= nil) and (Obstacles.isBodyActive == true) then
             physics.addBody(Obstacles)
             Obstacles.isVisible = true
-    end end
+    end end]]--
+
+    ReplaceCharacter()
 end
 
 -----------------------------------------------------------------------------------------
