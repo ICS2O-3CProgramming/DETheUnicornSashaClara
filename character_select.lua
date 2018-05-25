@@ -134,8 +134,8 @@ function scene:create( event )
          height = 100,
 
         -- Setting Visual Properties
-        defaultFile = "Images/PinkBackground.png",
-        overFile = "Images/PinkBackground.png",
+        defaultFile = "Images/BlueUnicorn.png",
+        overFile = "Images/BlueUnicorn.png",
 
         -- Setting Functional Properties
         onRelease = BlueTransition
