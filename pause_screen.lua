@@ -33,12 +33,21 @@ local playText
 -----------------------------------------------------------------------------------------
 
 -- Creating Transitioning Function back to game
-local function PlayTransition() 
-    composer.hideOverlay("crossFade", 400 )
-    ResumeGame()
-end 
+local function PlayTransition()
+    composer.hideOverlay("crossFade", 400 ) 
+    -- make character visible again
+    character.isVisible = true
+    
+    --allowing the game to continue
+    if (questionsAnswered > 0) then
+        if (Obstacles ~= nil) and (Obstacles.isBodyActive == true) then
+            physics.addBody(Obstacles)
+            Obstacles.isVisible = true
+            ResumeGame() 
+end end end
+ 
 
--- Creating Transitioning Function back to game
+-- Creating Transitioning Function back main menu
 local function MainMenuTransition() 
   composer.gotoScene( "main_menu" )
 end 
@@ -116,7 +125,7 @@ function scene:create( event )
     sceneGroup:insert( unpauseButton )
 
     -- Creating main menu Button
-    unpauseButton = widget.newButton( 
+    MainMenuButton = widget.newButton( 
     {
         -- Setting Position
         x = 800,
@@ -127,8 +136,8 @@ function scene:create( event )
         height = 100,
 
         -- Setting Visual Properties
-        defaultFile = "Images/MainMenuButtonUnpressed.png",
-        overFile = "Images/MainMenuButtonPressed.png",
+        defaultFile = "Images/MusicButtonUnpressed.png",
+        overFile = "Images/MusicButtonPressed.png",
 
         -- Setting Functional Properties
         onRelease = MainMenuTransition
@@ -137,7 +146,7 @@ function scene:create( event )
     
 -----------------------------------------------------------------------------------------
     -- Associating Buttons with this scene
-    sceneGroup:insert( unpauseButton )
+    sceneGroup:insert( MainMenuButton )
 
 end --function scene:create( event )
 

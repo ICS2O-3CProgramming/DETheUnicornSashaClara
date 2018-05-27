@@ -15,7 +15,6 @@ local widget = require( "widget" )
 -- load physics
 local physics = require("physics")
 
-
 -----------------------------------------------------------------------------------------
 
 -- Naming Scene
@@ -48,11 +47,13 @@ local rightW
 local topW
 local floor
 local door
-local questionsAnswered = 0
 local Obstacles
 local pauseButton
-local character
 
+-----------------------------------------------------------------------------------------
+-- GLOBAL VARIABLES
+-----------------------------------------------------------------------------------------
+questionsAnswered = 0
 
 -----------------------------------------------------------------------------------------
 -- LOCAL SCENE FUNCTIONS
@@ -104,7 +105,6 @@ end
 
 --Adding the touch listeners for the arrows
 local function AddArrowEventListeners()
-    print ("*** Added Arrow Listeners")
     rArrow:addEventListener("touch", right)
     uArrow:addEventListener("touch", up)
     lArrow:addEventListener("touch", left)
@@ -112,7 +112,6 @@ end
 
 --Removing the touch listeners for the arrows
 local function RemoveArrowEventListeners()
-    print ("***Removed arrow listeners")
     rArrow:removeEventListener("touch", right)
     uArrow:removeEventListener("touch", up)
     lArrow:removeEventListener("touch", left)
@@ -133,12 +132,12 @@ end
 --Creating a function to replace the character 
 local function ReplaceCharacter()
 
+    --Checking what character the user chose and placing it on the screen
     if (characterChoice == "pinkUnicorn") then
         character = display.newImageRect("Images/RectangularUnicorn.png", 100, 150)
     else
-        character = display.newImageRect("Images/BlueUnicorn.png", 100, 150)
+        character = display.newImageRect("Images/PinkBackground.png", 100, 150)
     end
-
     character.x = display.contentWidth * 0.5 / 8
     character.y = display.contentHeight  * 0.1 / 3
     character.width = 130
@@ -167,7 +166,6 @@ local function MakeHeartsVisible()
     heart2.isVisible = true
     heart3.isVisible = true
 end
-
 
 local function onCollision( self, event )
 
@@ -215,11 +213,11 @@ local function onCollision( self, event )
 end
 
 local function AddCollisionListeners()
-    -- if character collides with ball, onCollision will be called
+    -- if character collides with clouds, onCollision will be called
     clouds.collision = onCollision
     clouds:addEventListener( "collision" )
 
-    -- if character collides with ball, onCollision will be called    
+    -- if character collides with door, onCollision will be called    
     door.collision = onCollision
     door:addEventListener( "collision" )
 
@@ -262,19 +260,15 @@ end
 -- GLOBAL FUNCTIONS
 -----------------------------------------------------------------------------------------
 
-function ResumeLevel1Part1()
+--Function to replace the character
+function ResumeGame()
+  ReplaceCharacter()
+end
 
-    -- make character visible again
-    --character.isVisible = true
-    
-    --allowing the game to continue
-    --[[if (questionsAnswered > 0) then
-        if (Obstacles ~= nil) and (Obstacles.isBodyActive == true) then
-            physics.addBody(Obstacles)
-            Obstacles.isVisible = true
-    end end]]--
-
-    ReplaceCharacter()
+--Function to add the arrow event listeners and runtime listeners
+function Add()
+    AddArrowEventListeners()
+    AddRuntimeListeners()
 end
 
 -----------------------------------------------------------------------------------------
@@ -424,7 +418,7 @@ function scene:create( event )
     -- BUTTON WIDGETS
     -----------------------------------------------------------------------------------------
 
-    -- Creating Back Button
+    -- Creating Pause Button
     pauseButton = widget.newButton( 
     {
         -- Setting Position
@@ -487,7 +481,6 @@ function scene:show( event )
 
         -- create the character, add physics bodies and runtime listeners
         ReplaceCharacter()
-
     end
 
 end --function scene:show( event )

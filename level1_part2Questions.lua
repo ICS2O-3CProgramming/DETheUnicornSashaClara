@@ -77,7 +77,7 @@ local incorrectSoundChannel
 -----------------------------------------------------------------------------------------
 --LOCAL FUNCTIONS
 -----------------------------------------------------------------------------------------
---Function which displays the questions
+--Function which displays the questions and answers
 local function DisplayQuestionAndAnswers()
 
   randomNumber1 = math.random(1,10)
@@ -246,18 +246,14 @@ local function PositionAnswers()
         answerbox.x = X2
         answerbox.y = Y1
         
-
         --wrongAnswerBox1 position
         wrongAnswerBox1.x = X1
         wrongAnswerBox1.y = Y1
-        
         
         --wrongAnswerBox2 position
         wrongAnswerBox2.x = X1
         wrongAnswerBox2.y = Y2
         
-
-
         --wrongAnswerBox3 position
         wrongAnswerBox3.x = X2
         wrongAnswerBox3.y = Y2
@@ -275,7 +271,6 @@ local function PositionAnswers()
         wrongAnswerBox3PreviousY = wrongAnswerBox3.y
          
        
-
             -- random position 3
      elseif (randomPosition == 3) then
 
@@ -283,18 +278,14 @@ local function PositionAnswers()
         answerbox.x = X2
         answerbox.y = Y2
         
-
         --wrongAnswerBox1 position
         wrongAnswerBox1.x = X2
         wrongAnswerBox1.y = Y1
         
-
         --wrongAnswerBox2 position
          wrongAnswerBox2.x = X1
         wrongAnswerBox2.y = Y1
        
-
-
         --wrongAnswerBox3 position
         wrongAnswerBox3.x = X1
         wrongAnswerBox3.y = Y2
@@ -312,8 +303,6 @@ local function PositionAnswers()
         wrongAnswerBox3PreviousY = wrongAnswerBox3.y
        
 
-
-
       -- random position 4
      elseif (randomPosition == 4) then
         
@@ -321,7 +310,6 @@ local function PositionAnswers()
         answerbox.x = X1
         answerbox.y = Y2
         
-
         --wrongAnswerBox2 position
         wrongAnswerBox1.x = X2
         wrongAnswerBox1.y = Y2
@@ -330,12 +318,10 @@ local function PositionAnswers()
         wrongAnswerBox2.x = X2
         wrongAnswerBox2.y = Y1
         
-
         --wrongAnswerBox3 position
         wrongAnswerBox3.x = X1
         wrongAnswerBox3.y = Y1
         
-
         ---------------------------------------------------------
         --remembering their positions to return the answer in case it's wrong
         answerboxPreviousX = answerbox.x
@@ -510,7 +496,6 @@ local function TouchListenerAnswerBox1(touch)
                    
                 end
 
-
             --else make box go back to where it was
             else
                 wrongAnswerBox1.x = wrongAnswerBox1PreviousX
@@ -595,7 +580,6 @@ local function TouchListenerAnswerBox2(touch)
                    
                 end
                 
-
             --else make box go back to where it was
             else
                 wrongAnswerBox2.x = wrongAnswerBox2PreviousX
@@ -682,8 +666,6 @@ local function TouchListenerAnswerBox3(touch)
                    
                 end
                 
-
-
             --else make box go back to where it was
             else
                 wrongAnswerBox3.x = wrongAnswerBox3PreviousX
@@ -855,8 +837,6 @@ scene:addEventListener( "create", scene )
 scene:addEventListener( "show", scene )
 scene:addEventListener( "hide", scene )
 scene:addEventListener( "destroy", scene )
-
-
 
 -----------------------------------------------------------------------------------------
 

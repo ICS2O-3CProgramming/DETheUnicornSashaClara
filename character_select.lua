@@ -1,10 +1,9 @@
 -----------------------------------------------------------------------------------------
--- credits_screen.lua
+-- character_select.lua
 -- Created by: Sasha Malko
--- Date: May 10, 2018
--- Description: This is the credits page, displaying a back button to the main menu.
------------------------------------------------------------------------------------------
-
+-- Date: May 23, 2018
+-- Description: This is the character select screen of the game which allows the user to 
+-- select a character.
 -----------------------------------------------------------------------------------------
 -- INITIALIZATIONS
 -----------------------------------------------------------------------------------------
@@ -24,26 +23,30 @@ scene = composer.newScene( sceneName )
 -----------------------------------------------------------------------------------------
 -- GLOBAL VARIABLES
 -----------------------------------------------------------------------------------------
-
 characterChoice = "pinkUnicorn"
 
 -----------------------------------------------------------------------------------------
 -- LOCAL VARIABLES
 -----------------------------------------------------------------------------------------
 local bkg_image
+local selectText
+local blueText
+local pinkText
 local pinkButton
+local blueButton
 
 -----------------------------------------------------------------------------------------
--- LOCAL FUNCTIONS
+-- GLOBAL FUNCTIONS
 -----------------------------------------------------------------------------------------
 
--- Creating Transitioning Function back to main menu
+-- Creating function to allow user to select a character and then transitions to game
 function PinkTransition( )
     characterChoice = "pinkUnicorn"
     composer.gotoScene( "level1_part1", {effect = "slideLeft", time = 1000})
 
 end
 
+-- Creating function to allow user to select a character and then transitions to game
 function BlueTransition()
     characterChoice = "blueUnicorn"
     composer.gotoScene( "level1_part1", {effect = "slideLeft", time = 1000})
@@ -73,7 +76,7 @@ function scene:create( event )
     -- Associating display objects with this scene 
     sceneGroup:insert( bkg_image )
 
-    --Inserting the settings text, it's position and colour
+    --Inserting the select text, it's position and colour
     selectText = display.newText( "Select your character" , 0, 0, nil, 80)
     selectText.x = 500
     selectText.y = 60
@@ -82,7 +85,7 @@ function scene:create( event )
     -- Associating display objects with this scene 
     sceneGroup:insert( selectText )
 
-    --Inserting the settings text, it's position and colour
+    --Inserting the blue text, it's position and colour
     blueText = display.newText( "Blue Unicorn" , 0, 0, nil, 50)
     blueText.x = 800
     blueText.y = 450
@@ -91,7 +94,7 @@ function scene:create( event )
     -- Associating display objects with this scene 
     sceneGroup:insert( blueText )
 
-    --Inserting the settings text, it's position and colour
+    --Inserting the pink text, it's position and colour
     pinkText = display.newText( "Pink Unicorn" , 0, 0, nil, 50)
     pinkText.x = 200
     pinkText.y = 450
@@ -103,7 +106,7 @@ function scene:create( event )
     -- BUTTON WIDGETS
     -----------------------------------------------------------------------------------------
 
-    -- Creating Back Button
+    -- Creating Pink Button
     pinkButton = widget.newButton( 
     {
         -- Setting Position
@@ -122,13 +125,12 @@ function scene:create( event )
         onRelease = PinkTransition
 
     } )
-
     -----------------------------------------------------------------------------------------
 
     -- Associating Buttons with this scene
     sceneGroup:insert( pinkButton )
 
-        -- Creating Back Button
+    -- Creating Blue Button
     blueButton = widget.newButton( 
     {
         -- Setting Position
@@ -140,8 +142,8 @@ function scene:create( event )
          height = 100,
 
         -- Setting Visual Properties
-        defaultFile = "Images/BlueUnicorn.png",
-        overFile = "Images/BlueUnicorn.png",
+        defaultFile = "Images/PinkBackground.png",
+        overFile = "Images/PinkBackground.png",
 
         -- Setting Functional Properties
         onRelease = BlueTransition

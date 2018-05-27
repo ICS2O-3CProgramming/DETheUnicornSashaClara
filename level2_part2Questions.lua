@@ -1,8 +1,8 @@
 -----------------------------------------------------------------------------------------
--- level1_part2Questions.lua
+-- level2_part2Questions.lua
 -- Created by: Sasha
--- Date: May 14, 2018
--- Description: These are the questions for the level 1 part 2 scene in the game. 
+-- Date: May 24, 2018
+-- Description: These are the questions for the level 2 part 2 scene in the game. 
 -----------------------------------------------------------------------------------------
 -- INITIALIZATIONS
 -----------------------------------------------------------------------------------------
@@ -77,7 +77,8 @@ local incorrectSoundChannel
 -----------------------------------------------------------------------------------------
 --LOCAL FUNCTIONS
 -----------------------------------------------------------------------------------------
---Function which displays the questions
+
+--Function which displays the questions and answers
 local function DisplayQuestionAndAnswers()
 
   randomNumber1 = math.random(1,10)

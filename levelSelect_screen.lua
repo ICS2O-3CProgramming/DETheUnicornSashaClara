@@ -19,7 +19,6 @@ sceneName = "levelSelect_screen"
 -- Creating Scene Object
 scene = composer.newScene( sceneName ) 
 
-
 -----------------------------------------------------------------------------------------
 -- LOCAL VARIABLES
 -----------------------------------------------------------------------------------------

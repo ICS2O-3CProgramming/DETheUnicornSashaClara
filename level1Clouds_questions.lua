@@ -77,14 +77,37 @@ local incorrectSoundChannel
 --LOCAL FUNCTIONS
 -----------------------------------------------------------------------------------------
 
---making transition to next scene
+--Making transition back to level
 local function BackToLevel1() 
-    composer.hideOverlay("crossFade", 400 )
-    ResumeLevel1Part1()
+  composer.hideOverlay("crossFade", 400 )
+
+    --Checking what character the user chose and placing it on the screen
+    if (characterChoice == "pinkUnicorn") then
+      character = display.newImageRect("Images/RectangularUnicorn.png", 100, 150)
+    else
+      character = display.newImageRect("Images/PinkBackground.png", 100, 150)
+    end
+    character.x = display.contentWidth * 0.5 / 8
+    character.y = display.contentHeight  * 0.1 / 3
+    character.width = 130
+    character.height = 80
+    character.myName = "Unicorn"
+
+    -- intialize horizontal movement of character
+    motionx = 0
+
+    -- add physics body
+    physics.addBody( character, "dynamic", { density=0.5, friction=0.5, bounce=0.5, rotation=0 } )
+
+    -- prevent character from being able to tip over
+    character.isFixedRotation = true
+  
+   Add()
 end 
 
 -----------------------------------------------------------------------------------------
 
+--Function which displays the questions and answers
 local function DisplayQuestionAndAnswers()
 
   randomNumber1 = math.random(1,10) 
@@ -280,17 +303,14 @@ local function PositionAnswers()
         answerbox.x = X2
         answerbox.y = Y2
         
-
         --wrongAnswerBox1 position
         wrongAnswerBox1.x = X2
         wrongAnswerBox1.y = Y1
         
-
         --wrongAnswerBox2 position
          wrongAnswerBox2.x = X1
         wrongAnswerBox2.y = Y1
        
-
         --AnswerBox3 position
         wrongAnswerBox3.x = X1
         wrongAnswerBox3.y = Y2
@@ -315,7 +335,6 @@ local function PositionAnswers()
         answerbox.x = X1
         answerbox.y = Y2
         
-
         --wrongAnswerBox2 position
         wrongAnswerBox1.x = X2
         wrongAnswerBox1.y = Y2
@@ -324,12 +343,10 @@ local function PositionAnswers()
         wrongAnswerBox2.x = X2
         wrongAnswerBox2.y = Y1
         
-
         --wrongAnswerBox3 position
         wrongAnswerBox3.x = X1
         wrongAnswerBox3.y = Y1
         
-
         ---------------------------------------------------------
         --remembering their positions to return the answer in case it's wrong
         answerboxPreviousX = answerbox.x
@@ -493,8 +510,6 @@ local function TouchListenerAnswerBox1(touch)
                    
                 end
                 
-
-
             --else make box go back to where it was
             else
                 wrongAnswerBox1.x = wrongAnswerBox1PreviousX
@@ -576,10 +591,6 @@ local function TouchListenerAnswerBox2(touch)
                    
                 end
                 
-                
-                
-                
-
             --else make box go back to where it was
             else
                 wrongAnswerBox2.x = wrongAnswerBox2PreviousX
@@ -662,8 +673,6 @@ local function TouchListenerAnswerBox3(touch)
                    
                 end
                 
-
-
             --else make box go back to where it was
             else
                 wrongAnswerBox3.x = wrongAnswerBox3PreviousX

@@ -1,12 +1,11 @@
 -----------------------------------------------------------------------------------------
--- level1_part2.lua
+-- level2_part2.lua
 -- Created by: Sasha Malko
--- Date: May 14, 2018
--- Description: This is the level 1 part 2 screen of the game.
+-- Date: May 24, 2018
+-- Description: This is the level 2 part 2 screen of the game.
 -----------------------------------------------------------------------------------------
 -- INITIALIZATIONS
 -----------------------------------------------------------------------------------------
-
 -- Use Composer Libraries
 local composer = require( "composer" )
 local widget = require( "widget" )
@@ -16,6 +15,7 @@ local physics = require("physics")
 
 --Start physics
 physics.start()
+
 -----------------------------------------------------------------------------------------
 
 -- Naming Scene
@@ -36,7 +36,6 @@ local rainbow1
 local rainbow2
 local rainbow3
 local clouds
-local character
 local rArrow 
 local uArrow
 local lArrow
@@ -50,19 +49,23 @@ local rightW
 local topW
 local floor
 local door
-local questionsAnswered = 0
 local Obstacles
 local pauseButton
 local hurdle1
 
+-----------------------------------------------------------------------------------------
+-- LOCAL VARIABLES
+-----------------------------------------------------------------------------------------
+questionsAnswered = 0
 
 -----------------------------------------------------------------------------------------
 -- LOCAL SCENE FUNCTIONS
 ----------------------------------------------------------------------------------------- 
  -- Creating Transitioning Function to the pause overlay
 local function PauseTransition( )
-    -- show overlay with math question
-    composer.showOverlay( "pause_screen", { isModal = true, effect = "fade", time = 100}) 
+    -- show overlay with the pause screen
+    composer.showOverlay( "pause_screen", { isModal = true, effect = "fade", time = 100})
+    --make the character invisible 
     character.isVisible = false
 end
 
@@ -129,8 +132,14 @@ local function RemoveRuntimeListeners()
 end
 
 --Creating a function to replace the character 
-function ReplaceCharacter()
-    character = display.newImageRect("Images/RectangularUnicorn.png", 100, 150)
+local function ReplaceCharacter()
+
+    --Checking what character the user chose and placing it on the screen
+    if (characterChoice == "pinkUnicorn") then
+        character = display.newImageRect("Images/RectangularUnicorn.png", 100, 150)
+    else
+        character = display.newImageRect("Images/PinkBackground.png", 100, 150)
+    end
     character.x = display.contentWidth * 0.5 / 8
     character.y = display.contentHeight  * 0.1 / 3
     character.width = 130
@@ -232,7 +241,7 @@ local function AddCollisionListeners()
     clouds.collision = onCollision
     clouds:addEventListener( "collision" )
 
-    -- if character collides with clouds, onCollision will be called
+    -- if character collides with hurdle, onCollision will be called
     hurdle1.collision = onCollision
     hurdle1:addEventListener( "collision" )
 
@@ -282,18 +291,15 @@ end
 -- GLOBAL FUNCTIONS
 -----------------------------------------------------------------------------------------
 
+--Function to replace the character
 function ResumeGame()
-    -- make character visible again
-    character.isVisible = true
-    
-    --allowing the game to continue
-    if (questionsAnswered > 0) then
-        if (Obstacles ~= nil) and (Obstacles.isBodyActive == true) then
-            physics.addBody(Obstacles)
-            Obstacles.isVisible = true
-            ReplaceCharacter() 
-       end
-   end
+    ReplaceCharacter()
+end
+
+--Function to add the arrow event listeners and runtime listeners
+function Add()
+    AddArrowEventListeners()
+    AddRuntimeListeners()
 end
 
 -----------------------------------------------------------------------------------------
@@ -393,7 +399,7 @@ function scene:create( event )
     -- Insert the heart into the scene group
     sceneGroup:insert( heart3 )
 
-    -- Insert the rainbow
+    -- Insert the hurdle
     hurdle1 = display.newImageRect("Images/Hurdle.png", 0, 0)
     hurdle1.x = 500
     hurdle1.y = 380
@@ -401,7 +407,7 @@ function scene:create( event )
     hurdle1.height = 100
     hurdle1.myName = "hurdle1"
 
-    -- Insert rainbow into the scene group    
+    -- Insert hurdle into the scene group    
     sceneGroup:insert( hurdle1 )
 
     --Insert the right arrow

@@ -1,8 +1,8 @@
 -----------------------------------------------------------------------------------------
 --
--- level1_screen.lua
+-- level2_part1.lua
 -- Created by: Sasha Malko
--- Date: May 14, 2018
+-- Date: May 24, 2018
 -- Description: This is the level 2 screen of the game.
 -----------------------------------------------------------------------------------------
 -- INITIALIZATIONS
@@ -20,7 +20,7 @@ physics.start()
 -----------------------------------------------------------------------------------------
 
 -- Naming Scene
-sceneName = "level2_screen"
+sceneName = "level2_part1"
 
 -----------------------------------------------------------------------------------------
 
@@ -51,16 +51,20 @@ local floor
 local door
 local hurdle1
 local hurdle2
-local questionsAnswered = 0
 local Obstacles
 local pauseButton
+
+-----------------------------------------------------------------------------------------
+-- GLOBAL VARIABLES
+-----------------------------------------------------------------------------------------
+questionsAnswered = 0
 
 
 -----------------------------------------------------------------------------------------
 -- LOCAL SCENE FUNCTIONS
 ----------------------------------------------------------------------------------------- 
 
- -- Creating Transitioning Function back to main menu
+ -- Creating Transitioning Function to the pause screen
 local function PauseTransition( )
     -- show overlay with pause screen
     composer.showOverlay( "pause_screen", { isModal = true, effect = "fade", time = 100}) 
@@ -131,8 +135,14 @@ local function RemoveRuntimeListeners()
 end
 
 --Creating a function to replace the character 
-function ReplaceCharacter()
-    character = display.newImageRect("Images/BlueUnicorn.png", 100, 150)
+local function ReplaceCharacter()
+
+    --Checking what character the user chose and placing it on the screen
+    if (characterChoice == "pinkUnicorn") then
+        character = display.newImageRect("Images/RectangularUnicorn.png", 100, 150)
+    else
+        character = display.newImageRect("Images/PinkBackground.png", 100, 150)
+    end
     character.x = display.contentWidth * 0.5 / 8
     character.y = display.contentHeight  * 0.1 / 3
     character.width = 130
@@ -240,14 +250,14 @@ local function onCollision( self, event )
             questionsAnswered = questionsAnswered + 1
 
             -- show overlay with the question
-            composer.showOverlay( "level2blue_question", { isModal = true, effect = "fade", time = 100})
+            composer.showOverlay( "level2_question", { isModal = true, effect = "fade", time = 100})
 
         end        
     end
 end
 
 local function AddCollisionListeners()
-    -- if character collides with ball, onCollision will be called
+    -- if character collides with clouds, onCollision will be called
     clouds.collision = onCollision
     clouds:addEventListener( "collision" )
 
@@ -259,7 +269,7 @@ local function AddCollisionListeners()
     hurdle2.collision = onCollision
     hurdle2:addEventListener( "collision" )
 
-    -- if character collides with ball, onCollision will be called    
+    -- if character collides with door, onCollision will be called    
     door.collision = onCollision
     door:addEventListener( "collision" )
 
@@ -287,7 +297,6 @@ local function AddPhysicsBodies()
     physics.addBody(topW, "static", {density=1, friction=0.3, bounce=0.2} )
     physics.addBody(floor, "static", {density=1, friction=0.3, bounce=0.2} )
 
-
 end
 
 local function RemovePhysicsBodies()
@@ -308,17 +317,15 @@ end
 -- GLOBAL FUNCTIONS
 -----------------------------------------------------------------------------------------
 
+--Function to replace the character
 function ResumeGame()
+    ReplaceCharacter() 
+end
 
-    -- make character visible again
-    character.isVisible = true
-    
-    --allowing the game to continue
-    if (questionsAnswered > 0) then
-        if (Obstacles ~= nil) and (Obstacles.isBodyActive == true) then
-            physics.addBody(Obstacles)
-            Obstacles.isVisible = true
-    end end
+--Function to add the arrow event listeners and runtime listeners 
+function Add()
+    AddArrowEventListeners()
+    AddRuntimeListeners()
 end
 
 -----------------------------------------------------------------------------------------
@@ -408,7 +415,7 @@ function scene:create( event )
     -- Insert the heart into the scene group
     sceneGroup:insert( heart3 )
 
-    -- Insert the rainbow
+    -- Insert the hurdle
     hurdle1 = display.newImageRect("Images/Hurdle.png", 0, 0)
     hurdle1.x = 200
     hurdle1.y = 380
@@ -416,10 +423,10 @@ function scene:create( event )
     hurdle1.height = 100
     hurdle1.myName = "hurdle1"
 
-    -- Insert rainbow into the scene group    
+    -- Insert hurdle into the scene group    
     sceneGroup:insert( hurdle1 )
 
-    -- Insert the rainbow
+    -- Insert the hurdle
     hurdle2 = display.newImageRect("Images/Hurdle.png", 0, 0)
     hurdle2.x = 590
     hurdle2.y = 380
@@ -427,7 +434,7 @@ function scene:create( event )
     hurdle2.height = 100
     hurdle2.myName = "hurdle2"
 
-    -- Insert rainbow into the scene group    
+    -- Insert hurdle into the scene group    
     sceneGroup:insert( hurdle2 )
 
     --Insert the right arrow
@@ -445,7 +452,7 @@ function scene:create( event )
     uArrow.y = display.contentHeight * 8.5 / 10
     uArrow.rotation = 90
 
-    -- Insert the lArrow into the scene group
+    -- Insert the uArrow into the scene group
     sceneGroup:insert( uArrow )
 
     --Insert the left arrow
@@ -490,7 +497,7 @@ function scene:create( event )
     -- BUTTON WIDGETS
     -----------------------------------------------------------------------------------------
 
-    -- Creating Back Button
+    -- Creating Pause Button
     pauseButton = widget.newButton( 
     {
         -- Setting Position
@@ -531,7 +538,6 @@ function scene:show( event )
 
     -- Called when the scene is still off screen (but is about to come on screen).
     if ( phase == "will" ) then
-
 
         -- set gravity
         physics.setGravity( 0, GRAVITY )

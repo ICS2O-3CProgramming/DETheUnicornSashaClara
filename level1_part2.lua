@@ -14,7 +14,6 @@ local widget = require( "widget" )
 -- load physics
 local physics = require("physics")
 
-
 -----------------------------------------------------------------------------------------
 
 -- Naming Scene
@@ -48,11 +47,13 @@ local rightW
 local topW
 local floor
 local door
-local questionsAnswered = 0
 local Obstacles
 local pauseButton
-local character
 
+-----------------------------------------------------------------------------------------
+-- GLOBAL VARIABLES
+-----------------------------------------------------------------------------------------
+questionsAnswered = 0
 
 -----------------------------------------------------------------------------------------
 -- LOCAL SCENE FUNCTIONS
@@ -128,7 +129,13 @@ end
 
 --Creating a function to replace the character 
 local function ReplaceCharacter()
-    character = display.newImageRect("Images/RectangularUnicorn.png", 100, 150)
+
+    --Checking what character the user chose and placing it on the screen
+    if (characterChoice == "pinkUnicorn") then
+        character = display.newImageRect("Images/RectangularUnicorn.png", 100, 150)
+    else
+        character = display.newImageRect("Images/PinkBackground.png", 100, 150)
+    end
     character.x = display.contentWidth * 0.5 / 8
     character.y = display.contentHeight  * 0.1 / 3
     character.width = 130
@@ -163,7 +170,6 @@ local function onCollision( self, event )
 
     if ( event.phase == "began" ) then
 
-         
         if  (event.target.myName == "clouds") then
 
             -- get the obstacle that the user hit
@@ -253,18 +259,15 @@ end
 -- GLOBAL FUNCTIONS
 -----------------------------------------------------------------------------------------
 
+--Function to replace the character
 function ResumeGame()
-    -- make character visible again
-    character.isVisible = true
-    
-    --allowing the game to continue
-    if (questionsAnswered > 0) then
-        if (Obstacles ~= nil) and (Obstacles.isBodyActive == true) then
-            physics.addBody(Obstacles)
-            Obstacles.isVisible = true
-            ReplaceCharacter() 
-       end
-   end
+    ReplaceCharacter() 
+end
+
+--Function to add the arrow event listeners and runtime listeners
+function Add()
+    AddArrowEventListeners()
+    AddRuntimeListeners()
 end
 
 -----------------------------------------------------------------------------------------

@@ -28,6 +28,7 @@ local scene = composer.newScene( sceneName )
 
 -- local variables for the scene
 local bkg
+local scrollXSpeed = -2
 
 --Sounds
 local youWinSound = audio.loadSound("Sounds/YouWin.mp3")
@@ -41,10 +42,17 @@ local youWinSoundChannel
 local function LevelSelectTransition()
     composer.gotoScene( "levelSelect_Screen" )
 end
+
+--Function to move firework
+local function MoveFirework()
+    --move the firework up 
+    firework.y = firework.y + scrollXSpeed
+    --make the firework fade in 
+    firework.alpha = firework.alpha + 0.01
+end
 -----------------------------------------------------------------------------------------
 -- GLOBAL SCENE FUNCTIONS
 -----------------------------------------------------------------------------------------
-
 
 -- The function called when the screen doesn't exist
 function scene:create( event )
@@ -53,7 +61,7 @@ function scene:create( event )
     local sceneGroup = self.view
 
     -- Display background
-    bkg = display.newImage("Images/YouWinScreen.png")
+    bkg = display.newImage("Images/YouWin.png")
     bkg.x = display.contentCenterX
     bkg.y = display.contentCenterY
     bkg.width = display.contentWidth
@@ -62,6 +70,15 @@ function scene:create( event )
 
     -- Associating display objects with this scene 
     sceneGroup:insert( bkg )
+
+    --Displaying the image of the firework and making it invisible
+    firework = display.newImageRect("Images/Firework.png", 200, 150)
+    firework.x = 500
+    firework.y = 200
+    firework.alpha = 0
+
+    -- Associating display objects with this scene 
+    sceneGroup:insert( firework )
 end
 
 -----------------------------------------------------------------------------------------
@@ -89,6 +106,9 @@ function scene:show( event )
 
         --play music
         youWinSoundChannel = audio.play(youWinSound)
+
+        --Allowing the firework to enter the scene
+        Runtime:addEventListener("enterFrame", MoveFirework)
 
         --Transition to level select screen
         timer.performWithDelay(2000, LevelSelectTransition)
