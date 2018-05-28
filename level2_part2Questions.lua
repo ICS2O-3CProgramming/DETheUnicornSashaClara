@@ -15,7 +15,7 @@ local physics = require( "physics")
 -----------------------------------------------------------------------------------------
 
 -- Naming Scene
-sceneName = "level12_part2Questions"
+sceneName = "level2_part2Questions"
 
 -----------------------------------------------------------------------------------------
 
@@ -68,7 +68,9 @@ local X2 = display.contentWidth*5/7
 local Y1 = display.contentHeight*4/7
 local Y2 = display.contentHeight*6/7
 
---Sounds
+-----------------------------------------------------------------------------------------
+-- LOCAL SOUNDS
+-----------------------------------------------------------------------------------------
 local correctSound = audio.loadSound("Sounds/Correct.mp3")
 local correctSoundChannel
 local incorrectSound = audio.loadSound("Sounds/Incorrect.mp3")

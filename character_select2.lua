@@ -1,5 +1,5 @@
 -----------------------------------------------------------------------------------------
--- character_select.lua
+-- character_select2.lua
 -- Created by: Sasha Malko
 -- Date: May 24, 2018
 -- Description: This is the character select screen of the game which allows the user to 
@@ -15,7 +15,7 @@ local widget = require( "widget" )
 -----------------------------------------------------------------------------------------
 
 -- Naming Scene
-sceneName = "credits_screen"
+sceneName = "character_select2"
 
 -- Creating Scene Object
 scene = composer.newScene( sceneName ) 

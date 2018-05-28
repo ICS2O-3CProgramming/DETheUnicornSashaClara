@@ -15,7 +15,7 @@ local widget = require( "widget" )
 -----------------------------------------------------------------------------------------
 
 -- Naming Scene
-sceneName = "credits_screen"
+sceneName = "character_select"
 
 -- Creating Scene Object
 scene = composer.newScene( sceneName ) 
