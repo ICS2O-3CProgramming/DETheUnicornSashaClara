@@ -141,7 +141,7 @@ local function ReplaceCharacter()
     if (characterChoice == "pinkUnicorn") then
         character = display.newImageRect("Images/RectangularUnicorn.png", 100, 150)
     else
-        character = display.newImageRect("Images/PinkBackground.png", 100, 150)
+        character = display.newImageRect("Images/BlueUnicorn.png", 100, 150)
     end
     character.x = display.contentWidth * 0.5 / 8
     character.y = display.contentHeight  * 0.1 / 3
