@@ -233,9 +233,40 @@ local function onCollision( self, event )
  
             -- show overlay with the question
             composer.showOverlay( "level1_part1Questions", { isModal = true, effect = "fade", time = 100})
-        end
 
-        if (event.target.myName == "lollipop2") then
+        elseif (event.target.myName == "lollipop2") then
+            -- get the obstacle that the user hit
+            Obstacles = event.target
+
+            -- stop the character from moving
+            motionx = 0
+
+            -- make the character invisible
+            character.isVisible = false
+
+            -- Increment questions answered
+            questionsAnswered = questionsAnswered + 1
+
+            -- show overlay with the question
+            composer.showOverlay( "level1_part1Questions", { isModal = true, effect = "fade", time = 100})
+
+        elseif (event.target.myName == "lollipop3") then
+            -- get the obstacle that the user hit
+            Obstacles = event.target
+
+            -- stop the character from moving
+            motionx = 0
+
+            -- make the character invisible
+            character.isVisible = false
+
+            -- Increment questions answered
+            questionsAnswered = questionsAnswered + 1
+
+            -- show overlay with the question
+            composer.showOverlay( "level1_part1Questions", { isModal = true, effect = "fade", time = 100})
+
+        elseif (event.target.myName == "lollipop4") then
             -- get the obstacle that the user hit
             Obstacles = event.target
 
@@ -251,42 +282,7 @@ local function onCollision( self, event )
             -- show overlay with the question
             composer.showOverlay( "level1_part1Questions", { isModal = true, effect = "fade", time = 100})
         end
-
-        if (event.target.myName == "lollipop3") then
-            -- get the obstacle that the user hit
-            Obstacles = event.target
-
-            -- stop the character from moving
-            motionx = 0
-
-            -- make the character invisible
-            character.isVisible = false
-
-            -- Increment questions answered
-            questionsAnswered = questionsAnswered + 1
-
-            -- show overlay with the question
-            composer.showOverlay( "level1_part1Questions", { isModal = true, effect = "fade", time = 100})
-        end
-
-        if (event.target.myName == "lollipop4") then
-            -- get the obstacle that the user hit
-            Obstacles = event.target
-
-            -- stop the character from moving
-            motionx = 0
-
-            -- make the character invisible
-            character.isVisible = false
-
-            -- Increment questions answered
-            questionsAnswered = questionsAnswered + 1
-
-            -- show overlay with the question
-            composer.showOverlay( "level1_part1Questions", { isModal = true, effect = "fade", time = 100})
-        end
-
-        end        
+        
     end
 end
 
