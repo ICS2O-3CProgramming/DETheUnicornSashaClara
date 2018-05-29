@@ -292,16 +292,9 @@ end
 -----------------------------------------------------------------------------------------
 
 --Function to replace the character
-function ResumeGame()
+function ResumeL2Part2()
     ReplaceCharacter()
 end
-
---Function to add the arrow event listeners and runtime listeners
-function Add()
-    AddArrowEventListeners()
-    AddRuntimeListeners()
-end
-
 -----------------------------------------------------------------------------------------
 -- GLOBAL SCENE FUNCTIONS
 -----------------------------------------------------------------------------------------
@@ -405,7 +398,7 @@ function scene:create( event )
     hurdle1.y = 380
     hurdle1.width = 100
     hurdle1.height = 100
-    hurdle1.my Name = "hurdle1"
+    hurdle1.myName = "hurdle1"
 
     -- Insert hurdle into the scene group    
     sceneGroup:insert( hurdle1 )

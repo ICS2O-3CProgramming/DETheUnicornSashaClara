@@ -81,7 +81,9 @@ local incorrectSoundChannel
 local function BackToLevel1() 
   composer.hideOverlay("crossFade", 400 )
 
+
     --Checking what character the user chose and placing it on the screen
+
     if (characterChoice == "pinkUnicorn") then
       character = display.newImageRect("Images/RectangularUnicorn.png", 100, 150)
     else
@@ -101,8 +103,7 @@ local function BackToLevel1()
 
     -- prevent character from being able to tip over
     character.isFixedRotation = true
-  
-   Add()
+
 end 
 
 -----------------------------------------------------------------------------------------
