@@ -234,6 +234,13 @@ local function onCollision( self, event )
     end
 end
 
+local function DropLollipop()
+    timer.performWithDelay(0, lollipop1)
+    timer.performWithDelay(0, lollipop2)
+    timer.performWithDelay(0, lollipop3)
+    timer.performWithDelay(0, lollipop4)
+end
+
 
 local function AddCollisionListeners()
     -- if character collides with clouds, onCollision will be called
@@ -585,7 +592,14 @@ function scene:show( event )
         --create the character, add physics bodies and runtime listeners
         ReplaceCharacter()
 
-    end
+        DropLollipop()
+
+        if (lollipop1.y == 900) and 
+           (lollipop2.y == 900) and 
+           (lollipop3.y == 900) and
+           (lollipop4.y == 900) then 
+           DropLollipop()
+        end
 
 end --function scene:show( event )
 
