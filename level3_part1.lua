@@ -216,6 +216,75 @@ local function onCollision( self, event )
 
             -- show overlay with the question
             composer.showOverlay( "level1_part1Questions", { isModal = true, effect = "fade", time = 100})
+        end
+
+        if (event.target.myName == "lollypop1")
+            -- get the obstacle that the user hit
+            Obstacles = event.target
+
+            -- stop the character from moving
+            motionx = 0
+
+            -- make the character invisible
+            character.isVisible = false
+
+            -- Increment questions answered
+            questionsAnswered = questionsAnswered + 1
+
+            -- show overlay with the question
+            composer.showOverlay( "level1_part1Questions", { isModal = true, effect = "fade", time = 100})
+        end
+
+        if (event.target.myName == "lollypop2")
+            -- get the obstacle that the user hit
+            Obstacles = event.target
+
+            -- stop the character from moving
+            motionx = 0
+
+            -- make the character invisible
+            character.isVisible = false
+
+            -- Increment questions answered
+            questionsAnswered = questionsAnswered + 1
+
+            -- show overlay with the question
+            composer.showOverlay( "level1_part1Questions", { isModal = true, effect = "fade", time = 100})
+        end
+
+                if (event.target.myName == "lollypop3")
+            -- get the obstacle that the user hit
+            Obstacles = event.target
+
+            -- stop the character from moving
+            motionx = 0
+
+            -- make the character invisible
+            character.isVisible = false
+
+            -- Increment questions answered
+            questionsAnswered = questionsAnswered + 1
+
+            -- show overlay with the question
+            composer.showOverlay( "level1_part1Questions", { isModal = true, effect = "fade", time = 100})
+        end
+
+        if (event.target.myName == "lollypop4")
+            -- get the obstacle that the user hit
+            Obstacles = event.target
+
+            -- stop the character from moving
+            motionx = 0
+
+            -- make the character invisible
+            character.isVisible = false
+
+            -- Increment questions answered
+            questionsAnswered = questionsAnswered + 1
+
+            -- show overlay with the question
+            composer.showOverlay( "level1_part1Questions", { isModal = true, effect = "fade", time = 100})
+        end
 
         end        
     end
@@ -338,7 +407,52 @@ function scene:create( event )
     door.height = 150
 
     -- Insert the door into the scene group
-    sceneGroup:insert( door )
+    sceneGroup:insert( door )   
+
+    -- Insert lollypop1
+    lollypop1 = display.newImage("Images/BlueLollypop.png", 0, 0)
+    lollypop1.x = 900
+    lollypop1.y = 340
+    lollypop1.myName = "lollypop1"
+    lollypop1.width = 30
+    lollypop1.height = 150
+
+    -- Insert lollypop1 into the scene group
+    sceneGroup:insert( lollypop1 )
+
+    -- Insert lollypop2
+    lollypop2 = display.newImage("Images/OrangeLollypop.png", 0, 0)
+    lollypop2.x = 900
+    lollypop2.y = 340
+    lollypop2.myName = "lollypop2"
+    lollypop2.width = 30
+    lollypop2.height = 150
+
+    -- Insert the door into the scene group
+    sceneGroup:insert( lollypop2 )
+
+    -- Insert lollypop3
+    lollypop3 = display.newImage("Images/YellowLollypop.png", 0, 0)
+    lollypop3.x = 900
+    lollypop3.y = 340
+    lollypop3.myName = "lollypop3"
+    lollypop3.width = 30
+    lollypop3.height = 150
+
+    -- Insert lollypop3 into the scene group
+    sceneGroup:insert( lollypop3 )
+
+    -- Insert lollypop4
+    lollypop4 = display.newImage("Images/RedLollypop.png", 0, 0)
+    lollypop4.x = 900
+    lollypop4.y = 340
+    lollypop4.myName = "lollypop4"
+    lollypop4.width = 30
+    lollypop4.height = 150
+
+    -- Insert lollypop4 into the scene group
+    sceneGroup:insert( lollypop4 )
+
 
     -- Insert the heart
     heart1 = display.newImageRect("Images/heart.png", 80, 80)

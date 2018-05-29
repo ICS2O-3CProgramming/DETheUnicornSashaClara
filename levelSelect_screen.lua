@@ -50,7 +50,7 @@ end
 
 -- Creating Transitioning Function back to level 3
 local function Level3Transition( )
-    composer.gotoScene( "level3_screen", {effect = "zoomInOut", time = 500})
+    composer.gotoScene( "level3_part1", {effect = "zoomInOut", time = 500})
 end
 
 -----------------------------------------------------------------------------------------
