@@ -37,10 +37,10 @@ local rainbow2
 local clouds
 local door
 local Obstacles
-local lollypop1
-local lollypop2
-local lollypop3
-local lollypop4
+local lollipop1
+local lollipop2
+local lollipop3
+local lollipop4
 -- buttons
 local rArrow 
 local uArrow
@@ -218,7 +218,24 @@ local function onCollision( self, event )
             composer.showOverlay( "level1_part1Questions", { isModal = true, effect = "fade", time = 100})
         end
 
-        if (event.target.myName == "lollypop1")
+        if (event.target.myName == "lollipop1") then
+            -- get the obstacle that the user hit
+            Obstacles = event.target
+
+            -- stop the character from moving
+            motionx = 0
+
+            -- make the character invisible
+            character.isVisible = false
+
+            -- Increment questions answered
+            questionsAnswered = questionsAnswered + 1
+ 
+            -- show overlay with the question
+            composer.showOverlay( "level1_part1Questions", { isModal = true, effect = "fade", time = 100})
+        end
+
+        if (event.target.myName == "lollipop2") then
             -- get the obstacle that the user hit
             Obstacles = event.target
 
@@ -235,7 +252,7 @@ local function onCollision( self, event )
             composer.showOverlay( "level1_part1Questions", { isModal = true, effect = "fade", time = 100})
         end
 
-        if (event.target.myName == "lollypop2")
+        if (event.target.myName == "lollipop3") then
             -- get the obstacle that the user hit
             Obstacles = event.target
 
@@ -252,24 +269,7 @@ local function onCollision( self, event )
             composer.showOverlay( "level1_part1Questions", { isModal = true, effect = "fade", time = 100})
         end
 
-                if (event.target.myName == "lollypop3")
-            -- get the obstacle that the user hit
-            Obstacles = event.target
-
-            -- stop the character from moving
-            motionx = 0
-
-            -- make the character invisible
-            character.isVisible = false
-
-            -- Increment questions answered
-            questionsAnswered = questionsAnswered + 1
-
-            -- show overlay with the question
-            composer.showOverlay( "level1_part1Questions", { isModal = true, effect = "fade", time = 100})
-        end
-
-        if (event.target.myName == "lollypop4")
+        if (event.target.myName == "lollipop4") then
             -- get the obstacle that the user hit
             Obstacles = event.target
 
@@ -318,6 +318,10 @@ local function AddPhysicsBodies()
     physics.addBody(rightW, "static", {density=1, friction=0.3, bounce=0.2} )
     physics.addBody(topW, "static", {density=1, friction=0.3, bounce=0.2} )
     physics.addBody(floor, "static", {density=1, friction=0.3, bounce=0.2} )
+    physics.addBody(lollipop1, "static", {density=1, friction=0.3, bounce=0.2} )
+    physics.addBody(lollipop2, "static", {density=1, friction=0.3, bounce=0.2} )
+    physics.addBody(lollipop3, "static", {density=1, friction=0.3, bounce=0.2} )
+    physics.addBody(lollipop4, "static", {density=1, friction=0.3, bounce=0.2} )
 
 
 end
@@ -409,49 +413,49 @@ function scene:create( event )
     -- Insert the door into the scene group
     sceneGroup:insert( door )   
 
-    -- Insert lollypop1
-    lollypop1 = display.newImage("Images/BlueLollypop.png", 0, 0)
-    lollypop1.x = 900
-    lollypop1.y = 340
-    lollypop1.myName = "lollypop1"
-    lollypop1.width = 30
-    lollypop1.height = 150
+    -- Insert lollipop1
+    lollipop1 = display.newImage("Images/BlueLollipop.png", 0, 0)
+    lollipop1.x = 900
+    lollipop1.y = 340
+    lollipop1.myName = "lollipop1"
+    lollipop1.width = 30
+    lollipop1.height = 150
 
-    -- Insert lollypop1 into the scene group
-    sceneGroup:insert( lollypop1 )
+    -- Insert lollipop1 into the scene group
+    sceneGroup:insert( lollipop1 )
 
-    -- Insert lollypop2
-    lollypop2 = display.newImage("Images/OrangeLollypop.png", 0, 0)
-    lollypop2.x = 900
-    lollypop2.y = 340
-    lollypop2.myName = "lollypop2"
-    lollypop2.width = 30
-    lollypop2.height = 150
+    -- Insert lollipop2
+    lollipop2 = display.newImage("Images/OrangeLollipop.png", 0, 0)
+    lollipop2.x = 900
+    lollipop2.y = 340
+    lollipop2.myName = "lollipop2"
+    lollipop2.width = 30
+    lollipop2.height = 150
 
     -- Insert the door into the scene group
-    sceneGroup:insert( lollypop2 )
+    sceneGroup:insert( lollipop2 )
 
-    -- Insert lollypop3
-    lollypop3 = display.newImage("Images/YellowLollypop.png", 0, 0)
-    lollypop3.x = 900
-    lollypop3.y = 340
-    lollypop3.myName = "lollypop3"
-    lollypop3.width = 30
-    lollypop3.height = 150
+    -- Insert lollipop3
+    lollipop3 = display.newImage("Images/YellowLollipop.png", 0, 0)
+    lollipop3.x = 900
+    lollipop3.y = 340
+    lollipop3.myName = "lollipop3"
+    lollipop3.width = 30
+    lollipop3.height = 150
 
-    -- Insert lollypop3 into the scene group
-    sceneGroup:insert( lollypop3 )
+    -- Insert lollipop3 into the scene group
+    sceneGroup:insert( lollipop3 )
 
-    -- Insert lollypop4
-    lollypop4 = display.newImage("Images/RedLollypop.png", 0, 0)
-    lollypop4.x = 900
-    lollypop4.y = 340
-    lollypop4.myName = "lollypop4"
-    lollypop4.width = 30
-    lollypop4.height = 150
+    -- Insert lollipop4
+    lollipop4 = display.newImage("Images/RedLollipop.png", 0, 0)
+    lollipop4.x = 900
+    lollipop4.y = 340
+    lollipop4.myName = "lollipop4"
+    lollipop4.width = 30
+    lollipop4.height = 150
 
-    -- Insert lollypop4 into the scene group
-    sceneGroup:insert( lollypop4 )
+    -- Insert lollipop4 into the scene group
+    sceneGroup:insert( lollipop4 )
 
 
     -- Insert the heart
