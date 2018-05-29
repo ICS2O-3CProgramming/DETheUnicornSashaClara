@@ -289,7 +289,7 @@ local function onCollision( self, event )
             -- show overlay with the question
             composer.showOverlay( "level1_part1Questions", { isModal = true, effect = "fade", time = 100})
            
-        end
+            end
         end        
     end
 end
