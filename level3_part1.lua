@@ -219,6 +219,7 @@ local function onCollision( self, event )
         end
 
         if (event.target.myName == "lollipop1") then
+
             -- get the obstacle that the user hit
             Obstacles = event.target
 
@@ -236,6 +237,7 @@ local function onCollision( self, event )
         end
 
         if (event.target.myName == "lollipop2") then
+
             -- get the obstacle that the user hit
             Obstacles = event.target
 
@@ -253,6 +255,7 @@ local function onCollision( self, event )
         end
 
         if (event.target.myName == "lollipop3") then
+
             -- get the obstacle that the user hit
             Obstacles = event.target
 
@@ -270,6 +273,7 @@ local function onCollision( self, event )
         end
 
         if (event.target.myName == "lollipop4") then
+
             -- get the obstacle that the user hit
             Obstacles = event.target
 
@@ -284,8 +288,8 @@ local function onCollision( self, event )
 
             -- show overlay with the question
             composer.showOverlay( "level1_part1Questions", { isModal = true, effect = "fade", time = 100})
+           
         end
-
         end        
     end
 end
@@ -336,6 +340,11 @@ local function RemovePhysicsBodies()
     physics.removeBody(rightW)
     physics.removeBody(topW)
     physics.removeBody(floor)
+    physics.removeBody(lollipop1)
+    physics.removeBody(lollipop2)
+    physics.removeBody(lollipop3)
+    physics.removeBody(lollipop4)
+
 end
 
 -----------------------------------------------------------------------------------------
