@@ -36,18 +36,18 @@ local pinkButton
 local blueButton
 
 -----------------------------------------------------------------------------------------
--- GLOBAL FUNCTIONS
+-- LOCAL FUNCTIONS
 -----------------------------------------------------------------------------------------
 
 -- Creating function to allow user to select a character and then transitions to game
-function PinkTransition( )
+local function PinkTransition( )
     characterChoice = "pinkUnicorn"
     composer.gotoScene( "level1_part1", {effect = "slideLeft", time = 1000})
 
 end
 
 -- Creating function to allow user to select a character and then transitions to game
-function BlueTransition()
+local function BlueTransition()
     characterChoice = "blueUnicorn"
     composer.gotoScene( "level1_part1", {effect = "slideLeft", time = 1000})
 end
