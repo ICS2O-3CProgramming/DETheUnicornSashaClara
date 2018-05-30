@@ -39,6 +39,7 @@ local uArrow
 local lArrow
 local motionx = 0
 local SPEED = 8
+local GO = -8
 local LINEAR_VELOCITY = -100
 local GRAVITY = 7
 local leftW 
@@ -81,7 +82,7 @@ end
 
 -- When right arrow is touched, move character right
 local function left (touch)
-    motionx = -SPEED
+    motionx = GO
     character.xScale = -1
 end
 
@@ -187,7 +188,7 @@ local function onCollision( self, event )
             questionsAnswered = questionsAnswered + 1
 
             -- show overlay with the question
-            composer.showOverlay( "level1Clouds_questions", { isModal = true, effect = "fade", time = 100})        
+            composer.showOverlay( "level1Clouds_questions", { isModal = true, effect = "fade", time = 100})
         end
 
         if  (event.target.myName == "door") then
@@ -205,7 +206,8 @@ local function onCollision( self, event )
             questionsAnswered = questionsAnswered + 1
 
             -- show overlay with the question
-            composer.showOverlay( "level1_part1Questions", { isModal = true, effect = "fade", time = 100})            
+            composer.showOverlay( "level1_part1Questions", { isModal = true, effect = "fade", time = 100})
+
         end        
     end
 end
@@ -259,10 +261,15 @@ end
 -----------------------------------------------------------------------------------------
 
 --Function to replace the character
-function ResumeGameL1Part1()
+function ResumeGame()
   ReplaceCharacter()
 end
 
+--Function to add the arrow event listeners and runtime listeners
+function AddListenersAfterCloudsL1()
+    AddArrowEventListeners()
+    AddRuntimeListeners()
+end
 
 -----------------------------------------------------------------------------------------
 -- GLOBAL SCENE FUNCTIONS

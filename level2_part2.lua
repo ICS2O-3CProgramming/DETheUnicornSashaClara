@@ -292,9 +292,16 @@ end
 -----------------------------------------------------------------------------------------
 
 --Function to replace the character
-function ResumeL2Part2()
+function ResumeGame()
     ReplaceCharacter()
 end
+
+--Function to add the arrow event listeners and runtime listeners
+function Add()
+    AddArrowEventListeners()
+    AddRuntimeListeners()
+end
+
 -----------------------------------------------------------------------------------------
 -- GLOBAL SCENE FUNCTIONS
 -----------------------------------------------------------------------------------------

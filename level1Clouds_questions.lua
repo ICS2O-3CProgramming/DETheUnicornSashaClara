@@ -81,13 +81,11 @@ local incorrectSoundChannel
 local function BackToLevel1() 
   composer.hideOverlay("crossFade", 400 )
 
-
     --Checking what character the user chose and placing it on the screen
-
     if (characterChoice == "pinkUnicorn") then
       character = display.newImageRect("Images/RectangularUnicorn.png", 100, 150)
     else
-      character = display.newImageRect("Images/BlueUnicorn.png", 100, 150)
+      character = display.newImageRect("Images/PinkBackground.png", 100, 150)
     end
     character.x = display.contentWidth * 0.5 / 8
     character.y = display.contentHeight  * 0.1 / 3
@@ -103,7 +101,8 @@ local function BackToLevel1()
 
     -- prevent character from being able to tip over
     character.isFixedRotation = true
-
+  
+    AddListenersAfterCloudsL1()
 end 
 
 -----------------------------------------------------------------------------------------
