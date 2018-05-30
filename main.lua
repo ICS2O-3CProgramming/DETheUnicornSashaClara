@@ -15,4 +15,4 @@ local composer = require( "composer" )
 -----------------------------------------------------------------------------------------
 
 -- Go to the splash screen
-composer.gotoScene( "character_select" )
+composer.gotoScene( "splash_screen" )
