@@ -181,7 +181,6 @@ function scene:show( event )
         -- Called when the scene is now on screen.
 
     end
-
 end -- function scene:show( event )
 
 -----------------------------------------------------------------------------------------
