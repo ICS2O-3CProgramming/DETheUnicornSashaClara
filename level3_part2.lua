@@ -14,6 +14,8 @@ local widget = require( "widget" )
 -- load physics
 local physics = require("physics")
 
+physics.start()
+
 -----------------------------------------------------------------------------------------
 
 -- Naming Scene
@@ -194,7 +196,7 @@ local function onCollision( self, event )
         end
 
 
-        if  (event.target.myName == "lollipop1" or "lollipop2" or "lollipop3" or "lollipop4" ) then
+        if  (event.target.myName == "lollipop1") then
 
             -- get the obstacle that the user hit
             Obstacles = event.target
@@ -427,45 +429,45 @@ function scene:create( event )
     sceneGroup:insert( heart3 )
 
     -- Insert lollipop
-    lollipop1 = display.newImageRect("Images/BlueLollypop.png", 0, 0)
+    lollipop1 = display.newImageRect("Images/BlueLollipop.png", 0, 0)
     lollipop1.x = 500
     lollipop1.y = 700
     lollipop1.myName = "lollipop1"
-    lollipop1.width = 1100
-    lollipop1.height = 300
+    lollipop1.width = 100
+    lollipop1.height = 100
 
     -- Insert lollipop into the scene group    
     sceneGroup:insert( lollipop1 )
 
     -- Insert lollipop
-    lollipop2 = display.newImageRect("Images/RedLollypop.png", 0, 0)
+    lollipop2 = display.newImageRect("Images/RedLollipop.png", 0, 0)
     lollipop2.x = 500
     lollipop2.y = 700
     lollipop2.myName = "lollipop2"
-    lollipop2.width = 1100
-    lollipop2.height = 300
+    lollipop2.width = 100
+    lollipop2.height = 100
 
     -- Insert lollipop into the scene group    
     sceneGroup:insert( lollipop2 )
 
     -- Insert lollipop
-    lollipop3 = display.newImageRect("Images/OrangeLollypop.png", 0, 0)
+    lollipop3 = display.newImageRect("Images/OrangeLollipop.png", 0, 0)
     lollipop3.x = 500
     lollipop3.y = 700
     lollipop3.myName = "lollipop3"
-    lollipop3.width = 1100
-    lollipop3.height = 300
+    lollipop3.width = 100
+    lollipop3.height = 100
 
     -- Insert lollipop into the scene group    
     sceneGroup:insert( lollipop3 )
 
     -- Insert lollipop
-    lollipop4 = display.newImageRect("Images/YellowLollypop.png", 0, 0)
+    lollipop4 = display.newImageRect("Images/YellowLollipop.png", 0, 0)
     lollipop4.x = 500
     lollipop4.y = 700
     lollipop4.myName = "lollipop4"
-    lollipop4.width = 1100
-    lollipop4.height = 300
+    lollipop4.width = 100
+    lollipop4.height = 100
 
     -- Insert lollipop into the scene group    
     sceneGroup:insert( lollipop4 )
@@ -593,14 +595,7 @@ function scene:show( event )
         ReplaceCharacter()
 
         DropLollipop()
-
-        if (lollipop1.y == 900) and 
-           (lollipop2.y == 900) and 
-           (lollipop3.y == 900) and
-           (lollipop4.y == 900) then 
-           DropLollipop()
-        end
-
+    end
 end --function scene:show( event )
 
 -----------------------------------------------------------------------------------------
