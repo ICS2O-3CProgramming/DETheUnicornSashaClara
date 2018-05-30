@@ -1,5 +1,5 @@
 -----------------------------------------------------------------------------------------
--- level1Clouds_screen.lua
+-- level1Part2Clouds_screen.lua
 -- Created by: Sasha Malko
 -- Date: May 14, 2018
 -- Description: This is the level 1 questions of the game. The unicorn must jump from rainbow 
@@ -85,7 +85,7 @@ local function BackToLevel1()
     if (characterChoice == "pinkUnicorn") then
       character = display.newImageRect("Images/RectangularUnicorn.png", 100, 150)
     else
-      character = display.newImageRect("Images/PinkBackground.png", 100, 150)
+      character = display.newImageRect("Images/BlueUnicorn.png", 100, 150)
     end
     character.x = display.contentWidth * 0.5 / 8
     character.y = display.contentHeight  * 0.1 / 3
@@ -102,7 +102,7 @@ local function BackToLevel1()
     -- prevent character from being able to tip over
     character.isFixedRotation = true
   
-    Add()
+    AddL1P2()
 end 
 
 -----------------------------------------------------------------------------------------
@@ -472,12 +472,12 @@ local function TouchListenerAnswerBox1(touch)
                 incorrectSoundChannel = audio.play(incorrectSound)
                  
                 --Lose a heart if you the answer is incorrect
-                if (heart1.isVisible == true) and 
-                   (heart2.isVisible == true) and 
-                   (heart3.isVisible == true) then 
-                   heart1.isVisible = false
-                   heart2.isVisible = true
-                   heart3.isVisible = true
+                if (heart4.isVisible == true) and 
+                   (heart5.isVisible == true) and 
+                   (heart6.isVisible == true) then 
+                   heart4.isVisible = false
+                   heart5.isVisible = true
+                   heart6.isVisible = true
                    --make the incorrect text visible
                    incorrectText.isVisible = true
                    --Hide the incorrect text
@@ -486,11 +486,12 @@ local function TouchListenerAnswerBox1(touch)
                    BackToLevel1()
 
                 --Lose a heart if you the answer is incorrect
-                elseif (heart1.isVisible == false) and 
-                   (heart2.isVisible == true) and 
-                   (heart3.isVisible == true) then 
-                   heart1.isVisible = false 
-                   heart2.isVisible = false
+                elseif (heart4.isVisible == false) and 
+                   (heart5.isVisible == true) and 
+                   (heart6.isVisible == true) then 
+                   heart4.isVisible = false 
+                   heart5.isVisible = false
+                   heart6.isVisible = true
                    --make the incorrect text visible
                    incorrectText.isVisible = true
                    --Hide the incorrect text
@@ -499,12 +500,12 @@ local function TouchListenerAnswerBox1(touch)
                    BackToLevel1()
                 
                  --Lose a heart if you the answer is incorrect
-                 elseif (heart1.isVisible == false) and 
-                   (heart2.isVisible == false) and 
-                   (heart3.isVisible == true) then 
-                   heart1.isVisible = false 
-                   heart2.isVisible = false
-                   heart3.isVisible = false
+                 elseif (heart4.isVisible == false) and 
+                   (heart5.isVisible == false) and 
+                   (heart6.isVisible == true) then 
+                   heart4.isVisible = false 
+                   heart5.isVisible = false
+                   heart6.isVisible = false
                    --You lose transition
                    YouLoseTransition()
                    
@@ -553,12 +554,12 @@ local function TouchListenerAnswerBox2(touch)
                 incorrectSoundChannel = audio.play(incorrectSound)
                 
                 --Lose a heart if you the answer is incorrect
-                if (heart1.isVisible == true) and 
-                   (heart2.isVisible == true) and 
-                   (heart3.isVisible == true) then 
-                   heart1.isVisible = false
-                   heart2.isVisible = true
-                   heart3.isVisible = true
+                if (heart4.isVisible == true) and 
+                   (heart5.isVisible == true) and 
+                   (heart6.isVisible == true) then 
+                   heart4.isVisible = false
+                   heart5.isVisible = true
+                   heart6.isVisible = true
                    --make the incorrect text visible
                    incorrectText.isVisible = true
                    --Hide the incorrect text
@@ -567,11 +568,12 @@ local function TouchListenerAnswerBox2(touch)
                    BackToLevel1()
 
                 --Lose a heart if you the answer is incorrect
-                elseif (heart1.isVisible == false) and 
-                   (heart2.isVisible == true) and 
-                   (heart3.isVisible == true) then 
-                   heart1.isVisible = false 
-                   heart2.isVisible = false
+                elseif (heart4.isVisible == false) and 
+                   (heart5.isVisible == true) and 
+                   (heart6.isVisible == true) then 
+                   heart4.isVisible = false 
+                   heart5.isVisible = false
+                   heart6.isVisible = true
                    --make the incorrect text visible
                    incorrectText.isVisible = true
                    --Hide the incorrect text
@@ -580,12 +582,12 @@ local function TouchListenerAnswerBox2(touch)
                    BackToLevel1()
                 
                  --Lose a heart if you the answer is incorrect
-                 elseif (heart1.isVisible == false) and 
-                   (heart2.isVisible == false) and 
-                   (heart3.isVisible == true) then 
-                   heart1.isVisible = false 
-                   heart2.isVisible = false
-                   heart3.isVisible = false
+                 elseif (heart4.isVisible == false) and 
+                   (heart5.isVisible == false) and 
+                   (heart6.isVisible == true) then 
+                   heart4.isVisible = false 
+                   heart5.isVisible = false
+                   heart6.isVisible = false
                    --You lose transition
                    YouLoseTransition()
                    
@@ -635,12 +637,12 @@ local function TouchListenerAnswerBox3(touch)
                 incorrectSoundChannel = audio.play(incorrectSound)
                 
                 --Lose a heart if you the answer is incorrect
-                if (heart1.isVisible == true) and 
-                   (heart2.isVisible == true) and 
-                   (heart3.isVisible == true) then 
-                   heart1.isVisible = false
-                   heart2.isVisible = true
-                   heart3.isVisible = true
+                if (heart4.isVisible == true) and 
+                   (heart5.isVisible == true) and 
+                   (heart6.isVisible == true) then 
+                   heart4.isVisible = false
+                   heart5.isVisible = true
+                   heart6.isVisible = true
                    --make the incorrect text visible
                    incorrectText.isVisible = true
                    --Hide the incorrect text
@@ -649,11 +651,12 @@ local function TouchListenerAnswerBox3(touch)
                    BackToLevel1()
 
                 --Lose a heart if you the answer is incorrect
-                elseif (heart1.isVisible == false) and 
-                   (heart2.isVisible == true) and 
-                   (heart3.isVisible == true) then 
-                   heart1.isVisible = false 
-                   heart2.isVisible = false
+                elseif (heart4.isVisible == false) and 
+                   (heart5.isVisible == true) and 
+                   (heart6.isVisible == true) then 
+                   heart4.isVisible = false 
+                   heart5.isVisible = false
+                   heart6.isVisible = true
                    --make the incorrect text visible
                    incorrectText.isVisible = true
                    --Hide the incorrect text
@@ -662,12 +665,12 @@ local function TouchListenerAnswerBox3(touch)
                    BackToLevel1()
                 
                 --Lose a heart if you the answer is incorrect
-                 elseif (heart1.isVisible == false) and 
-                   (heart2.isVisible == false) and 
-                   (heart3.isVisible == true) then 
-                   heart1.isVisible = false 
-                   heart2.isVisible = false
-                   heart3.isVisible = false
+                 elseif (heart4.isVisible == false) and 
+                   (heart5.isVisible == false) and 
+                   (heart6.isVisible == true) then 
+                   heart4.isVisible = false 
+                   heart5.isVisible = false
+                   heart6.isVisible = false
                    --You lose transition
                    YouLoseTransition()
                    

@@ -160,9 +160,9 @@ end
 
 --Creating a function to make the hearts visible 
 local function MakeHeartsVisible()
-    heart1.isVisible = true
-    heart2.isVisible = true
-    heart3.isVisible = true
+    heart4.isVisible = true
+    heart5.isVisible = true
+    heart6.isVisible = true
 end
 
 --Creating a function to have collisions
@@ -186,7 +186,7 @@ local function onCollision( self, event )
             questionsAnswered = questionsAnswered + 1
 
             -- show overlay with questions
-            composer.showOverlay( "level1Clouds_questions", { isModal = true, effect = "fade", time = 100})
+            composer.showOverlay( "level1Part2Clouds_questions", { isModal = true, effect = "fade", time = 100})
         end
 
         if  (event.target.myName == "door") then
@@ -265,7 +265,7 @@ function ResumeGame()
 end
 
 --Function to add the arrow event listeners and runtime listeners
-function Add()
+function AddL1P2()
     AddArrowEventListeners()
     AddRuntimeListeners()
 end
@@ -341,31 +341,31 @@ function scene:create( event )
     sceneGroup:insert( door )
 
     -- Insert the heart
-    heart1 = display.newImageRect("Images/heart.png", 80, 80)
-    heart1.x = 50
-    heart1.y = 50
-    heart1.isVisible = true
+    heart4 = display.newImageRect("Images/heart.png", 80, 80)
+    heart4.x = 50
+    heart4.y = 50
+    heart4.isVisible = true
 
    -- Insert the heart into the scene group
-    sceneGroup:insert( heart1 )
+    sceneGroup:insert( heart4 )
 
     -- Insert the heart
-    heart2 = display.newImageRect("Images/heart.png", 80, 80)
-    heart2.x = 130
-    heart2.y = 50
-    heart2.isVisible = true
+    heart5 = display.newImageRect("Images/heart.png", 80, 80)
+    heart5.x = 130
+    heart5.y = 50
+    heart5.isVisible = true
 
     -- Insert the heart into the scene group
-    sceneGroup:insert( heart2 )
+    sceneGroup:insert( heart5 )
 
     -- Insert the heart
-    heart3 = display.newImageRect("Images/heart.png", 80, 80)
-    heart3.x = 210
-    heart3.y = 50
-    heart3.isVisible = true
+    heart6 = display.newImageRect("Images/heart.png", 80, 80)
+    heart6.x = 210
+    heart6.y = 50
+    heart6.isVisible = true
 
     -- Insert the heart into the scene group
-    sceneGroup:insert( heart3 )
+    sceneGroup:insert( heart6 )
 
     --Insert the right arrow
     rArrow = display.newImageRect("Images/ArrowButtonUnpressed.png", 100, 50)

@@ -188,7 +188,7 @@ local function onCollision( self, event )
             questionsAnswered = questionsAnswered + 1
 
             -- show overlay with the question
-            composer.showOverlay( "level1Clouds_questions", { isModal = true, effect = "fade", time = 100})
+            composer.showOverlay( "level1Part1Clouds_questions", { isModal = true, effect = "fade", time = 100})
         end
 
         if  (event.target.myName == "door") then
@@ -266,7 +266,7 @@ function ResumeGame()
 end
 
 --Function to add the arrow event listeners and runtime listeners
-function Add()
+function AddL1P1()
     AddArrowEventListeners()
     AddRuntimeListeners()
 end

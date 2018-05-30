@@ -167,9 +167,9 @@ end
 
 --Creating a function to make the hearts visible
 local function MakeHeartsVisible()
-    heart1.isVisible = true
-    heart2.isVisible = true
-    heart3.isVisible = true
+    heart7.isVisible = true
+    heart8.isVisible = true
+    heart9.isVisible = true
 end
 
 
@@ -194,7 +194,7 @@ local function onCollision( self, event )
             questionsAnswered = questionsAnswered + 1
 
             -- show overlay with the question
-            composer.showOverlay( "level1Clouds_questions", { isModal = true, effect = "fade", time = 100})
+            composer.showOverlay( "level2Part1Clouds_questions", { isModal = true, effect = "fade", time = 100})
         end
 
         if  (event.target.myName == "hurdle1") then
@@ -213,7 +213,7 @@ local function onCollision( self, event )
             questionsAnswered = questionsAnswered + 1
 
             -- show overlay with the question
-            composer.showOverlay( "level1Clouds_questions", { isModal = true, effect = "fade", time = 100})
+            composer.showOverlay( "level2Part1Clouds_questions", { isModal = true, effect = "fade", time = 100})
         end
 
         if  (event.target.myName == "hurdle2") then
@@ -232,7 +232,7 @@ local function onCollision( self, event )
             questionsAnswered = questionsAnswered + 1
 
             -- show overlay with the question
-            composer.showOverlay( "level1Clouds_questions", { isModal = true, effect = "fade", time = 100})
+            composer.showOverlay( "level2Part1Clouds_questions", { isModal = true, effect = "fade", time = 100})
         end
 
         if  (event.target.myName == "door") then
@@ -250,7 +250,7 @@ local function onCollision( self, event )
             questionsAnswered = questionsAnswered + 1
 
             -- show overlay with the question
-            composer.showOverlay( "level2_question", { isModal = true, effect = "fade", time = 100})
+            composer.showOverlay( "level2_part1Questions", { isModal = true, effect = "fade", time = 100})
 
         end        
     end
@@ -323,7 +323,7 @@ function ResumeGame()
 end
 
 --Function to add the arrow event listeners and runtime listeners 
-function Add()
+function AddL2P1()
     AddArrowEventListeners()
     AddRuntimeListeners()
 end
@@ -389,31 +389,31 @@ function scene:create( event )
     sceneGroup:insert( door )
 
     -- Insert the heart
-    heart1 = display.newImageRect("Images/heart.png", 80, 80)
-    heart1.x = 50
-    heart1.y = 50
-    heart1.isVisible = true
+    heart7 = display.newImageRect("Images/heart.png", 80, 80)
+    heart7.x = 50
+    heart7.y = 50
+    heart7.isVisible = true
 
     -- Insert the heart into the scene group
-    sceneGroup:insert( heart1 )
+    sceneGroup:insert( heart7 )
 
     -- Insert the heart
-    heart2 = display.newImageRect("Images/heart.png", 80, 80)
-    heart2.x = 130
-    heart2.y = 50
-    heart2.isVisible = true
+    heart8 = display.newImageRect("Images/heart.png", 80, 80)
+    heart8.x = 130
+    heart8.y = 50
+    heart8.isVisible = true
 
     -- Insert the heart into the scene group
-    sceneGroup:insert( heart2 )
+    sceneGroup:insert( heart8 )
 
     -- Insert the heart
-    heart3 = display.newImageRect("Images/heart.png", 80, 80)
-    heart3.x = 210
-    heart3.y = 50
-    heart3.isVisible = true
+    heart9 = display.newImageRect("Images/heart.png", 80, 80)
+    heart9.x = 210
+    heart9.y = 50
+    heart9.isVisible = true
 
     -- Insert the heart into the scene group
-    sceneGroup:insert( heart3 )
+    sceneGroup:insert( heart9 )
 
     -- Insert the hurdle
     hurdle1 = display.newImageRect("Images/Hurdle.png", 0, 0)

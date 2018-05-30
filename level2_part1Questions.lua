@@ -1,8 +1,9 @@
 -----------------------------------------------------------------------------------------
--- level2_part2Questions.lua
--- Created by: Sasha
+-- level2_questions.lua
+-- Created by: Sasha Malko
 -- Date: May 24, 2018
--- Description: These are the questions for the level 2 part 2 scene in the game. 
+-- Description: This is the level 2 questions of the game. The unicorn must jump from rainbow 
+--to rainbow, and if you it hits an obstacle, the user must answer a question.
 -----------------------------------------------------------------------------------------
 -- INITIALIZATIONS
 -----------------------------------------------------------------------------------------
@@ -15,7 +16,7 @@ local physics = require( "physics")
 -----------------------------------------------------------------------------------------
 
 -- Naming Scene
-sceneName = "level2_part2Questions"
+sceneName = "level2_question"
 
 -----------------------------------------------------------------------------------------
 
@@ -26,14 +27,15 @@ local scene = composer.newScene( sceneName )
 -- LOCAL VARIABLES
 -----------------------------------------------------------------------------------------
 
---Local variables 
-local correctText
-local incorrectText
+-- The local variables for this scene
 local questionText
 local bkg
 local cover
+local correctText
+local incorrectText
 local randomNumber1 
 local randomPosition
+
 
 -- boolean variables telling me which answer box was touched
 local answerboxAlreadyTouched = false
@@ -62,7 +64,7 @@ local wrongAnswerBox3PreviousY
 -- the black box where the user will drag the answer
 local userAnswerBoxPlaceholder
 
---The locations of the text
+-- The position of the text
 local X1 = display.contentWidth*2/7
 local X2 = display.contentWidth*5/7
 local Y1 = display.contentHeight*4/7
@@ -170,7 +172,7 @@ local function DisplayQuestionAndAnswers()
 
       -- create the question text object
       questionText.text = "What is Canada's national anthem?"
- 
+
       --create the answers
       answerbox.text = "O Canada"
       wrongAnswerBox1.text = "Lovely Canada"
@@ -178,7 +180,7 @@ local function DisplayQuestionAndAnswers()
       wrongAnswerBox3.text = "Land We Love"
 
 
-    elseif (randomNumber1 == 9) then 
+    elseif (randomNumber1 == 9) then
 
       -- create the question text object
       questionText.text = "What is Canada's national winter sport?"
@@ -190,7 +192,7 @@ local function DisplayQuestionAndAnswers()
       wrongAnswerBox3.text= "Soccer"
 
 
-    elseif (randomNumber1 == 10) then 
+    elseif (randomNumber1 == 10) then
 
       -- create the question text object
       questionText.text = "What is 10 + 8?"
@@ -245,22 +247,18 @@ local function PositionAnswers()
     -- random position 2
     elseif (randomPosition == 2) then
 
-        --answer box position
+        -- answer box position
         answerbox.x = X2
         answerbox.y = Y1
-        
-
+      
         --wrongAnswerBox1 position
         wrongAnswerBox1.x = X1
         wrongAnswerBox1.y = Y1
-        
         
         --wrongAnswerBox2 position
         wrongAnswerBox2.x = X1
         wrongAnswerBox2.y = Y2
         
-
-
         --wrongAnswerBox3 position
         wrongAnswerBox3.x = X2
         wrongAnswerBox3.y = Y2
@@ -277,28 +275,23 @@ local function PositionAnswers()
         wrongAnswerBox2PreviousY = wrongAnswerBox2.y
         wrongAnswerBox3PreviousY = wrongAnswerBox3.y
          
-       
 
-            -- random position 3
+    -- random position 3
      elseif (randomPosition == 3) then
 
-        --answer box position
+        -- answer box position
         answerbox.x = X2
         answerbox.y = Y2
         
-
         --wrongAnswerBox1 position
         wrongAnswerBox1.x = X2
         wrongAnswerBox1.y = Y1
         
-
         --wrongAnswerBox2 position
          wrongAnswerBox2.x = X1
         wrongAnswerBox2.y = Y1
        
-
-
-        --wrongAnswerBox3 position
+        --AnswerBox3 position
         wrongAnswerBox3.x = X1
         wrongAnswerBox3.y = Y2
 
@@ -315,16 +308,13 @@ local function PositionAnswers()
         wrongAnswerBox3PreviousY = wrongAnswerBox3.y
        
 
-
-
-      -- random position 4
+            -- random position 4
      elseif (randomPosition == 4) then
-        
-        --answer box position
+
+        -- answer box position
         answerbox.x = X1
         answerbox.y = Y2
         
-
         --wrongAnswerBox2 position
         wrongAnswerBox1.x = X2
         wrongAnswerBox1.y = Y2
@@ -333,12 +323,10 @@ local function PositionAnswers()
         wrongAnswerBox2.x = X2
         wrongAnswerBox2.y = Y1
         
-
         --wrongAnswerBox3 position
         wrongAnswerBox3.x = X1
         wrongAnswerBox3.y = Y1
         
-
         ---------------------------------------------------------
         --remembering their positions to return the answer in case it's wrong
         answerboxPreviousX = answerbox.x
@@ -360,7 +348,7 @@ local function RestartQuestion()
   PositionAnswers()
 end
 
---Function to hide the correct answer 
+--Function to hide the correct answer
 local function HideCorrect()
   correctText.isVisible = false
 end
@@ -370,9 +358,9 @@ local function HideIncorrect()
   incorrectText.isVisible = false
 end
 
---Function to transition to the you win screen
-local function YouWinTransition()
-  composer.gotoScene( "you_win" )
+--Function to transition to the part 2 screen
+local function Part2Transition()
+    composer.gotoScene( "level2_part2", {effect = "slideLeft", time = 1000})
 end
 
 --Function to transition to the you lose screen
@@ -400,7 +388,7 @@ local function TouchListenerAnswerbox(touch)
 
         -- this occurs when they release the mouse
         elseif (touch.phase == "ended") then
-            
+
             --reset the answer so it has not been touched
             answerboxAlreadyTouched = false
 
@@ -417,14 +405,14 @@ local function TouchListenerAnswerbox(touch)
                 -- Play correct Sound 
                 correctSoundChannel = audio.play(correctSound)
 
-                --Display text
+                --Make the correct text visible
                 correctText.isVisible = true
 
                 --Hide the correct text
                 timer.performWithDelay(1000,HideCorrect)
 
-                --Transition to you win
-                YouWinTransition()
+                --Transition to part 2 
+                Part2Transition()
 
             --else make box go back to where it was
             else
@@ -434,7 +422,6 @@ local function TouchListenerAnswerbox(touch)
         end
     end                
 end 
-
 
 local function TouchListenerAnswerBox1(touch)
     --only work if none of the other boxes have been touched
@@ -466,49 +453,43 @@ local function TouchListenerAnswerBox1(touch)
                 wrongAnswerBox1.x = userAnswerBoxPlaceholder.x
                 wrongAnswerBox1.y = userAnswerBoxPlaceholder.y
 
-                --Display text
-                incorrectText.isVisible = true
-
-                --Hide the incorrect text
-                timer.performWithDelay(1000,HideIncorrect)
-
                 --Restart the question
                 RestartQuestion()
-   
-                -- Play incorrect Sound 
+
+                -- Play incorrect Sound
                 incorrectSoundChannel = audio.play(incorrectSound)
 
-                 --Lose a heart if you the answer is incorrect
-            if (heart10.isVisible == true) and 
-                   (heart11.isVisible == true) and 
-                   (heart12.isVisible == true) then 
-                   heart10.isVisible = false
-                   heart11.isVisible = true
-                   heart12.isVisible = true
+               --Lose a heart if you the answer is incorrect
+            if (heart7.isVisible == true) and 
+                   (heart8.isVisible == true) and 
+                   (heart9.isVisible == true) then 
+                   heart7.isVisible = false
+                   heart8.isVisible = true
+                   heart9.isVisible = true
                    --make the incorrect text visible
                    incorrectText.isVisible = true
                    --Hide the incorrect text
                    timer.performWithDelay(1000,HideIncorrect)
-
-                 --Lose a heart if you the answer is incorrect
-                elseif (heart10.isVisible == false) and 
-                   (heart11.isVisible == true) and 
-                   (heart12.isVisible == true) then 
-                   heart10.isVisible = false 
-                   heart11.isVisible = false
-                   heart12.isVisible = true
-                   --make the incorrect text visible
-                   incorrectText.isVisible = true
-                   --Hide the incorrect text
-                   timer.performWithDelay(1000,HideIncorrect)
-                
+                   
                   --Lose a heart if you the answer is incorrect
-                 elseif (heart10.isVisible == false) and 
-                   (heart11.isVisible == false) and 
-                   (heart12.isVisible == true) then 
-                   heart10.isVisible = false 
-                   heart11.isVisible = false
-                   heart12.isVisible = false
+                elseif (heart7.isVisible == false) and 
+                   (heart8.isVisible == true) and 
+                   (heart9.isVisible == true) then 
+                   heart7.isVisible = false 
+                   heart8.isVisible = false
+                   heart9.isVisible = true
+                   --make the incorrect text visible
+                   incorrectText.isVisible = true
+                   --Hide the incorrect text
+                   timer.performWithDelay(1000,HideIncorrect)
+                   
+                  --Lose a heart if you the answer is incorrect
+                 elseif (heart7.isVisible == false) and 
+                   (heart8.isVisible == false) and 
+                   (heart9.isVisible == true) then 
+                   heart7.isVisible = false 
+                   heart8.isVisible = false
+                   heart9.isVisible = false
                    --Transition to you lose
                    YouLoseTransition()
                    
@@ -534,12 +515,14 @@ local function TouchListenerAnswerBox2(touch)
             --let other boxes know it has been clicked
             wrongAnswerBox2AlreadyTouched = true
             
+            --drag the answer to follow the mouse
         elseif (touch.phase == "moved") then
-            --dragging function
             wrongAnswerBox2.x = touch.x
             wrongAnswerBox2.y = touch.y
 
         elseif (touch.phase == "ended") then
+
+            --reset the answer so it has not been touched
             wrongAnswerBox2AlreadyTouched = false
 
             -- if the box is in the userAnswerBox Placeholder  go to center of placeholder
@@ -552,49 +535,43 @@ local function TouchListenerAnswerBox2(touch)
                 wrongAnswerBox2.x = userAnswerBoxPlaceholder.x
                 wrongAnswerBox2.y = userAnswerBoxPlaceholder.y
 
-                --Display text
-                incorrectText.isVisible = true
-
-                --Hide the incorrect text
-                timer.performWithDelay(1000,HideIncorrect)
-
                 --Restart the question
                 RestartQuestion()
 
                 -- Play incorrect Sound
                 incorrectSoundChannel = audio.play(incorrectSound)
                
-             --Lose a heart if you the answer is incorrect
-            if (heart10.isVisible == true) and 
-                   (heart11.isVisible == true) and 
-                   (heart12.isVisible == true) then 
-                   heart10.isVisible = false
-                   heart11.isVisible = true
-                   heart12.isVisible = true
+                --Lose a heart if you the answer is incorrect
+            if (heart7.isVisible == true) and 
+                   (heart8.isVisible == true) and 
+                   (heart9.isVisible == true) then 
+                   heart7.isVisible = false
+                   heart8.isVisible = true
+                   heart9.isVisible = true
                    --make the incorrect text visible
                    incorrectText.isVisible = true
                    --Hide the incorrect text
                    timer.performWithDelay(1000,HideIncorrect)
-                   
-                 --Lose a heart if you the answer is incorrect
-                elseif (heart10.isVisible == false) and 
-                   (heart11.isVisible == true) and 
-                   (heart12.isVisible == true) then 
-                   heart10.isVisible = false 
-                   heart11.isVisible = false
-                   heart12.isVisible = true
+
+                  --Lose a heart if you the answer is incorrect  
+                elseif (heart7.isVisible == false) and 
+                   (heart8.isVisible == true) and 
+                   (heart9.isVisible == true) then 
+                   heart7.isVisible = false 
+                   heart8.isVisible = false
+                   heart9.isVisible = true
                    --make the incorrect text visible
                    incorrectText.isVisible = true
                    --Hide the incorrect text
                    timer.performWithDelay(1000,HideIncorrect)
                    
                   --Lose a heart if you the answer is incorrect
-                 elseif (heart10.isVisible == false) and 
-                   (heart11.isVisible == false) and 
-                   (heart12.isVisible == true) then 
-                   heart10.isVisible = false 
-                   heart11.isVisible = false
-                   heart12.isVisible = false
+                 elseif (heart7.isVisible == false) and 
+                   (heart8.isVisible == false) and 
+                   (heart9.isVisible == true) then 
+                   heart7.isVisible = false 
+                   heart8.isVisible = false
+                   heart9.isVisible = false
                    --Transition to you lose
                    YouLoseTransition()
                    
@@ -620,13 +597,15 @@ local function TouchListenerAnswerBox3(touch)
         if (touch.phase == "began") then
             --let other boxes know it has been clicked
             wrongAnswerBox3AlreadyTouched = true
-            
+
+            --drag the answer to follow the mouse
         elseif (touch.phase == "moved") then
-            --dragging function
             wrongAnswerBox3.x = touch.x
             wrongAnswerBox3.y = touch.y
 
         elseif (touch.phase == "ended") then
+
+            --reset the answer so it has not been touched
             wrongAnswerBox3AlreadyTouched = false
 
             -- if the box is in the userAnswerBox Placeholder  go to center of placeholder
@@ -639,12 +618,6 @@ local function TouchListenerAnswerBox3(touch)
                 wrongAnswerBox3.x = userAnswerBoxPlaceholder.x
                 wrongAnswerBox3.y = userAnswerBoxPlaceholder.y
 
-                --Display text
-                incorrectText.isVisible = true
-
-                --Hide the incorrect text
-                timer.performWithDelay(1000,HideIncorrect)
-
                 --Restart the question
                 RestartQuestion()
 
@@ -652,37 +625,36 @@ local function TouchListenerAnswerBox3(touch)
                 incorrectSoundChannel = audio.play(incorrectSound)
 
                 --Lose a heart if you the answer is incorrect
-            if (heart10.isVisible == true) and 
-                   (heart11.isVisible == true) and 
-                   (heart12.isVisible == true) then 
-                   heart10.isVisible = false
-                   heart11.isVisible = true
-                   heart12.isVisible = true
+            if (heart7.isVisible == true) and 
+                   (heart8.isVisible == true) and 
+                   (heart9.isVisible == true) then 
+                   heart7.isVisible = false
+                   heart8.isVisible = true
+                   heart9.isVisible = true
                    --make the incorrect text visible
                    incorrectText.isVisible = true
                    --Hide the incorrect text
                    timer.performWithDelay(1000,HideIncorrect)
                    
                   --Lose a heart if you the answer is incorrect
-                elseif (heart10.isVisible == false) and 
-                   (heart11.isVisible == true) and 
-                   (heart12.isVisible == true) then 
-                   heart10.isVisible = false 
-                   heart11.isVisible = false
-                   heart12.isVisible = true
+                elseif (heart7.isVisible == false) and 
+                   (heart8.isVisible == true) and 
+                   (heart9.isVisible == true) then 
+                   heart7.isVisible = false 
+                   heart8.isVisible = false
+                   heart9.isVisible = true
                    --make the incorrect text visible
                    incorrectText.isVisible = true
                    --Hide the incorrect text
                    timer.performWithDelay(1000,HideIncorrect)
                    
-                
                   --Lose a heart if you the answer is incorrect
-                 elseif (heart10.isVisible == false) and 
-                   (heart11.isVisible == false) and 
-                   (heart12.isVisible == true) then 
-                   heart10.isVisible = false 
-                   heart11.isVisible = false
-                   heart12.isVisible = false
+                 elseif (heart7.isVisible == false) and 
+                   (heart8.isVisible == false) and 
+                   (heart9.isVisible == true) then 
+                   heart7.isVisible = false 
+                   heart8.isVisible = false
+                   heart9.isVisible = false
                    --Transition to you lose
                    YouLoseTransition()
                    
@@ -698,7 +670,6 @@ local function TouchListenerAnswerBox3(touch)
         end
     end
 end 
-
 
 
 -- Function that Adds Listeners to each answer box
@@ -733,7 +704,6 @@ function scene:create( event )
     --setting to a semi black colour
     bkg:setFillColor(0,0,0,0.8)
 
-    -----------------------------------------------------------------------------------------
     --making a cover rectangle to have the background fully bolcked where the question is
     cover = display.newRoundedRect(display.contentCenterX, display.contentCenterY, display.contentWidth*0.9, display.contentHeight*0.95, 50 )
     --setting its colour
@@ -742,13 +712,13 @@ function scene:create( event )
     -- create the question text object
     questionText = display.newText("", display.contentCenterX, display.contentCenterY*3/8, Arial, 53)
 
-    --create answerbox, wrong answers, and the boxes to show them
+    --create answerbox wrong answers and the boxes to show them
     answerbox = display.newText("", X1, Y1, nil, 50)
     wrongAnswerBox1 = display.newText("", X1, Y2, nil, 50)
     wrongAnswerBox2 = display.newText("", X2, Y2, nil, 50)
     wrongAnswerBox3 = display.newText("", X2, Y1, nil, 50)
 
-    -- the pink box where the user will drag the answer
+    -- the black box where the user will drag the answer
     userAnswerBoxPlaceholder = display.newImageRect("Images/PinkBackground.png", 400, 150, 0, 0)
     userAnswerBoxPlaceholder.x = 500
     userAnswerBoxPlaceholder.y = 300
@@ -782,6 +752,8 @@ function scene:create( event )
     sceneGroup:insert(incorrectText)
     sceneGroup:insert(questionText)
 
+
+
 end --function scene:create( event )
 
 -----------------------------------------------------------------------------------------
@@ -798,7 +770,6 @@ function scene:show( event )
     -- Called when the scene is still off screen (but is about to come on screen).
     if ( phase == "will" ) then
 
-        
     -----------------------------------------------------------------------------------------
 
     -- Called when the scene is now on screen.
@@ -827,14 +798,14 @@ function scene:hide( event )
 
     -- Called when the scene is on screen (but is about to go off screen).
     if ( phase == "will" ) then
-        
+
     -----------------------------------------------------------------------------------------
 
     -- Called immediately after scene goes off screen.
     elseif ( phase == "did" ) then
-        
-        --Remove the listeners for the answers boxes
-        RemoveAnswerBoxEventListeners()
+  
+      --Remove the listeners for the answers boxes
+      RemoveAnswerBoxEventListeners()
 
     end
 

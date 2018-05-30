@@ -192,7 +192,7 @@ local function onCollision( self, event )
             questionsAnswered = questionsAnswered + 1
 
             -- show overlay with questions
-            composer.showOverlay( "level1Clouds_questions", { isModal = true, effect = "fade", time = 100})
+            composer.showOverlay( "level3Part2Clouds_questions", { isModal = true, effect = "fade", time = 100})
         end
 
 
@@ -212,7 +212,7 @@ local function onCollision( self, event )
             questionsAnswered = questionsAnswered + 1
 
             -- show overlay with questions
-            composer.showOverlay( "level1Clouds_questions", { isModal = true, effect = "fade", time = 100})
+            composer.showOverlay( "level3Part2Clouds_questions", { isModal = true, effect = "fade", time = 100})
         end
 
         if  (event.target.myName == "door") then
@@ -236,13 +236,34 @@ local function onCollision( self, event )
     end
 end
 
-local function DropLollipop()
-    timer.performWithDelay(0, lollipop1)
-    timer.performWithDelay(0, lollipop2)
-    timer.performWithDelay(0, lollipop3)
-    timer.performWithDelay(0, lollipop4)
+local function lollipopA()
+    lollipop1 = display.newImageRect("Images/BlueLollipop.png", 0, 0)
+    lollipop1.x = 700
+    lollipop1.y = 10
+    lollipop1.myName = "lollipop1"
+    lollipop1.width = 50
+    lollipop1.height = 100
+    physics.addBody(lollipop1, {density=1.0, friction=0.5, bounce=0.3 } )
 end
 
+local function lollipopB()
+    physics.addBody(lollipop2, {density=1.0, friction=0.5, bounce=0.3 } )
+end
+
+local function lollipopC()
+    physics.addBody(lollipop3, {density=1.0, friction=0.5, bounce=0.3 } )
+end
+
+local function lollipopD()
+    physics.addBody(lollipop4, {density=1.0, friction=0.5, bounce=0.3 } )
+end
+
+local function DropLollipop()
+    timer.performWithDelay(2000, lollipopA, 0)
+    timer.performWithDelay(2000, lollipopB, 0)
+    timer.performWithDelay(3000, lollipopC)
+    timer.performWithDelay(4000, lollipopD)
+end 
 
 local function AddCollisionListeners()
     -- if character collides with clouds, onCollision will be called
@@ -286,15 +307,15 @@ local function AddPhysicsBodies()
     physics.addBody( rainbow2, "static", { density=1.0, friction=0.3, bounce=0.2 } )
     physics.addBody( rainbow3, "static", { density=1.0, friction=0.3, bounce=0.2 } )
     physics.addBody(door, "static",  {density=0, friction=0, bounce=0} )
-    physics.addBody( clouds, "static", { density=1.0, friction=0.3, bounce=0.2 } )
-    physics.addBody(lollipop1, {density=1.0, friction=0.5, bounce=0.3, radius=12.5})
-    physics.addBody(lollipop2, {density=1.0, friction=0.5, bounce=0.3, radius=12.5})
-    physics.addBody(lollipop3, {density=1.0, friction=0.5, bounce=0.3, radius=12.5})
-    physics.addBody(lollipop4, {density=1.0, friction=0.5, bounce=0.3, radius=12.5})  
+    --physics.addBody( clouds, "static", { density=1.0, friction=0.3, bounce=0.2 } )
+    --physics.addBody(lollipop1, {density=1.0, friction=0.5, bounce=0.3 } )
+    --physics.addBody(lollipop2, {density=1.0, friction=0.5, bounce=0.3 } )
+    --physics.addBody(lollipop3, {density=1.0, friction=0.5, bounce=0.3 } )
+    --physics.addBody(lollipop4, {density=1.0, friction=0.5, bounce=0.3 } )  
     physics.addBody(leftW, "static", {density=1, friction=0.3, bounce=0.2} )
     physics.addBody(rightW, "static", {density=1, friction=0.3, bounce=0.2} )
     physics.addBody(topW, "static", {density=1, friction=0.3, bounce=0.2} )
-    physics.addBody(floor, "static", {density=1, friction=0.3, bounce=0.2} )
+    --physics.addBody(floor, "static", {density=1, friction=0.3, bounce=0.2} )
 
 
 end
@@ -430,21 +451,22 @@ function scene:create( event )
 
     -- Insert lollipop
     lollipop1 = display.newImageRect("Images/BlueLollipop.png", 0, 0)
-    lollipop1.x = 500
-    lollipop1.y = 700
+    lollipop1.x = 700
+    lollipop1.y = 100
     lollipop1.myName = "lollipop1"
-    lollipop1.width = 100
+    lollipop1.width = 50
     lollipop1.height = 100
+    lollipop1.isVisible = false
 
     -- Insert lollipop into the scene group    
     sceneGroup:insert( lollipop1 )
 
     -- Insert lollipop
     lollipop2 = display.newImageRect("Images/RedLollipop.png", 0, 0)
-    lollipop2.x = 500
-    lollipop2.y = 700
+    lollipop2.x = 400
+    lollipop2.y = 100
     lollipop2.myName = "lollipop2"
-    lollipop2.width = 100
+    lollipop2.width = 50
     lollipop2.height = 100
 
     -- Insert lollipop into the scene group    
@@ -452,21 +474,21 @@ function scene:create( event )
 
     -- Insert lollipop
     lollipop3 = display.newImageRect("Images/OrangeLollipop.png", 0, 0)
-    lollipop3.x = 500
-    lollipop3.y = 700
+    lollipop3.x = 600
+    lollipop3.y = 100
     lollipop3.myName = "lollipop3"
-    lollipop3.width = 100
+    lollipop3.width = 50
     lollipop3.height = 100
 
     -- Insert lollipop into the scene group    
     sceneGroup:insert( lollipop3 )
 
     -- Insert lollipop
-    lollipop4 = display.newImageRect("Images/YellowLollipop.png", 0, 0)
-    lollipop4.x = 500
-    lollipop4.y = 700
+    lollipop4 = display.newImageRect("Images/PinkBackground.png", 0, 0)
+    lollipop4.x = 800
+    lollipop4.y = 100
     lollipop4.myName = "lollipop4"
-    lollipop4.width = 100
+    lollipop4.width = 50
     lollipop4.height = 100
 
     -- Insert lollipop into the scene group    
@@ -592,7 +614,7 @@ function scene:show( event )
         AddCollisionListeners()
 
         --create the character, add physics bodies and runtime listeners
-        ReplaceCharacter()
+        ReplaceCharacter() 
 
         DropLollipop()
     end

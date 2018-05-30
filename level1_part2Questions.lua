@@ -462,35 +462,36 @@ local function TouchListenerAnswerBox1(touch)
                 incorrectSoundChannel = audio.play(incorrectSound)
 
                  --Lose a heart if you the answer is incorrect
-            if (heart1.isVisible == true) and 
-                   (heart2.isVisible == true) and 
-                   (heart3.isVisible == true) then 
-                   heart1.isVisible = false
-                   heart2.isVisible = true
-                   heart3.isVisible = true
+            if (heart4.isVisible == true) and 
+                   (heart5.isVisible == true) and 
+                   (heart6.isVisible == true) then 
+                   heart4.isVisible = false
+                   heart5.isVisible = true
+                   heart6.isVisible = true
                    --make the incorrect text visible
                    incorrectText.isVisible = true
                    --Hide the incorrect text
                    timer.performWithDelay(1000,HideIncorrect)
 
                  --Lose a heart if you the answer is incorrect
-                elseif (heart1.isVisible == false) and 
-                   (heart2.isVisible == true) and 
-                   (heart3.isVisible == true) then 
-                   heart1.isVisible = false 
-                   heart2.isVisible = false
+                elseif (heart4.isVisible == false) and 
+                   (heart5.isVisible == true) and 
+                   (heart6.isVisible == true) then 
+                   heart4.isVisible = false 
+                   heart5.isVisible = false
+                   heart6.isVisible = true
                    --make the incorrect text visible
                    incorrectText.isVisible = true
                    --Hide the incorrect text
                    timer.performWithDelay(1000,HideIncorrect)
                 
                   --Lose a heart if you the answer is incorrect
-                 elseif (heart1.isVisible == false) and 
-                   (heart2.isVisible == false) and 
-                   (heart3.isVisible == true) then 
-                   heart1.isVisible = false 
-                   heart2.isVisible = false
-                   heart3.isVisible = false
+                 elseif (heart4.isVisible == false) and 
+                   (heart5.isVisible == false) and 
+                   (heart6.isVisible == true) then 
+                   heart4.isVisible = false 
+                   heart5.isVisible = false
+                   heart6.isVisible = false
                    --Transition to you lose
                    YouLoseTransition()
                    
@@ -546,35 +547,36 @@ local function TouchListenerAnswerBox2(touch)
                 incorrectSoundChannel = audio.play(incorrectSound)
                
              --Lose a heart if you the answer is incorrect
-            if (heart1.isVisible == true) and 
-                   (heart2.isVisible == true) and 
-                   (heart3.isVisible == true) then 
-                   heart1.isVisible = false
-                   heart2.isVisible = true
-                   heart3.isVisible = true
+            if (heart4.isVisible == true) and 
+                   (heart5.isVisible == true) and 
+                   (heart6.isVisible == true) then 
+                   heart4.isVisible = false
+                   heart5.isVisible = true
+                   heart6.isVisible = true
                    --make the incorrect text visible
                    incorrectText.isVisible = true
                    --Hide the incorrect text
                    timer.performWithDelay(1000,HideIncorrect)
                    
                  --Lose a heart if you the answer is incorrect
-                elseif (heart1.isVisible == false) and 
-                   (heart2.isVisible == true) and 
-                   (heart3.isVisible == true) then 
-                   heart1.isVisible = false 
-                   heart2.isVisible = false
+                elseif (heart4.isVisible == false) and 
+                   (heart5.isVisible == true) and 
+                   (heart6.isVisible == true) then 
+                   heart4.isVisible = false 
+                   heart5.isVisible = false
+                   heart6.isVisible = true
                    --make the incorrect text visible
                    incorrectText.isVisible = true
                    --Hide the incorrect text
                    timer.performWithDelay(1000,HideIncorrect)
                    
                   --Lose a heart if you the answer is incorrect
-                 elseif (heart1.isVisible == false) and 
-                   (heart2.isVisible == false) and 
-                   (heart3.isVisible == true) then 
-                   heart1.isVisible = false 
-                   heart2.isVisible = false
-                   heart3.isVisible = false
+                 elseif (heart4.isVisible == false) and 
+                   (heart5.isVisible == false) and 
+                   (heart6.isVisible == true) then 
+                   heart4.isVisible = false 
+                   heart5.isVisible = false
+                   heart6.isVisible = false
                    --Transition to you lose
                    YouLoseTransition()
                    
@@ -631,23 +633,24 @@ local function TouchListenerAnswerBox3(touch)
                 incorrectSoundChannel = audio.play(incorrectSound)
 
                 --Lose a heart if you the answer is incorrect
-            if (heart1.isVisible == true) and 
-                   (heart2.isVisible == true) and 
-                   (heart3.isVisible == true) then 
-                   heart1.isVisible = false
-                   heart2.isVisible = true
-                   heart3.isVisible = true
+            if (heart4.isVisible == true) and 
+                   (heart5.isVisible == true) and 
+                   (heart6.isVisible == true) then 
+                   heart4.isVisible = false
+                   heart5.isVisible = true
+                   heart6.isVisible = true
                    --make the incorrect text visible
                    incorrectText.isVisible = true
                    --Hide the incorrect text
                    timer.performWithDelay(1000,HideIncorrect)
                    
                   --Lose a heart if you the answer is incorrect
-                elseif (heart1.isVisible == false) and 
-                   (heart2.isVisible == true) and 
-                   (heart3.isVisible == true) then 
-                   heart1.isVisible = false 
-                   heart2.isVisible = false
+                elseif (heart4.isVisible == false) and 
+                   (heart5.isVisible == true) and 
+                   (heart6.isVisible == true) then 
+                   heart4.isVisible = false 
+                   heart5.isVisible = false
+                   heart6.isVisible = true
                    --make the incorrect text visible
                    incorrectText.isVisible = true
                    --Hide the incorrect text
@@ -655,12 +658,12 @@ local function TouchListenerAnswerBox3(touch)
                    
                 
                   --Lose a heart if you the answer is incorrect
-                 elseif (heart1.isVisible == false) and 
-                   (heart2.isVisible == false) and 
-                   (heart3.isVisible == true) then 
-                   heart1.isVisible = false 
-                   heart2.isVisible = false
-                   heart3.isVisible = false
+                 elseif (heart4.isVisible == false) and 
+                   (heart5.isVisible == false) and 
+                   (heart6.isVisible == true) then 
+                   heart4.isVisible = false 
+                   heart5.isVisible = false
+                   heart6.isVisible = false
                    --Transition to you lose
                    YouLoseTransition()
                    

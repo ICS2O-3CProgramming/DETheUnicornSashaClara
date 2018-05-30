@@ -164,9 +164,9 @@ end
 
 --Creating a function to make the hearts visible 
 local function MakeHeartsVisible()
-    heart1.isVisible = true
-    heart2.isVisible = true
-    heart3.isVisible = true
+    heart10.isVisible = true
+    heart11.isVisible = true
+    heart12.isVisible = true
 end
 
 --Creating a function to have collisions
@@ -191,7 +191,7 @@ local function onCollision( self, event )
             questionsAnswered = questionsAnswered + 1
 
             -- show overlay with questions
-            composer.showOverlay( "level1Clouds_questions", { isModal = true, effect = "fade", time = 100})
+            composer.showOverlay( "level2Part2Clouds_questions", { isModal = true, effect = "fade", time = 100})
         end
 
 
@@ -211,7 +211,7 @@ local function onCollision( self, event )
             questionsAnswered = questionsAnswered + 1
 
             -- show overlay with questions
-            composer.showOverlay( "level1Clouds_questions", { isModal = true, effect = "fade", time = 100})
+            composer.showOverlay( "level2Part2Clouds_questions", { isModal = true, effect = "fade", time = 100})
         end
 
         if  (event.target.myName == "door") then
@@ -297,7 +297,7 @@ function ResumeGame()
 end
 
 --Function to add the arrow event listeners and runtime listeners
-function Add()
+function AddL2P2()
     AddArrowEventListeners()
     AddRuntimeListeners()
 end
@@ -373,31 +373,31 @@ function scene:create( event )
     sceneGroup:insert( door )
 
     -- Insert the heart
-    heart1 = display.newImageRect("Images/heart.png", 80, 80)
-    heart1.x = 50
-    heart1.y = 50
-    heart1.isVisible = true
+    heart10 = display.newImageRect("Images/heart.png", 80, 80)
+    heart10.x = 50
+    heart10.y = 50
+    heart10.isVisible = true
 
    -- Insert the heart into the scene group
-    sceneGroup:insert( heart1 )
+    sceneGroup:insert( heart10 )
 
     -- Insert the heart
-    heart2 = display.newImageRect("Images/heart.png", 80, 80)
-    heart2.x = 130
-    heart2.y = 50
-    heart2.isVisible = true
+    heart11 = display.newImageRect("Images/heart.png", 80, 80)
+    heart11.x = 130
+    heart11.y = 50
+    heart11.isVisible = true
 
     -- Insert the heart into the scene group
-    sceneGroup:insert( heart2 )
+    sceneGroup:insert( heart11 )
 
     -- Insert the heart
-    heart3 = display.newImageRect("Images/heart.png", 80, 80)
-    heart3.x = 210
-    heart3.y = 50
-    heart3.isVisible = true
+    heart12 = display.newImageRect("Images/heart.png", 80, 80)
+    heart12.x = 210
+    heart12.y = 50
+    heart12.isVisible = true
 
     -- Insert the heart into the scene group
-    sceneGroup:insert( heart3 )
+    sceneGroup:insert( heart12 )
 
     -- Insert the hurdle
     hurdle1 = display.newImageRect("Images/Hurdle.png", 0, 0)
