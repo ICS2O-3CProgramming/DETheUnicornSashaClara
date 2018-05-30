@@ -102,7 +102,7 @@ local function BackToLevel1()
     -- prevent character from being able to tip over
     character.isFixedRotation = true
   
-    AddListenersAfterCloudsL1()
+    Add()
 end 
 
 -----------------------------------------------------------------------------------------

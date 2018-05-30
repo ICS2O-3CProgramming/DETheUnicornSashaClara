@@ -266,7 +266,7 @@ function ResumeGame()
 end
 
 --Function to add the arrow event listeners and runtime listeners
-function AddListenersAfterCloudsL1()
+function Add()
     AddArrowEventListeners()
     AddRuntimeListeners()
 end
