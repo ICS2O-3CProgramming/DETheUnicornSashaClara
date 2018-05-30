@@ -314,10 +314,10 @@ local function AddPhysicsBodies()
     physics.addBody(rightW, "static", {density=1, friction=0.3, bounce=0.2} )
     physics.addBody(topW, "static", {density=1, friction=0.3, bounce=0.2} )
     physics.addBody(floor, "static", {density=1, friction=0.3, bounce=0.2} )
-    physics.addBody(lollipop1, "static", {density=1, friction=0.3, bounce=0.2} )
-    physics.addBody(lollipop2, "static", {density=1, friction=0.3, bounce=0.2} )
-    physics.addBody(lollipop3, "static", {density=1, friction=0.3, bounce=0.2} )
-    physics.addBody(lollipop4, "static", {density=1, friction=0.3, bounce=0.2} )
+    physics.addBody(lollipop1, {density=1, friction=0.3, bounce=0.2} )
+    physics.addBody(lollipop2, {density=1, friction=0.3, bounce=0.2} )
+    physics.addBody(lollipop3, {density=1, friction=0.3, bounce=0.2} )
+    physics.addBody(lollipop4, {density=1, friction=0.3, bounce=0.2} )
 
 
 end
@@ -332,6 +332,10 @@ local function RemovePhysicsBodies()
     physics.removeBody(rightW)
     physics.removeBody(topW)
     physics.removeBody(floor)
+    physics.removeBody(lollipop1)
+    physics.removeBody(lollipop2)
+    physics.removeBody(lollipop3)
+    physics.removeBody(lollipop4)
 end
 
 -----------------------------------------------------------------------------------------
@@ -411,44 +415,44 @@ function scene:create( event )
 
     -- Insert lollipop1
     lollipop1 = display.newImage("Images/BlueLollipop.png", 0, 0)
-    lollipop1.x = 900
-    lollipop1.y = 340
+    lollipop1.x = 200
+    lollipop1.y = 0
     lollipop1.myName = "lollipop1"
-    lollipop1.width = 30
-    lollipop1.height = 150
+    lollipop1.width = 100
+    lollipop1.height = 200
 
     -- Insert lollipop1 into the scene group
     sceneGroup:insert( lollipop1 )
 
     -- Insert lollipop2
     lollipop2 = display.newImage("Images/OrangeLollipop.png", 0, 0)
-    lollipop2.x = 900
-    lollipop2.y = 340
+    lollipop2.x = 300
+    lollipop2.y = 0
     lollipop2.myName = "lollipop2"
-    lollipop2.width = 30
-    lollipop2.height = 150
+    lollipop2.width = 100
+    lollipop2.height = 200
 
     -- Insert the door into the scene group
     sceneGroup:insert( lollipop2 )
 
     -- Insert lollipop3
     lollipop3 = display.newImage("Images/YellowLollipop.png", 0, 0)
-    lollipop3.x = 900
-    lollipop3.y = 340
+    lollipop3.x = 400
+    lollipop3.y = 0
     lollipop3.myName = "lollipop3"
-    lollipop3.width = 30
-    lollipop3.height = 150
+    lollipop3.width = 100
+    lollipop3.height = 200
 
     -- Insert lollipop3 into the scene group
     sceneGroup:insert( lollipop3 )
 
     -- Insert lollipop4
     lollipop4 = display.newImage("Images/RedLollipop.png", 0, 0)
-    lollipop4.x = 900
-    lollipop4.y = 340
+    lollipop4.x = 500
+    lollipop4.y = 0
     lollipop4.myName = "lollipop4"
-    lollipop4.width = 30
-    lollipop4.height = 150
+    lollipop4.width = 100
+    lollipop4.height = 200
 
     -- Insert lollipop4 into the scene group
     sceneGroup:insert( lollipop4 )
