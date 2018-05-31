@@ -1,8 +1,9 @@
 -----------------------------------------------------------------------------------------
--- levelSelect_screen.lua
+-- character_select.lua
 -- Created by: Sasha Malko
--- Date: May 14, 2018
--- Description: This is the level Select page, displaying a back button to the main menu.
+-- Date: May 23, 2018
+-- Description: This is the character select screen of the game which allows the user to 
+-- select a character.
 -----------------------------------------------------------------------------------------
 -- INITIALIZATIONS
 -----------------------------------------------------------------------------------------
@@ -14,43 +15,41 @@ local widget = require( "widget" )
 -----------------------------------------------------------------------------------------
 
 -- Naming Scene
-sceneName = "levelSelect_screen"
+sceneName = "character_select"
 
 -- Creating Scene Object
 scene = composer.newScene( sceneName ) 
 
 -----------------------------------------------------------------------------------------
+-- GLOBAL VARIABLES
+-----------------------------------------------------------------------------------------
+characterChoice = "pinkUnicorn"
+
+-----------------------------------------------------------------------------------------
 -- LOCAL VARIABLES
 -----------------------------------------------------------------------------------------
 local bkg_image
-local backButton
-local level1Button
-local level2Button
-local level3Button
-local levelText
+local selectText
+local blueText
+local pinkText
+local pinkButton
+local blueButton
 
 -----------------------------------------------------------------------------------------
--- LOCAL FUNCTIONS
+-- GLOBAL FUNCTIONS
 -----------------------------------------------------------------------------------------
 
--- Creating Transitioning Function back to main menu
-local function BackTransition( )
-    composer.gotoScene( "main_menu", {effect = "slideLeft", time = 500})
+-- Creating function to allow user to select a character and then transitions to game
+function PinkTransition( )
+    characterChoice = "pinkUnicorn"
+    composer.gotoScene( "level3_part1", {effect = "slideLeft", time = 1000})
+
 end
 
--- Creating Transitioning Function back to level 1
-local function Level1Transition( )
-    composer.gotoScene( "character_select", {effect = "zoomInOut", time = 500})
-end
-
--- Creating Transitioning Function back to level 2
-local function Level2Transition( )
-    composer.gotoScene( "character_select2", {effect = "zoomInOut", time = 500})
-end
-
--- Creating Transitioning Function back to level 3
-local function Level3Transition( )
-    composer.gotoScene( "character_select3", {effect = "zoomInOut", time = 500})
+-- Creating function to allow user to select a character and then transitions to game
+function BlueTransition()
+    characterChoice = "blueUnicorn"
+    composer.gotoScene( "level3_part1", {effect = "slideLeft", time = 1000})
 end
 
 -----------------------------------------------------------------------------------------
@@ -76,125 +75,86 @@ function scene:create( event )
 
     -- Associating display objects with this scene 
     sceneGroup:insert( bkg_image )
-    
+
+    --Inserting the select text, it's position and colour
+    selectText = display.newText( "Select your character" , 0, 0, nil, 80)
+    selectText.x = 500
+    selectText.y = 60
+    selectText:setTextColor(0,0,0)
+
+    -- Associating display objects with this scene 
+    sceneGroup:insert( selectText )
+
+    --Inserting the blue text, it's position and colour
+    blueText = display.newText( "Blue Unicorn" , 0, 0, nil, 50)
+    blueText.x = 800
+    blueText.y = 450
+    blueText:setTextColor(0,0,0)
+
+    -- Associating display objects with this scene 
+    sceneGroup:insert( blueText )
+
+    --Inserting the pink text, it's position and colour
+    pinkText = display.newText( "Pink Unicorn" , 0, 0, nil, 50)
+    pinkText.x = 200
+    pinkText.y = 450
+    pinkText:setTextColor(0,0,0)
+
+    -- Associating display objects with this scene 
+    sceneGroup:insert( pinkText )
     -----------------------------------------------------------------------------------------
     -- BUTTON WIDGETS
     -----------------------------------------------------------------------------------------
 
-    -- Creating Back Button
-    backButton = widget.newButton( 
+    -- Creating Pink Button
+    pinkButton = widget.newButton( 
     {
         -- Setting Position
-        x = 900,
-        y = 500,
+        x = 200,
+        y = 350,
 
         -- Setting Dimensions
-        width = 200,
-        height = 100,
+         width = 200,
+         height = 100,
 
         -- Setting Visual Properties
-        defaultFile = "Images/BackButtonUnpressed.png",
-        overFile = "Images/BackButtonPressed.png",
+        defaultFile = "Images/RectangularUnicorn.png",
+        overFile = "Images/RectangularUnicorn.png",
 
         -- Setting Functional Properties
-        onRelease = BackTransition
+        onRelease = PinkTransition
+
+    } )
+    -----------------------------------------------------------------------------------------
+
+    -- Associating Buttons with this scene
+    sceneGroup:insert( pinkButton )
+
+    -- Creating Blue Button
+    blueButton = widget.newButton( 
+    {
+        -- Setting Position
+        x = 800,
+        y = 350,
+
+        -- Setting Dimensions
+         width = 200,
+         height = 100,
+
+        -- Setting Visual Properties
+        defaultFile = "Images/BlueUnicorn.png",
+        overFile = "Images/BlueUnicorn.png",
+
+        -- Setting Functional Properties
+        onRelease = BlueTransition
 
     } )
 
     -----------------------------------------------------------------------------------------
 
     -- Associating Buttons with this scene
-    sceneGroup:insert( backButton )
+    sceneGroup:insert( blueButton )
 
-    -----------------------------------------------------------------------------------------
-
-    -- Creating level 1 Button
-    level1Button = widget.newButton( 
-    {
-        -- Setting Position
-        x = 150,
-        y = 250,
-
-        -- Setting Dimensions
-        width = 200,
-        height = 200,
-
-        -- Setting Visual Properties
-        defaultFile = "Images/Level1ButtonUnpressed.png",
-        overFile = "Images/Level1ButtonPressed.png",
-
-        -- Setting Functional Properties
-        onRelease = Level1Transition
-
-    } )
-
-    -----------------------------------------------------------------------------------------
-
-    -- Associating Buttons with this scene
-    sceneGroup:insert( level1Button )
-
-    -----------------------------------------------------------------------------------------
-
-    -- Creating level 2 Button
-    level2Button = widget.newButton( 
-    {
-        -- Setting Position
-        x = 500,
-        y = 250,
-
-        -- Setting Dimensions
-        width = 200,
-        height = 200,
-
-        -- Setting Visual Properties
-        defaultFile = "Images/Level2ButtonUnpressed.png",
-        overFile = "Images/Level2ButtonPressed.png",
-
-        -- Setting Functional Properties
-        onRelease = Level2Transition
-
-    } )
-
-    -----------------------------------------------------------------------------------------
-
-    -- Associating Buttons with this scene
-    sceneGroup:insert( level2Button )
-
-    -----------------------------------------------------------------------------------------
-
-    -- Creating level 3 Button
-    level3Button = widget.newButton( 
-    {
-        -- Setting Position
-        x = 850,
-        y = 250,
-
-        -- Setting Dimensions
-        width = 200,
-        height = 200,
-
-        -- Setting Visual Properties
-        defaultFile = "Images/Level3ButtonUnpressed.png",
-        overFile = "Images/Level3ButtonPressed.png",
-
-        -- Setting Functional Properties
-        onRelease = Level3Transition
-
-    } )
-
-    -----------------------------------------------------------------------------------------
-
-    -- Associating Buttons with this scene
-    sceneGroup:insert( level3Button )
-
-    --Inserting the level select text, it's position and colour
-    levelText = display.newText( "Level Select" , 0, 0, nil, 80)
-    levelText.x = 500
-    levelText.y = 60
-    levelText:setTextColor(0,0,0)
-
-    -- Associating Buttons with this scene
-    sceneGroup:insert( levelText )
     
 end --function scene:create( event )
 
@@ -212,16 +172,15 @@ function scene:show( event )
 
     -----------------------------------------------------------------------------------------
 
-     -- Called when the scene is still off screen (but is about to come on screen).
     if ( phase == "will" ) then
+        -- Called when the scene is still off screen (but is about to come on screen).
 
     -----------------------------------------------------------------------------------------
 
-    -- Called when the scene is now on screen.
     elseif ( phase == "did" ) then
+        -- Called when the scene is now on screen.
 
     end
-
 end -- function scene:show( event )
 
 -----------------------------------------------------------------------------------------
@@ -238,14 +197,13 @@ function scene:hide( event )
 
     -----------------------------------------------------------------------------------------
 
-    -- Called when the scene is on screen (but is about to go off screen).
     if ( phase == "will" ) then
-        
+        -- Called when the scene is on screen (but is about to go off screen).
+
     -----------------------------------------------------------------------------------------
 
-    -- Called immediately after scene goes off screen.
     elseif ( phase == "did" ) then
-        
+        -- Called immediately after scene goes off screen.
     end
 
 end --function scene:hide( event )
@@ -257,6 +215,11 @@ function scene:destroy( event )
 
     -- Creating a group that associates objects with the scene
     local sceneGroup = self.view
+
+    -----------------------------------------------------------------------------------------
+
+    -- Called prior to the removal of scene's view ("sceneGroup").
+
 
 end --function scene:destroy( event )
 

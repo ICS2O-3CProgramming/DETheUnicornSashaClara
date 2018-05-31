@@ -1,9 +1,8 @@
 -----------------------------------------------------------------------------------------
---
--- level1_screen.lua
+-- level1_part2.lua
 -- Created by: Sasha Malko
 -- Date: May 14, 2018
--- Description: This is the level 1 screen of the game.
+-- Description: This is the level 1 part 2 screen of the game.
 -----------------------------------------------------------------------------------------
 -- INITIALIZATIONS
 -----------------------------------------------------------------------------------------
@@ -18,8 +17,9 @@ local physics = require("physics")
 -----------------------------------------------------------------------------------------
 
 -- Naming Scene
-sceneName = "level3_part1"
+sceneName = "level1_part2"
 
+physics.start()
 -----------------------------------------------------------------------------------------
 
 -- Creating Scene Object
@@ -31,33 +31,24 @@ local scene = composer.newScene( sceneName )
 
 -- The local variables for this scene
 local bkg_image
---obstacles
 local rainbow1
 local rainbow2
 local clouds
-local door
-local Obstacles
-local lollipop1
-local lollipop2
-local lollipop3
-local lollipop4
--- buttons
 local rArrow 
 local uArrow
 local lArrow
-local pauseButton
--- physics
 local motionx = 0
 local SPEED = 8
 local GO = -8
 local LINEAR_VELOCITY = -100
 local GRAVITY = 7
--- walls
 local leftW 
 local rightW
 local topW
 local floor
-
+local door
+local Obstacles
+local pauseButton
 
 -----------------------------------------------------------------------------------------
 -- GLOBAL VARIABLES
@@ -67,13 +58,15 @@ questionsAnswered = 0
 -----------------------------------------------------------------------------------------
 -- LOCAL SCENE FUNCTIONS
 ----------------------------------------------------------------------------------------- 
-
- -- Creating Transitioning Function back to main menu
+ -- Creating Transitioning Function to the pause overlay
 local function PauseTransition( )
-    -- show overlay with pause screen
-    composer.showOverlay( "pause_screen", { isModal = true, effect = "fade", time = 100}) 
-    --make the character invisible 
+    -- show overlay with math question
+    composer.showOverlay( "pauseL3_screen", { isModal = true, effect = "fade", time = 100}) 
     character.isVisible = false
+    lollipop1.isVisible = false
+    lollipop2.isVisible = false
+    lollipop3.isVisible = false
+    lollipop4.isVisible = false
 end
 
 -- When right arrow is touched, move character right
@@ -89,7 +82,7 @@ local function up (touch)
     end
 end
 
--- When right arrow is touched, move character right
+-- When left arrow is touched, move character left
 local function left (touch)
     motionx = GO
     character.xScale = -1
@@ -153,11 +146,43 @@ local function ReplaceCharacter()
     character.height = 80
     character.myName = "Unicorn"
 
-    -- intialize horizontal movement of character
+    lollipop1 = display.newImageRect("Images/BlueLollipop.png", 0, 0)
+    lollipop1.x = 160
+    lollipop1.y = 10
+    lollipop1.myName = "lollipop1"
+    lollipop1.width = 37.5
+    lollipop1.height = 75
+
+    lollipop2 = display.newImageRect("Images/RedLollipop.png", 0, 0)
+    lollipop2.x = 340
+    lollipop2.y = 10
+    lollipop2.myName = "lollipop2"
+    lollipop2.width = 37.5
+    lollipop2.height = 75
+
+    lollipop3 = display.newImageRect("Images/OrangeLollipop.png", 0, 0)
+    lollipop3.x = 620
+    lollipop3.y = 100
+    lollipop3.myName = "lollipop3"
+    lollipop3.width = 37.5
+    lollipop3.height = 75
+
+    lollipop4 = display.newImageRect("Images/PinkBackground.png", 0, 0)
+    lollipop4.x = 800
+    lollipop4.y = 10
+    lollipop4.myName = "lollipop4"
+    lollipop4.width = 37.5
+    lollipop4.height = 75
+
+    --intialize horizontal movement of character
     motionx = 0
 
     -- add physics body
     physics.addBody( character, "dynamic", { density=0.5, friction=0.5, bounce=0.5, rotation=0 } )
+    physics.addBody( lollipop1, "dynamic", { density=0.5, friction=0.5, bounce=0.2, rotation=0 } )
+    physics.addBody( lollipop2, "dynamic", { density=0.5, friction=0.5, bounce=0.2, rotation=0 } )
+    physics.addBody( lollipop3, "dynamic", { density=0.5, friction=0.5, bounce=0.2, rotation=0 } )
+    physics.addBody( lollipop4, "dynamic", { density=0.5, friction=0.5, bounce=0.2, rotation=0 } )
 
     -- prevent character from being able to tip over
     character.isFixedRotation = true
@@ -169,17 +194,17 @@ local function ReplaceCharacter()
     AddRuntimeListeners()
 end
 
---Creating a function to make the hearts visible
+--Creating a function to make the hearts visible 
 local function MakeHeartsVisible()
-    heart1.isVisible = true
-    heart2.isVisible = true
-    heart3.isVisible = true
+    heart13.isVisible = true
+    heart14.isVisible = true
+    heart15.isVisible = true
 end
 
+--Creating a function to have collisions
 local function onCollision( self, event )
 
     if ( event.phase == "began" ) then
-
 
         if  (event.target.myName == "clouds") then
 
@@ -192,12 +217,16 @@ local function onCollision( self, event )
 
             -- remove the character from the display
             display.remove(character)
+            display.remove(lollipop1)
+            display.remove(lollipop2)
+            display.remove(lollipop3)
+            display.remove(lollipop4)
 
             -- Increment questions answered
             questionsAnswered = questionsAnswered + 1
 
-            -- show overlay with the question
-            composer.showOverlay( "level1Clouds_questions", { isModal = true, effect = "fade", time = 100})
+            -- show overlay with questions
+            composer.showOverlay( "level3Part1Clouds_questions", { isModal = true, effect = "fade", time = 100})
         end
 
         if  (event.target.myName == "door") then
@@ -210,98 +239,36 @@ local function onCollision( self, event )
 
             -- make the character invisible
             character.isVisible = false
+            lollipop1.isVisible = false
+            lollipop2.isVisible = false
+            lollipop3.isVisible = false
+            lollipop4.isVisible = false
 
             -- Increment questions answered
             questionsAnswered = questionsAnswered + 1
 
-            -- show overlay with the question
-            composer.showOverlay( "level1_part1Questions", { isModal = true, effect = "fade", time = 100})
-        end
+            -- show overlay with questions
+            composer.showOverlay( "level3_part1Questions", { isModal = true, effect = "fade", time = 100})
 
-        if (event.target.myName == "lollipop1") then
-            -- get the obstacle that the user hit
-            Obstacles = event.target
-
-            -- stop the character from moving
-            motionx = 0
-
-            -- make the character invisible
-            character.isVisible = false
-
-            -- Increment questions answered
-            questionsAnswered = questionsAnswered + 1
- 
-            -- show overlay with the question
-            composer.showOverlay( "level1_part1Questions", { isModal = true, effect = "fade", time = 100})
-
-        elseif (event.target.myName == "lollipop2") then
-            -- get the obstacle that the user hit
-            Obstacles = event.target
-
-            -- stop the character from moving
-            motionx = 0
-
-            -- make the character invisible
-            character.isVisible = false
-
-            -- Increment questions answered
-            questionsAnswered = questionsAnswered + 1
-
-            -- show overlay with the question
-            composer.showOverlay( "level1_part1Questions", { isModal = true, effect = "fade", time = 100})
-
-        elseif (event.target.myName == "lollipop3") then
-            -- get the obstacle that the user hit
-            Obstacles = event.target
-
-            -- stop the character from moving
-            motionx = 0
-
-            -- make the character invisible
-            character.isVisible = false
-
-            -- Increment questions answered
-            questionsAnswered = questionsAnswered + 1
-
-            -- show overlay with the question
-            composer.showOverlay( "level1_part1Questions", { isModal = true, effect = "fade", time = 100})
-
-        elseif (event.target.myName == "lollipop4") then
-            -- get the obstacle that the user hit
-            Obstacles = event.target
-
-            -- stop the character from moving
-            motionx = 0
-
-            -- make the character invisible
-            character.isVisible = false
-
-            -- Increment questions answered
-            questionsAnswered = questionsAnswered + 1
-
-            -- show overlay with the question
-            composer.showOverlay( "level1_part1Questions", { isModal = true, effect = "fade", time = 100})
-        end
-
+        end        
     end
 end
+
 
 local function AddCollisionListeners()
     -- if character collides with clouds, onCollision will be called
     clouds.collision = onCollision
     clouds:addEventListener( "collision" )
 
-    -- if character collides with door, onCollision will be called    
+    -- if character collides with the door, onCollision will be called    
     door.collision = onCollision
     door:addEventListener( "collision" )
-
 end
 
 --Creating function to remove the collison listeners 
 local function RemoveCollisionListeners()
     clouds:removeEventListener( "collision" )
     door:removeEventListener( "collision" )
-
 end
 
 local function AddPhysicsBodies()
@@ -314,10 +281,6 @@ local function AddPhysicsBodies()
     physics.addBody(rightW, "static", {density=1, friction=0.3, bounce=0.2} )
     physics.addBody(topW, "static", {density=1, friction=0.3, bounce=0.2} )
     physics.addBody(floor, "static", {density=1, friction=0.3, bounce=0.2} )
-    physics.addBody(lollipop1, {density=1, friction=0.3, bounce=0.2} )
-    physics.addBody(lollipop2, {density=1, friction=0.3, bounce=0.2} )
-    physics.addBody(lollipop3, {density=1, friction=0.3, bounce=0.2} )
-    physics.addBody(lollipop4, {density=1, friction=0.3, bounce=0.2} )
 
 
 end
@@ -332,10 +295,6 @@ local function RemovePhysicsBodies()
     physics.removeBody(rightW)
     physics.removeBody(topW)
     physics.removeBody(floor)
-    physics.removeBody(lollipop1)
-    physics.removeBody(lollipop2)
-    physics.removeBody(lollipop3)
-    physics.removeBody(lollipop4)
 end
 
 -----------------------------------------------------------------------------------------
@@ -344,11 +303,11 @@ end
 
 --Function to replace the character
 function ResumeGame()
-  ReplaceCharacter()
+    ReplaceCharacter() 
 end
 
 --Function to add the arrow event listeners and runtime listeners
-function Add()
+function AddL3P2()
     AddArrowEventListeners()
     AddRuntimeListeners()
 end
@@ -363,19 +322,19 @@ function scene:create( event )
     -- Creating a group that associates objects with the scene
     local sceneGroup = self.view
 
-    -- Insert the background image
+    --Insert the background image
     bkg_image = display.newImageRect("Images/BlueBackground.png", display.contentWidth, display.contentHeight)
     bkg_image.x = display.contentWidth / 2 
     bkg_image.y = display.contentHeight / 2
 
-     -- Insert background image into the scene group 
+    -- Insert background image into the scene group 
     sceneGroup:insert( bkg_image )    
     
     -- Insert the rainbow
     rainbow1 = display.newImageRect("Images/Rainbow.png", 0, 0)
     rainbow1.x = 100
     rainbow1.y = 480
-    rainbow1.width = 400
+    rainbow1.width = 500
     rainbow1.height = 130
         
     -- Insert rainbow into the scene group 
@@ -398,8 +357,8 @@ function scene:create( event )
     clouds.myName = "clouds"
     clouds.width = 1100
     clouds.height = 300
-        
-    -- Insert clouds into the scene group  
+
+    -- Insert clouds into the scene group    
     sceneGroup:insert( clouds )
 
     -- Insert the Door
@@ -411,79 +370,34 @@ function scene:create( event )
     door.height = 150
 
     -- Insert the door into the scene group
-    sceneGroup:insert( door )   
-
-    -- Insert lollipop1
-    lollipop1 = display.newImage("Images/BlueLollipop.png", 0, 0)
-    lollipop1.x = 200
-    lollipop1.y = 0
-    lollipop1.myName = "lollipop1"
-    lollipop1.width = 100
-    lollipop1.height = 200
-
-    -- Insert lollipop1 into the scene group
-    sceneGroup:insert( lollipop1 )
-
-    -- Insert lollipop2
-    lollipop2 = display.newImage("Images/OrangeLollipop.png", 0, 0)
-    lollipop2.x = 300
-    lollipop2.y = 0
-    lollipop2.myName = "lollipop2"
-    lollipop2.width = 100
-    lollipop2.height = 200
-
-    -- Insert the door into the scene group
-    sceneGroup:insert( lollipop2 )
-
-    -- Insert lollipop3
-    lollipop3 = display.newImage("Images/YellowLollipop.png", 0, 0)
-    lollipop3.x = 400
-    lollipop3.y = 0
-    lollipop3.myName = "lollipop3"
-    lollipop3.width = 100
-    lollipop3.height = 200
-
-    -- Insert lollipop3 into the scene group
-    sceneGroup:insert( lollipop3 )
-
-    -- Insert lollipop4
-    lollipop4 = display.newImage("Images/RedLollipop.png", 0, 0)
-    lollipop4.x = 500
-    lollipop4.y = 0
-    lollipop4.myName = "lollipop4"
-    lollipop4.width = 100
-    lollipop4.height = 200
-
-    -- Insert lollipop4 into the scene group
-    sceneGroup:insert( lollipop4 )
-
+    sceneGroup:insert( door )
 
     -- Insert the heart
-    heart1 = display.newImageRect("Images/heart.png", 80, 80)
-    heart1.x = 50
-    heart1.y = 50
-    heart1.isVisible = true
+    heart13 = display.newImageRect("Images/heart.png", 80, 80)
+    heart13.x = 50
+    heart13.y = 50
+    heart13.isVisible = true
 
-    -- Insert the heart into the scene group
-    sceneGroup:insert( heart1 )
+   -- Insert the heart into the scene group
+    sceneGroup:insert( heart13 )
 
     -- Insert the heart
-    heart2 = display.newImageRect("Images/heart.png", 80, 80)
-    heart2.x = 130
-    heart2.y = 50
-    heart2.isVisible = true
+    heart14 = display.newImageRect("Images/heart.png", 80, 80)
+    heart14.x = 130
+    heart14.y = 50
+    heart14.isVisible = true
 
     -- Insert the heart into the scene group
-    sceneGroup:insert( heart2 )
+    sceneGroup:insert( heart14 )
 
-     -- Insert the heart
-    heart3 = display.newImageRect("Images/heart.png", 80, 80)
-    heart3.x = 210
-    heart3.y = 50
-    heart3.isVisible = true
+    -- Insert the heart
+    heart15 = display.newImageRect("Images/heart.png", 80, 80)
+    heart15.x = 210
+    heart15.y = 50
+    heart15.isVisible = true
 
     -- Insert the heart into the scene group
-    sceneGroup:insert( heart3 )
+    sceneGroup:insert( heart15 )
 
     --Insert the right arrow
     rArrow = display.newImageRect("Images/ArrowButtonUnpressed.png", 100, 50)
@@ -500,7 +414,7 @@ function scene:create( event )
     uArrow.y = display.contentHeight * 8.5 / 10
     uArrow.rotation = 90
 
-    -- Insert the lArrow into the scene group
+    -- Insert the uArrow into the scene group
     sceneGroup:insert( uArrow )
 
     --Insert the left arrow
@@ -518,7 +432,7 @@ function scene:create( event )
     -- Insert the leftW into the scene group
     sceneGroup:insert( leftW )
 
-    --Insert the right wall
+    --Insert the rightW arrow 
     rightW = display.newLine( 0, 0, 0, display.contentHeight)
     rightW.x = display.contentCenterX * 2
     rightW.isVisible = true
@@ -526,19 +440,19 @@ function scene:create( event )
     -- Insert the rightW into the scene group
     sceneGroup:insert( rightW )
 
-    --Insert the top wall
+    --Insert the topW arrow
     topW = display.newLine( 0, 0, display.contentWidth, 0)
     topW.isVisible = true
 
     -- Insert the topW into the scene group
     sceneGroup:insert( topW )
 
-    -- Insert the floor
+    --Insert the floor
     floor = display.newImageRect("Images/PinkBackground.png", 1024, 100)
     floor.x = display.contentCenterX
     floor.y = display.contentHeight * 1.06
-
-    -- Insert the floor into the scene group
+    
+    --Insert the floor into the scene group 
     sceneGroup:insert( floor )
 
     -----------------------------------------------------------------------------------------
@@ -567,7 +481,7 @@ function scene:create( event )
 
     -----------------------------------------------------------------------------------------
 
-    -- Associating Buttons with this scene
+    -- Associating pause button with this scene
     sceneGroup:insert( pauseButton )
 
 
@@ -586,28 +500,27 @@ function scene:show( event )
 
     -- Called when the scene is still off screen (but is about to come on screen).
     if ( phase == "will" ) then
-        --Start physics
-        physics.start()
 
         -- set gravity
         physics.setGravity( 0, GRAVITY )
 
     elseif ( phase == "did" ) then
 
-        --Number of questions answered to 0
+        --Set questionsAnswered to 0
         questionsAnswered = 0
 
         -- make all lives visible
         MakeHeartsVisible()
 
-        -- add physics bodies to each object
+        --add physics bodies to each object
         AddPhysicsBodies()
 
-        -- add collision listeners to objects
+        --add collision listeners to objects
         AddCollisionListeners()
 
-        -- create the character, add physics bodies and runtime listeners
+        --create the character, add physics bodies and runtime listeners
         ReplaceCharacter()
+
     end
 
 end --function scene:show( event )
@@ -625,7 +538,7 @@ function scene:hide( event )
 
     -- Called when the scene is on screen (but is about to go off screen).
     if ( phase == "will" ) then
-
+        
     -----------------------------------------------------------------------------------------
 
     -- Called immediately after scene goes off screen.
@@ -637,6 +550,11 @@ function scene:hide( event )
         RemoveArrowEventListeners()
         RemoveRuntimeListeners()
         display.remove(character)
+        display.remove(lollipop1)
+        display.remove(lollipop2)
+        display.remove(lollipop3)
+        display.remove(lollipop4)
+        
     end
 
 end --function scene:hide( event )
