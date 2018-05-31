@@ -40,7 +40,7 @@ local youWinSoundChannel
 
 --Function that transitions to the level select screen 
 local function LevelSelectTransition()
-    composer.gotoScene( "levelSelect_Screen" )
+    composer.gotoScene( "levelSelect_screen" )
 end
 
 --Function to move firework
