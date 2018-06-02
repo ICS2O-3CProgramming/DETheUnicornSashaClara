@@ -29,6 +29,7 @@ local level2Button
 local level3Button
 local levelText
 
+
 -----------------------------------------------------------------------------------------
 -- LOCAL FUNCTIONS
 -----------------------------------------------------------------------------------------
@@ -45,12 +46,16 @@ end
 
 -- Creating Transitioning Function back to level 2
 local function Level2Transition( )
+    if level1 == "completed" then
     composer.gotoScene( "character_select2", {effect = "zoomInOut", time = 500})
+    end
 end
 
 -- Creating Transitioning Function back to level 3
 local function Level3Transition( )
+    if level2 == "completed" then 
     composer.gotoScene( "character_select3", {effect = "zoomInOut", time = 500})
+    end 
 end
 
 -----------------------------------------------------------------------------------------
@@ -76,6 +81,26 @@ function scene:create( event )
 
     -- Associating display objects with this scene 
     sceneGroup:insert( bkg_image )
+
+    -- Insert the background image and set it to the center of the screen
+    lock1 = display.newImageRect("Images/PinkBackground.png", 500, 400)
+    lock1.x = 500
+    lock1.y = 400
+    lock1.width = 80
+    lock1.height = 80
+
+    -- Associating display objects with this scene 
+    sceneGroup:insert( lock1 )
+
+    -- Insert the background image and set it to the center of the screen
+    lock2 = display.newImageRect("Images/PinkBackground.png", 500, 400)
+    lock2.x = 850
+    lock2.y = 400
+    lock2.width = 80
+    lock2.height = 80
+
+    -- Associating display objects with this scene 
+    sceneGroup:insert( lock2 )
     
     -----------------------------------------------------------------------------------------
     -- BUTTON WIDGETS

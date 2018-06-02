@@ -14,7 +14,7 @@ local widget = require( "widget" )
 -----------------------------------------------------------------------------------------
 
 -- Naming Scene
-sceneName = "level1Clouds_questions"
+sceneName = "level1Part1Clouds_questions"
 
 -----------------------------------------------------------------------------------------
 
@@ -83,8 +83,10 @@ local function BackToLevel1()
     --Checking what character the user chose and placing it on the screen
     if (characterChoice == "pinkUnicorn") then
       character = display.newImageRect("Images/RectangularUnicorn.png", 100, 150)
-    else
+    elseif (characterChoice == "blueUnicorn") then
       character = display.newImageRect("Images/BlueUnicorn.png", 100, 150)
+    elseif (characterChoice == "bowUnicorn") then
+      character = display.newImageRect("Images/BowUnicorn.png", 100, 150)
     end
     character.x = display.contentWidth * 0.5 / 8
     character.y = display.contentHeight  * 0.1 / 3

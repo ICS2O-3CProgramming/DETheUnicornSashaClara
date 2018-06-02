@@ -137,8 +137,10 @@ local function ReplaceCharacter()
     --Checking what character the user chose and placing it on the screen
     if (characterChoice == "pinkUnicorn") then
         character = display.newImageRect("Images/RectangularUnicorn.png", 100, 150)
-    else
+    elseif (characterChoice == "blueUnicorn") then
         character = display.newImageRect("Images/BlueUnicorn.png", 100, 150)
+    elseif (characterChoice == "bowUnicorn") then
+        character = display.newImageRect("Images/BowUnicorn.png", 100, 150)
     end
     character.x = display.contentWidth * 0.5 / 8
     character.y = display.contentHeight  * 0.1 / 3
@@ -229,7 +231,7 @@ local function onCollision( self, event )
             questionsAnswered = questionsAnswered + 1
 
             -- show overlay with questions
-            composer.showOverlay( "level1_part2Questions", { isModal = true, effect = "fade", time = 100})
+            composer.showOverlay( "level2_part2Questions", { isModal = true, effect = "fade", time = 100})
 
         end        
     end
@@ -561,6 +563,9 @@ function scene:hide( event )
         RemoveArrowEventListeners()
         RemoveRuntimeListeners()
         display.remove(character)
+
+        level2 = "completed"
+        lock2.isVisible = false
     end
 
 end --function scene:hide( event )

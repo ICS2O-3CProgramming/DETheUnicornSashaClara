@@ -14,7 +14,7 @@ local widget = require( "widget" )
 -----------------------------------------------------------------------------------------
 
 -- Naming Scene
-sceneName = "pause_screen"
+sceneName = "pauseL3_screen"
 
 -- Creating Scene Object
 scene = composer.newScene( sceneName ) 
@@ -27,6 +27,12 @@ local cover
 local unpauseButton
 local pauseText
 local playText
+local unmuteButton
+local muteButton
+
+--Sounds
+local easy = audio.loadSound("Sounds/easy.mp3")
+local easyChannel 
 
 -----------------------------------------------------------------------------------------
 -- LOCAL FUNCTIONS
@@ -99,6 +105,28 @@ function scene:create( event )
 
     --Insert the play text to the scene group
     sceneGroup:insert( playText )
+
+    --Inserting the unmute button and setting it's position, dimensions and visibility 
+    unmuteButton = display.newImageRect("Images/MusicButtonUnpressed.png", 500, 500)
+    unmuteButton.x = 250
+    unmuteButton.y = 600
+    unmuteButton.width = 200
+    unmuteButton.height = 100
+    unmuteButton.isVisible = true
+
+    --Insert the play text to the scene group
+    sceneGroup:insert( unmuteButton )
+
+    --Inserting the mute button and setting it's position, dimensions and visibility 
+    muteButton = display.newImageRect("Images/MusicButtonPressed.png", 500, 500)
+    muteButton.x = 250
+    muteButton.y = 600
+    muteButton.width = 200
+    muteButton.height = 100
+    muteButton.isVisible = false
+
+    --Insert the play text to the scene group
+    sceneGroup:insert( muteButton )
 
     ------------------------------------------------------------------------------------------
     --WIDGETS
@@ -175,12 +203,54 @@ function scene:show( event )
  
     -- Called when the scene is now on screen.
     elseif ( phase == "did" ) then
+     -- Called when the scene is now on screen.
+
+        -- Function: unmuteButtonListener
+        -- Input: touch listener
+        -- Output: none
+        -- Description: When the mute button is clicked, the music will turn off and when the 
+        -- unmute button is clicked, the music will turn on again. 
+        local function unmuteButtonListener(touch)
+            if (touch.phase == "began") then
+                unmuteButton.isVisible = true
+                muteButton.isVisible = false
+                easyChannel = audio.play(easy, {channel = 3, loops = -1})
+            end
         
-        --pause the audio
-        audio.pause()
+            if (touch.phase == 'ended') then 
+                unmuteButton.isVisible = false
+                muteButton.isVisible = true
+                audio.stop()
+            end
+        end
 
+
+       --add the respective listeners to each object
+       unmuteButton:addEventListener("touch", unmuteButtonListener)
+
+        -- Function: muteButtonListener
+        -- Input: touch listener
+        -- Output: none
+        -- Description: When the mute button is clicked, the music will turn off and when the 
+        -- unmute button is clicked, the music will turn on again.
+        local function muteButtonListener(touch)
+            if (touch.phase == "began") then
+                unmuteButton.isVisible = false
+                muteButton.isVisible = true
+                audio.stop()
+            end
+       
+            if (touch.phase == 'ended') then 
+                unmuteButton.isVisible = true
+                muteButton.isVisible = false
+                easyChannel = audio.play(easy, {channel = 3, loops = -1})  
+            end
+        end
+
+        
+        --add the respective listeners to each object
+        muteButton:addEventListener("touch", muteButtonListener)
     end
-
 end -- function scene:show( event )
 
 -----------------------------------------------------------------------------------------

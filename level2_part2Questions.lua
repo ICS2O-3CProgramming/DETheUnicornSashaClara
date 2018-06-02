@@ -798,7 +798,6 @@ function scene:show( event )
     -- Called when the scene is still off screen (but is about to come on screen).
     if ( phase == "will" ) then
 
-        
     -----------------------------------------------------------------------------------------
 
     -- Called when the scene is now on screen.
@@ -827,7 +826,8 @@ function scene:hide( event )
 
     -- Called when the scene is on screen (but is about to go off screen).
     if ( phase == "will" ) then
-        
+
+
     -----------------------------------------------------------------------------------------
 
     -- Called immediately after scene goes off screen.

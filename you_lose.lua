@@ -27,6 +27,8 @@ local scene = composer.newScene( sceneName )
 
 -- local variables for the scene
 local bkg
+local Speed = 2
+local tear
 
 --Sounds
 local loseSound = audio.loadSound("Sounds/boo.mp3")
@@ -41,6 +43,14 @@ local function LevelSelectTransition()
     composer.gotoScene( "levelSelect_screen" )
 end
 
+--Function to move firework
+local function MoveTear()
+    --move the firework up 
+    tear.y = tear.y + Speed
+    --make the firework fade in 
+    tear.alpha = tear.alpha + 0.01
+end
+
 --------------------------------------------------------------------------------------
 -- The function called when the screen doesn't exist
 function scene:create( event )
@@ -49,7 +59,7 @@ function scene:create( event )
     local sceneGroup = self.view
 
     -- Display background
-    bkg = display.newImage("Images/YouLoseScreen.png")
+    bkg = display.newImage("Images/YouLose.png")
     bkg.x = display.contentCenterX
     bkg.y = display.contentCenterY
     bkg.width = display.contentWidth
@@ -57,6 +67,15 @@ function scene:create( event )
    
     -- Associating display objects with this scene 
     sceneGroup:insert( bkg )
+
+    --Displaying the image of the firework and making it invisible
+    tear = display.newImageRect("Images/Tear.png", 30, 30)
+    tear.x = 450
+    tear.y = 350
+    tear.alpha = 0
+
+    -- Associating display objects with this scene 
+    sceneGroup:insert( tear )
   
 end    
 
@@ -89,6 +108,9 @@ function scene:show( event )
 
         --Play lose sound
         loseSoundChannel = audio.play(loseSound)
+
+        --Allowing the firework to enter the scene
+        Runtime:addEventListener("enterFrame", MoveTear)
 
         --Transition to level select
         timer.performWithDelay(2000, LevelSelectTransition)

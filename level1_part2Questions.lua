@@ -789,6 +789,9 @@ function scene:show( event )
         --Add the listeners to the answers boxes
         AddAnswerBoxEventListeners()
 
+        level1 = "completed"
+        lock1.isVisible = false
+
     end
 
 end --function scene:show( event )
@@ -806,6 +809,7 @@ function scene:hide( event )
 
     -- Called when the scene is on screen (but is about to go off screen).
     if ( phase == "will" ) then
+      
         
     -----------------------------------------------------------------------------------------
 

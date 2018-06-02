@@ -32,8 +32,10 @@ local bkg_image
 local selectText
 local blueText
 local pinkText
+local bowText
 local pinkButton
 local blueButton
+local bowButton
 
 -----------------------------------------------------------------------------------------
 -- GLOBAL FUNCTIONS
@@ -49,6 +51,12 @@ end
 -- Creating function to allow user to select a character and then transitions to game
 function BlueTransition()
     characterChoice = "blueUnicorn"
+    composer.gotoScene( "level1_part1", {effect = "slideLeft", time = 1000})
+end
+
+-- Creating function to allow user to select a character and then transitions to game
+function BowTransition()
+    characterChoice = "bowUnicorn"
     composer.gotoScene( "level1_part1", {effect = "slideLeft", time = 1000})
 end
 
@@ -87,7 +95,7 @@ function scene:create( event )
 
     --Inserting the blue text, it's position and colour
     blueText = display.newText( "Blue Unicorn" , 0, 0, nil, 50)
-    blueText.x = 800
+    blueText.x = 850
     blueText.y = 450
     blueText:setTextColor(0,0,0)
 
@@ -96,12 +104,21 @@ function scene:create( event )
 
     --Inserting the pink text, it's position and colour
     pinkText = display.newText( "Pink Unicorn" , 0, 0, nil, 50)
-    pinkText.x = 200
+    pinkText.x = 150
     pinkText.y = 450
     pinkText:setTextColor(0,0,0)
 
     -- Associating display objects with this scene 
     sceneGroup:insert( pinkText )
+
+    --Inserting the pink text, it's position and colour
+    bowText = display.newText( "Bow Unicorn" , 0, 0, nil, 50)
+    bowText.x = 500
+    bowText.y = 450
+    bowText:setTextColor(0,0,0)
+
+    -- Associating display objects with this scene 
+    sceneGroup:insert( bowText )
     -----------------------------------------------------------------------------------------
     -- BUTTON WIDGETS
     -----------------------------------------------------------------------------------------
@@ -110,7 +127,7 @@ function scene:create( event )
     pinkButton = widget.newButton( 
     {
         -- Setting Position
-        x = 200,
+        x = 150,
         y = 350,
 
         -- Setting Dimensions
@@ -134,7 +151,7 @@ function scene:create( event )
     blueButton = widget.newButton( 
     {
         -- Setting Position
-        x = 800,
+        x = 850,
         y = 350,
 
         -- Setting Dimensions
@@ -154,6 +171,31 @@ function scene:create( event )
 
     -- Associating Buttons with this scene
     sceneGroup:insert( blueButton )
+
+        -- Creating Blue Button
+    bowButton = widget.newButton( 
+    {
+        -- Setting Position
+        x = 500,
+        y = 350,
+
+        -- Setting Dimensions
+         width = 200,
+         height = 100,
+
+        -- Setting Visual Properties
+        defaultFile = "Images/BowUnicorn.png",
+        overFile = "Images/BowUnicorn.png",
+
+        -- Setting Functional Properties
+        onRelease = BowTransition
+
+    } )
+
+    -----------------------------------------------------------------------------------------
+
+    -- Associating Buttons with this scene
+    sceneGroup:insert( bowButton )
 
     
 end --function scene:create( event )

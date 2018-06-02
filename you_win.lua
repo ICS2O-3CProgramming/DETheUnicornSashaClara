@@ -28,7 +28,8 @@ local scene = composer.newScene( sceneName )
 
 -- local variables for the scene
 local bkg
-local scrollXSpeed = -2
+local Speed = -2
+local firework
 
 --Sounds
 local youWinSound = audio.loadSound("Sounds/YouWin.mp3")
@@ -46,7 +47,7 @@ end
 --Function to move firework
 local function MoveFirework()
     --move the firework up 
-    firework.y = firework.y + scrollXSpeed
+    firework.y = firework.y + Speed
     --make the firework fade in 
     firework.alpha = firework.alpha + 0.01
 end
@@ -132,7 +133,6 @@ function scene:hide( event )
 
     if ( phase == "will" ) then
         -- Called when the scene is on screen (but is about to go off screen).
-
 
     -----------------------------------------------------------------------------------------
 
