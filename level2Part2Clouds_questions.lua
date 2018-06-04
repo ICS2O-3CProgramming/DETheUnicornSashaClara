@@ -104,6 +104,7 @@ local function BackToLevel1()
     -- prevent character from being able to tip over
     character.isFixedRotation = true
   
+    --Adding listeners
     AddL2P2()
 end 
 

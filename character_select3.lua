@@ -136,7 +136,7 @@ function scene:create( event )
 
         -- Setting Visual Properties
         defaultFile = "Images/RectangularUnicorn.png",
-        overFile = "Images/RectangularUnicorn.png",
+        overFile = "Images/RectangularUnicornPressed.png",
 
         -- Setting Functional Properties
         onRelease = PinkTransition
@@ -160,7 +160,7 @@ function scene:create( event )
 
         -- Setting Visual Properties
         defaultFile = "Images/BlueUnicorn.png",
-        overFile = "Images/BlueUnicorn.png",
+        overFile = "Images/BlueUnicornPressed.png",
 
         -- Setting Functional Properties
         onRelease = BlueTransition
@@ -185,7 +185,7 @@ function scene:create( event )
 
         -- Setting Visual Properties
         defaultFile = "Images/BowUnicorn.png",
-        overFile = "Images/BowUnicorn.png",
+        overFile = "Images/BowUnicornPressed.png",
 
         -- Setting Functional Properties
         onRelease = BowTransition
