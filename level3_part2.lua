@@ -169,7 +169,7 @@ local function ReplaceCharacter()
     lollipop3.width = 37.5
     lollipop3.height = 75
 
-    lollipop4 = display.newImageRect("Images/PinkBackground.png", 0, 0)
+    lollipop4 = display.newImageRect("Images/YellowLollipop.png", 0, 0)
     lollipop4.x = 840
     lollipop4.y = 10
     lollipop4.myName = "lollipop4"
