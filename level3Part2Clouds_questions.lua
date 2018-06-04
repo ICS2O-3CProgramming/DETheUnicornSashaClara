@@ -97,6 +97,7 @@ local function BackToLevel1()
     -- intialize horizontal movement of character
     motionx = 0
 
+    --Inserting lollipop
     lollipop1 = display.newImageRect("Images/BlueLollipop.png", 0, 0)
     lollipop1.x = 160
     lollipop1.y = 10
@@ -104,6 +105,7 @@ local function BackToLevel1()
     lollipop1.width = 37.5
     lollipop1.height = 75
 
+    --Inserting lollipop
     lollipop2 = display.newImageRect("Images/RedLollipop.png", 0, 0)
     lollipop2.x = 380
     lollipop2.y = 10
@@ -111,6 +113,7 @@ local function BackToLevel1()
     lollipop2.width = 37.5
     lollipop2.height = 75
 
+    --Inserting lollipop
     lollipop3 = display.newImageRect("Images/OrangeLollipop.png", 0, 0)
     lollipop3.x = 620
     lollipop3.y = 100
@@ -118,13 +121,15 @@ local function BackToLevel1()
     lollipop3.width = 37.5
     lollipop3.height = 75
 
-    lollipop4 = display.newImageRect("Images/PinkBackground.png", 0, 0)
+    --Inserting lollipop
+    lollipop4 = display.newImageRect("Images/YellowLollipop.png", 0, 0)
     lollipop4.x = 840
     lollipop4.y = 10
     lollipop4.myName = "lollipop4"
     lollipop4.width = 37.5
     lollipop4.height = 75
 
+    --Adding physics to the character and the lollipops
     physics.addBody( character, "dynamic", { density=0.5, friction=0.5, bounce=0.5, rotation=0 } )
     physics.addBody( lollipop1, "dynamic", { density=0.5, friction=0.5, bounce=0.2, rotation=0 } )
     physics.addBody( lollipop2, "dynamic", { density=0.5, friction=0.5, bounce=0.2, rotation=0 } )
@@ -134,6 +139,7 @@ local function BackToLevel1()
     -- prevent character from being able to tip over
     character.isFixedRotation = true
   
+    --Adding listeners
     AddL3P2()
 end 
 

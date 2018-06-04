@@ -147,6 +147,7 @@ local function ReplaceCharacter()
     character.height = 80
     character.myName = "Unicorn"
 
+    --Inserting lollipop
     lollipop1 = display.newImageRect("Images/BlueLollipop.png", 0, 0)
     lollipop1.x = 160
     lollipop1.y = 10
@@ -154,6 +155,7 @@ local function ReplaceCharacter()
     lollipop1.width = 37.5
     lollipop1.height = 75
 
+    --Inserting lollipop
     lollipop2 = display.newImageRect("Images/RedLollipop.png", 0, 0)
     lollipop2.x = 340
     lollipop2.y = 10
@@ -161,6 +163,7 @@ local function ReplaceCharacter()
     lollipop2.width = 37.5
     lollipop2.height = 75
 
+    --Inserting lollipop
     lollipop3 = display.newImageRect("Images/OrangeLollipop.png", 0, 0)
     lollipop3.x = 620
     lollipop3.y = 100
@@ -168,7 +171,8 @@ local function ReplaceCharacter()
     lollipop3.width = 37.5
     lollipop3.height = 75
 
-    lollipop4 = display.newImageRect("Images/PinkBackground.png", 0, 0)
+    --Inserting lollipop
+    lollipop4 = display.newImageRect("Images/YellowLollipop.png", 0, 0)
     lollipop4.x = 800
     lollipop4.y = 10
     lollipop4.myName = "lollipop4"
@@ -216,7 +220,7 @@ local function onCollision( self, event )
             RemoveArrowEventListeners()
             RemoveRuntimeListeners()
 
-            -- remove the character from the display
+            -- remove the character and lollipops from the display
             display.remove(character)
             display.remove(lollipop1)
             display.remove(lollipop2)
@@ -238,7 +242,7 @@ local function onCollision( self, event )
             -- stop the character from moving
             motionx = 0
 
-            -- make the character invisible
+            -- make the character and lollipops invisible
             character.isVisible = false
             lollipop1.isVisible = false
             lollipop2.isVisible = false
@@ -302,7 +306,7 @@ end
 -- GLOBAL FUNCTIONS
 -----------------------------------------------------------------------------------------
 
---Function to replace the character
+--Function to replace the character and lollipops
 function ResumeGame()
     ReplaceCharacter() 
 end
@@ -519,7 +523,7 @@ function scene:show( event )
         --add collision listeners to objects
         AddCollisionListeners()
 
-        --create the character, add physics bodies and runtime listeners
+        --create the character and lollipops, add physics bodies and runtime listeners
         ReplaceCharacter()
 
     end
@@ -545,7 +549,8 @@ function scene:hide( event )
     -- Called immediately after scene goes off screen.
     elseif ( phase == "did" ) then
         
-        --Remove physics, collision, arrow, and runtime listeners. Make character invisible
+        --Remove physics, collision, arrow, and runtime listeners. Make the character and 
+        --the lollipops invisible.
         RemoveCollisionListeners()
         RemovePhysicsBodies()
         RemoveArrowEventListeners()
