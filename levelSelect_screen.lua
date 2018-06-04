@@ -82,7 +82,7 @@ function scene:create( event )
     sceneGroup:insert( bkg_image )
 
     -- Insert the background image and set it to the center of the screen
-    lock1 = display.newImageRect("Images/PinkBackground.png", 500, 400)
+    lock1 = display.newImageRect("Images/Lock.png", 500, 400)
     lock1.x = 500
     lock1.y = 400
     lock1.width = 80
@@ -92,7 +92,7 @@ function scene:create( event )
     sceneGroup:insert( lock1 )
 
     -- Insert the background image and set it to the center of the screen
-    lock2 = display.newImageRect("Images/PinkBackground.png", 500, 400)
+    lock2 = display.newImageRect("Images/Lock.png", 500, 400)
     lock2.x = 850
     lock2.y = 400
     lock2.width = 80
