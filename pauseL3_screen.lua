@@ -1,8 +1,8 @@
 -----------------------------------------------------------------------------------------
--- pause_screen.lua
+-- pauseL3_screen.lua
 -- Created by: Sasha Malko
 -- Date: May 14, 2018
--- Description: This is the pause page, displaying a play button to the game.
+-- Description: This is the pause page for the level 3 screen, displaying a play button to the game.
 -----------------------------------------------------------------------------------------
 -- INITIALIZATIONS
 -----------------------------------------------------------------------------------------

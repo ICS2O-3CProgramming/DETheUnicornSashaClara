@@ -1,8 +1,8 @@
 -----------------------------------------------------------------------------------------
--- level1_part2Questions.lua
+-- level3_part2Questions.lua
 -- Created by: Sasha
 -- Date: May 14, 2018
--- Description: These are the questions for the level 1 part 2 scene in the game. 
+-- Description: These are the questions for the level 3 part 2 scene in the game. 
 -----------------------------------------------------------------------------------------
 -- INITIALIZATIONS
 -----------------------------------------------------------------------------------------

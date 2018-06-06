@@ -1,8 +1,8 @@
 -----------------------------------------------------------------------------------------
--- level1_part2.lua
+-- level3_part2.lua
 -- Created by: Sasha Malko
 -- Date: May 14, 2018
--- Description: This is the level 1 part 2 screen of the game.
+-- Description: This is the level 3 part 2 screen of the game.
 -----------------------------------------------------------------------------------------
 -- INITIALIZATIONS
 -----------------------------------------------------------------------------------------
@@ -239,6 +239,10 @@ local function onCollision( self, event )
             
             -- get the obstacle that the user hit
             Obstacles = event.target
+
+            -- remove runtime listeners that move the character
+            RemoveArrowEventListeners()
+            RemoveRuntimeListeners()
 
             -- stop the character from moving
             motionx = 0

@@ -1,9 +1,9 @@
 -----------------------------------------------------------------------------------------
--- level1_questions.lua
+-- level3_part1Questions.lua
 -- Created by: Sasha Malko
 -- Date: May 14, 2018
--- Description: This is the level 1 questions of the game. The unicorn must jump from rainbow 
---to rainbow, and if you it hits an obstacle, the user must answer a question.
+-- Description: This is the level 3 part 1 questions of the game. The unicorn must jump 
+-- from rainbow to rainbow, and if you it hits an obstacle, the user must answer a question.
 -----------------------------------------------------------------------------------------
 -- INITIALIZATIONS
 -----------------------------------------------------------------------------------------
