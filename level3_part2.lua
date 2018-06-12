@@ -240,6 +240,10 @@ local function onCollision( self, event )
             -- get the obstacle that the user hit
             Obstacles = event.target
 
+            --remove the event listener on the door
+            door:removeEventListener( "collision" )
+
+
             -- remove runtime listeners that move the character
             RemoveArrowEventListeners()
             RemoveRuntimeListeners()

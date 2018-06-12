@@ -239,6 +239,9 @@ local function onCollision( self, event )
             -- get the obstacle that the user hit
             Obstacles = event.target
 
+            --remove the event listener on the door
+            door:removeEventListener( "collision" )
+
             -- stop the character from moving
             motionx = 0
 
